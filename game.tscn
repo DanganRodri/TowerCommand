@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://kli56l5wifew"]
+[gd_scene load_steps=12 format=3 uid="uid://kli56l5wifew"]
 
 [ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_7mn0m"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_xcrxx"]
 [ext_resource type="Script" path="res://scripts/TileMap.gd" id="2_m7nva"]
 [ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_oomhc"]
 [ext_resource type="Script" path="res://scripts/enemy_tank.gd" id="3_l44kk"]
 [ext_resource type="Texture2D" uid="uid://bucje24pdr4dv" path="res://tileprueba.png" id="5_e5xui"]
 [ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="6_43sbu"]
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="7_adbpj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5epq"]
 texture = ExtResource("5_e5xui")
@@ -23,7 +25,8 @@ sources/0 = SubResource("TileSetAtlasSource_n5epq")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
 size = Vector2(38, 38)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
+script = ExtResource("1_xcrxx")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ip0x2")
@@ -41,13 +44,8 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_oomhc")
 metadata/_edit_lock_ = true
 
-[node name="Area2D" type="Area2D" parent="Enemy Basic"]
-position = Vector2(-240, -528)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Basic/Area2D"]
-position = Vector2(240, 528)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Basic"]
 shape = SubResource("RectangleShape2D_feq2d")
-metadata/_edit_lock_ = true
 
 [node name="Enemy Tank" type="CharacterBody2D" parent="."]
 position = Vector2(848, 16)
@@ -79,10 +77,16 @@ metadata/_edit_lock_ = true
 anchor_mode = 0
 zoom = Vector2(1.333, 1.19)
 
-[node name="PrimaryWeapon" type="Node" parent="."]
+[node name="PrimaryWeapon" type="Node2D" parent="."]
+script = ExtResource("7_adbpj")
 
 [node name="PrimaryCooldown" type="Timer" parent="PrimaryWeapon"]
+one_shot = true
 
-[node name="SecondaryWeapeon" type="Node" parent="."]
+[node name="SecondaryWeapeon" type="Node2D" parent="."]
 
 [node name="SecondaryCooldown" type="Timer" parent="SecondaryWeapeon"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[connection signal="timeout" from="PrimaryWeapon/PrimaryCooldown" to="PrimaryWeapon" method="_on_primary_cooldown_timeout"]
