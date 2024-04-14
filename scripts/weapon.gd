@@ -28,7 +28,6 @@ func shoot():
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
 			if collidesWithPoint(mouse_position, enemy.position, colliderSize):
-				print("PEW PEW")
 				enemy.hp = enemy.hp - 1
 				var sprite = enemy.get_child(0)
 				sprite.modulate = Color(1, 0, 0) # Rojo
