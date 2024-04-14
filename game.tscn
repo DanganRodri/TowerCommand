@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kli56l5wifew"]
+[gd_scene load_steps=14 format=3 uid="uid://kli56l5wifew"]
 
 [ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_7mn0m"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xcrxx"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bucje24pdr4dv" path="res://tileprueba.png" id="5_e5xui"]
 [ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="6_43sbu"]
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="7_adbpj"]
+[ext_resource type="Script" path="res://scripts/barrier.gd" id="7_ldcq1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5epq"]
 texture = ExtResource("5_e5xui")
@@ -24,6 +25,9 @@ sources/0 = SubResource("TileSetAtlasSource_n5epq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
 size = Vector2(38, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45mvs"]
+size = Vector2(104, 96)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_xcrxx")
@@ -59,6 +63,10 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Tank"]
 shape = SubResource("RectangleShape2D_feq2d")
 metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy Tank"]
+shape = SubResource("RectangleShape2D_45mvs")
+script = ExtResource("7_ldcq1")
 
 [node name="Enemy Speedy" type="CharacterBody2D" parent="."]
 position = Vector2(848, 432)

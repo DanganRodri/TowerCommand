@@ -21,8 +21,21 @@ func shoot():
 	if Input.is_action_pressed("left_click") and is_ready:
 		is_ready = false
 		timer.start()
-		var enemies = get_parent().get_all_enemies()
+		var game = get_parent()
+		var enemies = game.get_all_enemies()
+		var tanks = game.get_tank_enemies()
 		var mouse_position = get_global_mouse_position()
+		
+		for tank in tanks:
+			var barrier = tank.get_child(2)
+			
+			if barrier != null:
+				var colliderSize = barrier.get_shape().get_rect().size
+				
+				if collidesWithPoint(mouse_position, tank.position, colliderSize):
+					barrier.hp = barrier.hp - 1
+					print("daño barrera")
+					return
 		
 		for enemy in enemies:
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
