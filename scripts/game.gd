@@ -6,10 +6,21 @@ var basics = []
 var tanks = []
 var speedies = []
 
+var primaryWeapon: Weapon
+var secondaryWeapon: Weapon
+
+var level_parameters := {
+	"primaryWeapon" = Weapon.new(),
+	"secondaryWeapon" = Weapon.new()
+}
+
 func _ready():
 	main = get_tree().get_root()
 
 func _process(delta):
+	
+	
+	
 	enemies = []
 	basics = []
 	tanks = []
@@ -25,8 +36,12 @@ func _process(delta):
 				tanks.append(node)
 			if node is Speedy:
 				speedies.append(node)
-			
+		
+		if primaryWeapon == null and node is Weapon:
+			primaryWeapon = node as Weapon
 	
+		if secondaryWeapon == null and node is Weapon:
+			secondaryWeapon = node as Weapon
 	
 
 func get_all_enemies():

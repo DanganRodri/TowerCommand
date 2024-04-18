@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kli56l5wifew"]
+[gd_scene load_steps=18 format=3 uid="uid://kli56l5wifew"]
 
 [ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_7mn0m"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xcrxx"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="6_43sbu"]
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="7_adbpj"]
 [ext_resource type="Script" path="res://scripts/barrier.gd" id="7_ldcq1"]
+[ext_resource type="Script" path="res://scripts/shieldmamager.gd" id="9_6sjlg"]
+[ext_resource type="Script" path="res://scripts/shield.gd" id="10_p0ywg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5epq"]
 texture = ExtResource("5_e5xui")
@@ -28,6 +30,10 @@ size = Vector2(38, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45mvs"]
 size = Vector2(104, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh65l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wjb2"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_xcrxx")
@@ -81,6 +87,29 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_feq2d")
 metadata/_edit_lock_ = true
 
+[node name="Shields" type="Area2D" parent="Enemy Speedy"]
+script = ExtResource("9_6sjlg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
+position = Vector2(-29, -29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("10_p0ywg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
+position = Vector2(29, -29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("10_p0ywg")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
+position = Vector2(-29, 29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("10_p0ywg")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
+position = Vector2(29, 29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("10_p0ywg")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(1.333, 1.19)
@@ -94,5 +123,16 @@ one_shot = true
 [node name="SecondaryWeapeon" type="Node2D" parent="."]
 
 [node name="SecondaryCooldown" type="Timer" parent="SecondaryWeapeon"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(35, 34.5)
+scale = Vector2(0.203125, 0.210938)
+texture = ExtResource("2_oomhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(35, 35)
+shape = SubResource("RectangleShape2D_1wjb2")
 
 [connection signal="timeout" from="PrimaryWeapon/PrimaryCooldown" to="PrimaryWeapon" method="_on_primary_cooldown_timeout"]

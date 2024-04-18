@@ -7,17 +7,19 @@ class_name Enemy
 var current_path: Array[Vector2i]
 
 var type = "Basic"
-var hp = 3
+var hp = 3.0
 var speed = 1.5
 var maxSpeed = 150
 var color = Color()
 var damageTimer = 0
+var inmune : bool = false
 
-func _init(_type, _hp, _speed,_maxSpeed) -> void:
+func _init(_type, _hp, _speed,_maxSpeed,_inmune) -> void:
 	self.type = _type
 	self.hp = _hp
 	self.speed = speed
 	self.maxSpeed = _maxSpeed
+	self.inmune = _inmune
 
 func get_route():
 	current_path = tilemap.graph.get_id_path(

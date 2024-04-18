@@ -4,15 +4,22 @@ class_name Weapon
 
 @onready var timer = get_child(0)
 
-var cool_down = 0.1
+var weapon_type = {
+	"AR": 0,
+	"SG": 1,
+	"RL": 2
+}
+
+var atk_speed = 0.1
 var is_ready : bool = true
-var type = "AR"
+var type = weapon_type.AR
+var damage = 1.0
 
 
 const ar_cursor = ""
 
 func _ready():
-	timer.wait_time = cool_down
+	timer.wait_time = atk_speed
 
 func _process(delta):
 	shoot()
@@ -24,24 +31,32 @@ func shoot():
 		var game = get_parent()
 		var enemies = game.get_all_enemies()
 		var tanks = game.get_tank_enemies()
+		var speedies = game.get_speedy_enemies()
 		var mouse_position = get_global_mouse_position()
 		
 		for tank in tanks:
-			var barrier = tank.get_child(2)
-			
-			if barrier != null:
-				var colliderSize = barrier.get_shape().get_rect().size
-				
-				if collidesWithPoint(mouse_position, tank.position, colliderSize):
-					barrier.hp = barrier.hp - 1
-					print("daño barrera")
-					return
+			for barrier in tank.get_children():
+				if barrier is Barrier:
+					var colliderSize = barrier.get_shape().get_rect().size
+					
+					if collidesWithPoint(mouse_position, tank.position, colliderSize):
+						barrier.hp = barrier.hp - 1
+						return
+		
+		for speedie in speedies:
+			var shields = speedie.get_child(2)
+			for shield in shields.get_children():
+				if shield is Shield and shield.disabled == false:
+					var colliderSize = shield.get_shape().get_rect().size
+					if collidesWithPoint(mouse_position, shield.position + speedie.position, colliderSize):
+						shield.hitted = true
+						return
 		
 		for enemy in enemies:
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
-			if collidesWithPoint(mouse_position, enemy.position, colliderSize):
-				enemy.hp = enemy.hp - 1
+			if collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
+				enemy.hp = enemy.hp - self.damage
 				var sprite = enemy.get_child(0)
 				sprite.modulate = Color(1, 0, 0) # Rojo
 				enemy.damageTimer = 3
