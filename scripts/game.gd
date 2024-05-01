@@ -5,6 +5,7 @@ var enemies = []
 var basics = []
 var tanks = []
 var speedies = []
+var towers = []
 
 var primaryWeapon: Weapon
 var secondaryWeapon: Weapon
@@ -19,12 +20,11 @@ func _ready():
 
 func _process(delta):
 	
-	
-	
 	enemies = []
 	basics = []
 	tanks = []
 	speedies = []
+	towers = []
 	var childs = get_children()
 	
 	for node in childs:
@@ -42,6 +42,9 @@ func _process(delta):
 	
 		if secondaryWeapon == null and node is Weapon:
 			secondaryWeapon = node as Weapon
+			
+		if node is StaticBody2D:
+			towers.append(node)
 	
 
 func get_all_enemies():
@@ -58,3 +61,6 @@ func get_tank_enemies():
 
 func get_speedy_enemies():
 	return speedies
+
+func get_towers():
+	return towers

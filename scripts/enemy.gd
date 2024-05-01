@@ -5,6 +5,7 @@ class_name Enemy
 @onready var tilemap = get_node("../TileMap")
 @onready var sprite = get_node("Sprite2D")
 var current_path: Array[Vector2i]
+var target: Vector2
 
 var type = "Basic"
 var hp = 3.0
@@ -24,7 +25,7 @@ func _init(_type, _hp, _speed,_maxSpeed,_inmune) -> void:
 func get_route():
 	current_path = tilemap.graph.get_id_path(
 		tilemap.local_to_map(global_position),
-		tilemap.local_to_map(Vector2(432,272))
+		tilemap.local_to_map(target)
 	).slice(1)
 	
 func checkIfDead():
@@ -38,6 +39,11 @@ func resetColor():
 	else:
 		damageTimer = damageTimer - 1
 
+func get_target():
+	var tower = get_parent().get_towers()[0]
+	target = tower.position
+	pass
+
 func _process(delta):
 	
 	if checkIfDead():
@@ -50,6 +56,7 @@ func _process(delta):
 	resetColor()
 	
 	if current_path.is_empty():
+		get_target()
 		get_route()
 		return
 	
