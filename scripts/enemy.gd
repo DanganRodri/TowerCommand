@@ -7,20 +7,22 @@ class_name Enemy
 var current_path: Array[Vector2i]
 var target: Vector2
 
-var type = "Basic"
-var hp = 3.0
-var speed = 1.5
-var maxSpeed = 150
-var color = Color()
-var damageTimer = 0
+var type : String = "Basic"
+var hp : float = 3.0
+var speed : float = 1.5
+var maxSpeed : int = 150
+var color : Color = Color()
+var damageTimer : int = 0
 var inmune : bool = false
+var gold : int = 10
 
-func _init(_type, _hp, _speed,_maxSpeed,_inmune) -> void:
+func _init(_type, _hp, _speed,_maxSpeed,_inmune, gold) -> void:
 	self.type = _type
 	self.hp = _hp
-	self.speed = speed
+	self.speed = _speed
 	self.maxSpeed = _maxSpeed
 	self.inmune = _inmune
+	self.gold = gold
 
 func get_route():
 	current_path = tilemap.graph.get_id_path(
@@ -47,6 +49,8 @@ func get_target():
 func _process(delta):
 	
 	if checkIfDead():
+		var game = get_parent()
+		game.gold = game.gold + self.gold
 		self.queue_free()
 		pass
 	

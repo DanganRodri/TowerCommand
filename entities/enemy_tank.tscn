@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhxphl8er2710"]
+
+[ext_resource type="Script" path="res://scripts/enemy_tank.gd" id="1_2b0qn"]
+[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_nko0o"]
+[ext_resource type="Script" path="res://scripts/barrier.gd" id="3_a724s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
+size = Vector2(38, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45mvs"]
+size = Vector2(186, 182)
+
+[node name="Enemy Tank" type="CharacterBody2D"]
+position = Vector2(51, 271)
+script = ExtResource("1_2b0qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_nko0o")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_feq2d")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_45mvs")
+script = ExtResource("3_a724s")

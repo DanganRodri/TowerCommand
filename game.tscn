@@ -1,17 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://kli56l5wifew"]
+[gd_scene load_steps=13 format=3 uid="uid://kli56l5wifew"]
 
-[ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_7mn0m"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xcrxx"]
 [ext_resource type="Script" path="res://scripts/TileMap.gd" id="2_m7nva"]
-[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_oomhc"]
-[ext_resource type="Script" path="res://scripts/enemy_tank.gd" id="3_l44kk"]
+[ext_resource type="PackedScene" uid="uid://by4yhnfel8rw8" path="res://entities/enemy_basic.tscn" id="4_jp2g2"]
+[ext_resource type="PackedScene" uid="uid://dhxphl8er2710" path="res://entities/enemy_tank.tscn" id="5_4aoqd"]
 [ext_resource type="Texture2D" uid="uid://bucje24pdr4dv" path="res://tileprueba.png" id="5_e5xui"]
-[ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="6_43sbu"]
-[ext_resource type="Script" path="res://scripts/weapon.gd" id="7_adbpj"]
-[ext_resource type="Script" path="res://scripts/barrier.gd" id="7_ldcq1"]
-[ext_resource type="Script" path="res://scripts/shieldmamager.gd" id="9_6sjlg"]
-[ext_resource type="Script" path="res://scripts/shield.gd" id="10_p0ywg"]
-[ext_resource type="Script" path="res://scripts/tower.gd" id="12_xnteq"]
+[ext_resource type="PackedScene" uid="uid://csu7onqbvhwhd" path="res://entities/enemy_speedy.tscn" id="6_v6po8"]
+[ext_resource type="PackedScene" uid="uid://com1u85x7sy52" path="res://entities/primary_weapon.tscn" id="7_jppf1"]
+[ext_resource type="PackedScene" uid="uid://6qw84vv1brxl" path="res://entities/tower.tscn" id="8_ri4xi"]
+[ext_resource type="Script" path="res://scripts/Gold.gd" id="13_3i5qu"]
+[ext_resource type="PackedScene" uid="uid://hvvnfjpmdhwo" path="res://entities/turret.tscn" id="14_cdrpe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5epq"]
 texture = ExtResource("5_e5xui")
@@ -26,16 +24,6 @@ custom_data_layer_0/name = "type"
 custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_n5epq")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
-size = Vector2(38, 38)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_45mvs"]
-size = Vector2(186, 182)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh65l"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wjb2"]
-
 [node name="Game" type="Node"]
 script = ExtResource("1_xcrxx")
 
@@ -46,97 +34,30 @@ format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 65536, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 65536, 0, 589825, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 65536, 0, 196610, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 524290, 65536, 0, 589826, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 65536, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 65536, 0, 589827, 0, 0, 4, 0, 0, 65540, 0, 0, 131076, 65536, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 524292, 65536, 0, 589828, 0, 0, 5, 0, 0, 65541, 65536, 0, 131077, 65536, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 524293, 65536, 0, 589829, 0, 0, 6, 0, 0, 65542, 65536, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524294, 65536, 0, 589830, 0, 0, 7, 0, 0, 65543, 65536, 0, 131079, 0, 0, 196615, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 524295, 65536, 0, 589831, 0, 0, 8, 0, 0, 65544, 65536, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 0, 0, 524296, 65536, 0, 589832, 0, 0, 9, 0, 0, 65545, 65536, 0, 131081, 65536, 0, 196617, 65536, 0, 262153, 65536, 0, 327689, 65536, 0, 393225, 0, 0, 458761, 0, 0, 524297, 65536, 0, 589833, 0, 0, 10, 0, 0, 65546, 0, 0, 131082, 0, 0, 196618, 0, 0, 262154, 0, 0, 327690, 65536, 0, 393226, 0, 0, 458762, 0, 0, 524298, 65536, 0, 589834, 0, 0, 11, 0, 0, 65547, 0, 0, 131083, 0, 0, 196619, 0, 0, 262155, 0, 0, 327691, 65536, 0, 393227, 0, 0, 458763, 0, 0, 524299, 65536, 0, 589835, 0, 0, 12, 0, 0, 65548, 0, 0, 131084, 0, 0, 196620, 0, 0, 262156, 0, 0, 327692, 65536, 0, 393228, 0, 0, 458764, 0, 0, 524300, 65536, 0, 589836, 0, 0, 13, 0, 0, 65549, 0, 0, 131085, 0, 0, 196621, 0, 0, 262157, 0, 0, 327693, 65536, 0, 393229, 0, 0, 458765, 0, 0, 524301, 65536, 0, 589837, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048576, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, 917505, 65536, 0, 983041, 0, 0, 1048577, 0, 0, 655362, 0, 0, 720898, 0, 0, 786434, 0, 0, 851970, 0, 0, 917506, 65536, 0, 983042, 0, 0, 1048578, 0, 0, 655363, 0, 0, 720899, 0, 0, 786435, 0, 0, 851971, 0, 0, 917507, 65536, 0, 983043, 0, 0, 1048579, 0, 0, 655364, 0, 0, 720900, 0, 0, 786436, 0, 0, 851972, 0, 0, 917508, 65536, 0, 983044, 0, 0, 1048580, 0, 0, 655365, 0, 0, 720901, 0, 0, 786437, 0, 0, 851973, 0, 0, 917509, 65536, 0, 983045, 0, 0, 1048581, 0, 0, 655366, 0, 0, 720902, 0, 0, 786438, 0, 0, 851974, 0, 0, 917510, 65536, 0, 983046, 0, 0, 1048582, 0, 0, 655367, 0, 0, 786439, 0, 0, 851975, 0, 0, 917511, 65536, 0, 983047, 0, 0, 1048583, 0, 0, 655368, 65536, 0, 720904, 65536, 0, 786440, 65536, 0, 851976, 65536, 0, 917512, 65536, 0, 983048, 0, 0, 1048584, 0, 0, 655369, 65536, 0, 720905, 0, 0, 786441, 0, 0, 851977, 0, 0, 917513, 0, 0, 983049, 0, 0, 1048585, 0, 0, 655370, 65536, 0, 720906, 0, 0, 786442, 0, 0, 851978, 0, 0, 917514, 0, 0, 983050, 0, 0, 1048586, 0, 0, 655371, 65536, 0, 720907, 0, 0, 786443, 0, 0, 851979, 0, 0, 917515, 0, 0, 983051, 0, 0, 1048587, 0, 0, 655372, 65536, 0, 720908, 0, 0, 786444, 0, 0, 851980, 0, 0, 917516, 0, 0, 983052, 0, 0, 1048588, 0, 0, 655373, 65536, 0, 720909, 0, 0, 786445, 0, 0, 851981, 0, 0, 917517, 0, 0, 983053, 0, 0, 1048589, 0, 0, 14, 0, 0, 65550, 0, 0, 131086, 0, 0, 196622, 0, 0, 262158, 0, 0, 327694, 65536, 0, 393230, 0, 0, 458766, 0, 0, 524302, 65536, 0, 589838, 0, 0, 655374, 65536, 0, 720910, 0, 0, 786446, 0, 0, 851982, 0, 0, 917518, 0, 0, 983054, 0, 0, 1048590, 0, 0, 15, 0, 0, 65551, 0, 0, 131087, 0, 0, 196623, 0, 0, 262159, 0, 0, 327695, 65536, 0, 393231, 0, 0, 458767, 0, 0, 524303, 65536, 0, 589839, 0, 0, 655375, 65536, 0, 720911, 0, 0, 786447, 0, 0, 851983, 0, 0, 917519, 0, 0, 983055, 0, 0, 1048591, 0, 0, 16, 0, 0, 65552, 65536, 0, 131088, 65536, 0, 196624, 65536, 0, 262160, 65536, 0, 327696, 65536, 0, 393232, 0, 0, 458768, 0, 0, 524304, 65536, 0, 589840, 0, 0, 655376, 65536, 0, 720912, 0, 0, 786448, 0, 0, 851984, 0, 0, 917520, 0, 0, 983056, 0, 0, 1048592, 0, 0, 17, 0, 0, 65553, 65536, 0, 131089, 0, 0, 196625, 0, 0, 262161, 0, 0, 327697, 0, 0, 393233, 0, 0, 458769, 0, 0, 524305, 65536, 0, 589841, 0, 0, 655377, 65536, 0, 720913, 0, 0, 786449, 0, 0, 851985, 0, 0, 917521, 0, 0, 983057, 0, 0, 1048593, 0, 0, 18, 0, 0, 65554, 65536, 0, 131090, 0, 0, 196626, 0, 0, 262162, 0, 0, 327698, 0, 0, 393234, 0, 0, 458770, 0, 0, 524306, 65536, 0, 589842, 0, 0, 655378, 65536, 0, 720914, 0, 0, 786450, 0, 0, 851986, 0, 0, 917522, 0, 0, 983058, 0, 0, 1048594, 0, 0, 19, 0, 0, 65555, 65536, 0, 131091, 0, 0, 196627, 0, 0, 262163, 0, 0, 327699, 0, 0, 393235, 0, 0, 458771, 0, 0, 524307, 65536, 0, 589843, 0, 0, 655379, 65536, 0, 720915, 0, 0, 786451, 0, 0, 851987, 0, 0, 917523, 0, 0, 983059, 0, 0, 1048595, 0, 0, 20, 0, 0, 65556, 65536, 0, 131092, 0, 0, 196628, 0, 0, 262164, 0, 0, 327700, 0, 0, 393236, 0, 0, 458772, 0, 0, 524308, 65536, 0, 589844, 0, 0, 655380, 65536, 0, 720916, 0, 0, 786452, 0, 0, 851988, 0, 0, 917524, 0, 0, 983060, 0, 0, 1048596, 0, 0, 21, 0, 0, 65557, 65536, 0, 131093, 0, 0, 196629, 0, 0, 262165, 0, 0, 327701, 0, 0, 393237, 0, 0, 458773, 0, 0, 524309, 65536, 0, 589845, 0, 0, 655381, 65536, 0, 720917, 65536, 0, 786453, 65536, 0, 851989, 0, 0, 917525, 0, 0, 983061, 0, 0, 1048597, 0, 0, 22, 0, 0, 65558, 65536, 0, 131094, 0, 0, 196630, 0, 0, 262166, 0, 0, 327702, 0, 0, 393238, 0, 0, 458774, 0, 0, 524310, 65536, 0, 589846, 0, 0, 655382, 0, 0, 720918, 0, 0, 786454, 65536, 0, 851990, 0, 0, 917526, 0, 0, 983062, 0, 0, 1048598, 0, 0, 23, 0, 0, 65559, 65536, 0, 131095, 65536, 0, 196631, 65536, 0, 262167, 65536, 0, 327703, 65536, 0, 393239, 65536, 0, 458775, 0, 0, 524311, 65536, 0, 589847, 0, 0, 655383, 0, 0, 720919, 0, 0, 786455, 65536, 0, 851991, 0, 0, 917527, 0, 0, 983063, 0, 0, 1048599, 0, 0, 24, 0, 0, 65560, 0, 0, 131096, 0, 0, 196632, 0, 0, 262168, 0, 0, 327704, 0, 0, 393240, 65536, 0, 458776, 0, 0, 524312, 65536, 0, 589848, 0, 0, 655384, 0, 0, 720920, 0, 0, 786456, 65536, 0, 851992, 0, 0, 917528, 0, 0, 983064, 0, 0, 1048600, 0, 0, 25, 0, 0, 65561, 0, 0, 131097, 0, 0, 196633, 0, 0, 262169, 0, 0, 327705, 0, 0, 393241, 65536, 0, 458777, 65536, 0, 524313, 65536, 0, 589849, 65536, 0, 655385, 65536, 0, 720921, 65536, 0, 786457, 65536, 0, 851993, 0, 0, 917529, 0, 0, 983065, 0, 0, 1048601, 0, 0, 26, 0, 0, 65562, 0, 0, 131098, 0, 0, 196634, 0, 0, 262170, 0, 0, 327706, 0, 0, 393242, 0, 0, 458778, 0, 0, 524314, 0, 0, 589850, 0, 0, 655386, 0, 0, 720922, 0, 0, 786458, 0, 0, 851994, 0, 0, 917530, 0, 0, 983066, 0, 0, 1048602, 0, 0, 720903, 0, 0)
 script = ExtResource("2_m7nva")
 
-[node name="Enemy Basic" type="CharacterBody2D" parent="."]
-position = Vector2(115, 464)
-script = ExtResource("1_7mn0m")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy Basic"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_oomhc")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Basic"]
-shape = SubResource("RectangleShape2D_feq2d")
-
-[node name="Enemy Tank" type="CharacterBody2D" parent="."]
-position = Vector2(51, 271)
-script = ExtResource("3_l44kk")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy Tank"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_oomhc")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Tank"]
-shape = SubResource("RectangleShape2D_feq2d")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy Tank"]
-shape = SubResource("RectangleShape2D_45mvs")
-script = ExtResource("7_ldcq1")
-
-[node name="Enemy Speedy" type="CharacterBody2D" parent="."]
-position = Vector2(49, 79)
-script = ExtResource("6_43sbu")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy Speedy"]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_oomhc")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Speedy"]
-shape = SubResource("RectangleShape2D_feq2d")
-metadata/_edit_lock_ = true
-
-[node name="Shields" type="Area2D" parent="Enemy Speedy"]
-script = ExtResource("9_6sjlg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
-position = Vector2(-29, -29)
-shape = SubResource("RectangleShape2D_bh65l")
-script = ExtResource("10_p0ywg")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
-position = Vector2(29, -29)
-shape = SubResource("RectangleShape2D_bh65l")
-script = ExtResource("10_p0ywg")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
-position = Vector2(-29, 29)
-shape = SubResource("RectangleShape2D_bh65l")
-script = ExtResource("10_p0ywg")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Enemy Speedy/Shields"]
-position = Vector2(29, 29)
-shape = SubResource("RectangleShape2D_bh65l")
-script = ExtResource("10_p0ywg")
+[node name="Gold" type="Label" parent="."]
+offset_left = 808.0
+offset_top = 2.0
+offset_right = 848.0
+offset_bottom = 25.0
+script = ExtResource("13_3i5qu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(1.333, 1.19)
 
-[node name="PrimaryWeapon" type="Node2D" parent="."]
-script = ExtResource("7_adbpj")
+[node name="Enemy Basic" parent="." instance=ExtResource("4_jp2g2")]
+position = Vector2(49, 463)
 
-[node name="PrimaryCooldown" type="Timer" parent="PrimaryWeapon"]
-one_shot = true
+[node name="Enemy Tank" parent="." instance=ExtResource("5_4aoqd")]
 
-[node name="SecondaryWeapeon" type="Node2D" parent="."]
+[node name="Enemy Speedy" parent="." instance=ExtResource("6_v6po8")]
 
-[node name="SecondaryCooldown" type="Timer" parent="SecondaryWeapeon"]
+[node name="PrimaryWeapon" parent="." instance=ExtResource("7_jppf1")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(815, 272)
-script = ExtResource("12_xnteq")
+[node name="StaticBody2D" parent="." instance=ExtResource("8_ri4xi")]
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-modulate = Color(1, 1, 0, 1)
-self_modulate = Color(1, 1, 0, 1)
-position = Vector2(0, -0.5)
-scale = Vector2(0.203125, 0.210938)
-texture = ExtResource("2_oomhc")
+[node name="Turrets" type="Node" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_1wjb2")
-
-[connection signal="timeout" from="PrimaryWeapon/PrimaryCooldown" to="PrimaryWeapon" method="_on_primary_cooldown_timeout"]
+[node name="Turret" parent="Turrets" instance=ExtResource("14_cdrpe")]
+position = Vector2(434, 226)
+scale = Vector2(0.859979, 0.859979)

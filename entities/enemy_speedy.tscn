@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://csu7onqbvhwhd"]
+
+[ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="1_owtnb"]
+[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_q2t72"]
+[ext_resource type="Script" path="res://scripts/shieldmamager.gd" id="3_k3slf"]
+[ext_resource type="Script" path="res://scripts/shield.gd" id="4_t0law"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
+size = Vector2(38, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh65l"]
+
+[node name="Enemy Speedy" type="CharacterBody2D"]
+position = Vector2(49, 79)
+script = ExtResource("1_owtnb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_q2t72")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_feq2d")
+metadata/_edit_lock_ = true
+
+[node name="Shields" type="Area2D" parent="."]
+script = ExtResource("3_k3slf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shields"]
+position = Vector2(-29, -29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_t0law")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Shields"]
+position = Vector2(29, -29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_t0law")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Shields"]
+position = Vector2(-29, 29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_t0law")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Shields"]
+position = Vector2(29, 29)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_t0law")

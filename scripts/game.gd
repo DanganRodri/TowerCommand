@@ -6,6 +6,7 @@ var basics = []
 var tanks = []
 var speedies = []
 var towers = []
+var gold : int = 0
 
 var primaryWeapon: Weapon
 var secondaryWeapon: Weapon
@@ -45,6 +46,9 @@ func _process(delta):
 			
 		if node is StaticBody2D:
 			towers.append(node)
+			
+		if node is Label:
+			node.gold = self.gold
 	
 
 func get_all_enemies():
