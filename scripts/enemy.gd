@@ -24,6 +24,10 @@ func _init(_type, _hp, _speed,_maxSpeed,_inmune, gold) -> void:
 	self.inmune = _inmune
 	self.gold = gold
 
+func _ready():
+	get_target()
+	get_route()
+
 func get_route():
 	current_path = tilemap.graph.get_id_path(
 		tilemap.local_to_map(global_position),
@@ -42,7 +46,8 @@ func resetColor():
 		damageTimer = damageTimer - 1
 
 func get_target():
-	var tower = get_parent().get_towers()[0]
+	var towers = self.get_parent().get_node("Towers").get_children()
+	var tower = Game.check_closest(self, towers)
 	target = tower.position
 	pass
 
@@ -59,15 +64,11 @@ func _process(delta):
 	
 	resetColor()
 	
-	if current_path.is_empty():
-		get_target()
-		get_route()
-		return
+	if not current_path.is_empty():
+		var target_position = tilemap.map_to_local(current_path.front())
+		global_position = global_position.move_toward(target_position, self.speed)
 	
-	var target_position = tilemap.map_to_local(current_path.front())
-	global_position = global_position.move_toward(target_position, self.speed)
-	
-	if global_position == target_position:
-		current_path.pop_front()
+		if global_position == target_position:
+			current_path.pop_front()
 	
 	pass

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Game="*res://scripts/game.gd"
 WeaponRules="*res://scripts/globals.gd"
+Tower_Manager="*res://scripts/tower_manager.gd"
 
 [input]
 

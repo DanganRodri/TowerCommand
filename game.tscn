@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://kli56l5wifew"]
+[gd_scene load_steps=14 format=3 uid="uid://kli56l5wifew"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_xcrxx"]
 [ext_resource type="Script" path="res://scripts/TileMap.gd" id="2_m7nva"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://csu7onqbvhwhd" path="res://entities/enemy_speedy.tscn" id="6_v6po8"]
 [ext_resource type="PackedScene" uid="uid://com1u85x7sy52" path="res://entities/primary_weapon.tscn" id="7_jppf1"]
 [ext_resource type="PackedScene" uid="uid://6qw84vv1brxl" path="res://entities/tower.tscn" id="8_ri4xi"]
+[ext_resource type="Script" path="res://scripts/tower_manager.gd" id="9_s7gx1"]
 [ext_resource type="Script" path="res://scripts/Gold.gd" id="13_3i5qu"]
 [ext_resource type="PackedScene" uid="uid://hvvnfjpmdhwo" path="res://entities/turret.tscn" id="14_cdrpe"]
 
@@ -54,7 +55,14 @@ position = Vector2(49, 463)
 
 [node name="PrimaryWeapon" parent="." instance=ExtResource("7_jppf1")]
 
-[node name="StaticBody2D" parent="." instance=ExtResource("8_ri4xi")]
+[node name="Towers" type="Node" parent="."]
+script = ExtResource("9_s7gx1")
+
+[node name="Tower1" parent="Towers" groups=["Tower"] instance=ExtResource("8_ri4xi")]
+position = Vector2(817, 208)
+
+[node name="Tower2" parent="Towers" groups=["Tower"] instance=ExtResource("8_ri4xi")]
+position = Vector2(818, 401)
 
 [node name="Turrets" type="Node" parent="."]
 

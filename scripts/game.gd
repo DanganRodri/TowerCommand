@@ -9,15 +9,15 @@ var towers = []
 var gold : int = 0
 
 var primaryWeapon: Weapon
-var secondaryWeapon: Weapon
+
 
 var level_parameters := {
 	"primaryWeapon" = Weapon.new(),
-	"secondaryWeapon" = Weapon.new()
 }
 
 func _ready():
 	main = get_tree().get_root()
+	towers = Tower_Manager.get_children()
 
 func _process(delta):
 	
@@ -37,19 +37,29 @@ func _process(delta):
 				tanks.append(node)
 			if node is Speedy:
 				speedies.append(node)
-		
+					
 		if primaryWeapon == null and node is Weapon:
 			primaryWeapon = node as Weapon
-	
-		if secondaryWeapon == null and node is Weapon:
-			secondaryWeapon = node as Weapon
-			
-		if node is StaticBody2D:
-			towers.append(node)
-			
+		
 		if node is Label:
 			node.gold = self.gold
+			
+
+func check_closest(entity, entity_array):
 	
+	var min_distance = INF
+	var closest = entity_array[0]
+	
+	for e in entity_array:
+		var distance = calculate_distance(entity, e)
+		if distance < min_distance:
+			min_distance = distance
+			closest = e
+	
+	return closest
+	
+func calculate_distance(e1, e2):
+	return e1.position.distance_to(e2.position)
 
 func get_all_enemies():
 	if enemies.size() == 0:
