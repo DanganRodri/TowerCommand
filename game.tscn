@@ -67,5 +67,13 @@ position = Vector2(818, 401)
 [node name="Turrets" type="Node" parent="."]
 
 [node name="Turret" parent="Turrets" instance=ExtResource("14_cdrpe")]
-position = Vector2(434, 226)
+position = Vector2(433, 225)
+scale = Vector2(0.859979, 0.859979)
+
+[node name="Turret2" parent="Turrets" instance=ExtResource("14_cdrpe")]
+position = Vector2(209, 396)
+scale = Vector2(0.859979, 0.859979)
+
+[node name="Turret3" parent="Turrets" instance=ExtResource("14_cdrpe")]
+position = Vector2(640, 133)
 scale = Vector2(0.859979, 0.859979)

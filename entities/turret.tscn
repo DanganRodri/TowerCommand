@@ -1,10 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://hvvnfjpmdhwo"]
+[gd_scene load_steps=9 format=3 uid="uid://hvvnfjpmdhwo"]
 
 [ext_resource type="Script" path="res://scripts/blank_turret.gd" id="1_4o1ll"]
 [ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="1_yj1l2"]
+[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_v67vt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
 size = Vector2(65, 61)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13ero"]
+bg_color = Color(0.901961, 0, 0, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(1, 0.509804, 0.435294, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxe5e"]
+bg_color = Color(0.996078, 0.878431, 0, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.964706, 0.937255, 0.745098, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdoqx"]
+bg_color = Color(0.403922, 0.831373, 1, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.67451, 0.921569, 1, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvu8e"]
+bg_color = Color(0.176471, 0.701961, 0.501961, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.376471, 0.933333, 0.47451, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Blank Turret" type="StaticBody2D"]
 position = Vector2(27, 26)
@@ -21,4 +74,92 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_siseg")
 metadata/_edit_lock_ = true
 
+[node name="Upgrade" type="Node" parent="."]
+
+[node name="UpgradeList" type="Panel" parent="Upgrade"]
+visible = false
+anchors_preset = -1
+anchor_left = -0.076
+anchor_top = 0.086
+anchor_right = 0.124
+anchor_bottom = 0.225
+offset_left = -0.447998
+offset_top = 0.271999
+offset_right = 0.151993
+offset_bottom = 0.199997
+script = ExtResource("3_v67vt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 231.0
+offset_bottom = 58.0
+theme_override_constants/separation = 7
+alignment = 1
+
+[node name="Dps" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_13ero")
+theme_override_styles/hover = SubResource("StyleBoxFlat_13ero")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_13ero")
+
+[node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Dps"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 52.0
+offset_right = 50.0
+offset_bottom = 78.0
+text = "Dps"
+horizontal_alignment = 1
+
+[node name="Aoe" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_yxe5e")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yxe5e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_yxe5e")
+
+[node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Aoe"]
+layout_mode = 0
+offset_top = 52.0
+offset_right = 50.0
+offset_bottom = 75.0
+text = "AoE"
+horizontal_alignment = 1
+
+[node name="Ice" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_kdoqx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kdoqx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kdoqx")
+
+[node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Ice"]
+layout_mode = 0
+offset_top = 52.0
+offset_right = 50.0
+offset_bottom = 75.0
+text = "Ice"
+horizontal_alignment = 1
+
+[node name="Sniper" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_hvu8e")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hvu8e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hvu8e")
+
+[node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Sniper"]
+layout_mode = 0
+offset_top = 52.0
+offset_right = 50.0
+offset_bottom = 75.0
+text = "Sniper"
+horizontal_alignment = 1
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Dps" to="." method="_on_dps_pressed"]
+[connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Aoe" to="." method="_on_aoe_pressed"]
+[connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Ice" to="." method="_on_ice_pressed"]
+[connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Sniper" to="." method="_on_sniper_pressed"]

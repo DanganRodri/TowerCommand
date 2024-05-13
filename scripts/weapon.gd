@@ -35,13 +35,13 @@ func shoot():
 		var mouse_position = get_global_mouse_position()
 		
 		for tank in tanks:
-			for barrier in tank.get_children():
-				if barrier is Barrier:
-					var colliderSize = barrier.get_shape().get_rect().size
-					
-					if collidesWithPoint(mouse_position, tank.position, colliderSize):
-						barrier.hp = barrier.hp - 1
-						return
+			var barrier = tank.get_node("Barrier")
+			if barrier != null:
+				var colliderSize = barrier.get_child(0).get_shape().get_rect().size
+				
+				if collidesWithPoint(mouse_position, tank.position, colliderSize):
+					barrier.hp = barrier.hp - 1
+					return
 		
 		for speedie in speedies:
 			var shields = speedie.get_child(2)
@@ -56,10 +56,7 @@ func shoot():
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
 			if collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
-				enemy.hp = enemy.hp - self.damage
-				var sprite = enemy.get_child(0)
-				sprite.modulate = Color(1, 0, 0) # Rojo
-				enemy.damageTimer = 3
+				enemy.on_hit(self.damage)
 				break
 			
 

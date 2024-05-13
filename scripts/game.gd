@@ -8,6 +8,9 @@ var speedies = []
 var towers = []
 var gold : int = 0
 
+const RANGE_BORDER_COLOR = Color(0.2, 0.5, 1, 0.77)
+const RANGE_COLOR = Color(0, 0, 0, 0.1)
+
 var primaryWeapon: Weapon
 
 
@@ -48,7 +51,7 @@ func _process(delta):
 func check_closest(entity, entity_array):
 	
 	var min_distance = INF
-	var closest = entity_array[0]
+	var closest = null
 	
 	for e in entity_array:
 		var distance = calculate_distance(entity, e)

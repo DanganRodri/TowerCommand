@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://g3qp2um41wts"]
+
+[ext_resource type="Script" path="res://scripts/ice_turret.gd" id="1_r7ys7"]
+[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_p2fbo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
+size = Vector2(65, 61)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
+radius = 175.0
+
+[node name="Ice Turret" type="StaticBody2D"]
+position = Vector2(27, 26)
+input_pickable = true
+script = ExtResource("1_r7ys7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.14902, 0.737255, 1, 1)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("2_p2fbo")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_siseg")
+metadata/_edit_lock_ = true
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_dntdq")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

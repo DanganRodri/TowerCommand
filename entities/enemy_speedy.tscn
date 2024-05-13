@@ -1,14 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://csu7onqbvhwhd"]
+[gd_scene load_steps=10 format=3 uid="uid://csu7onqbvhwhd"]
 
 [ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="1_owtnb"]
 [ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_q2t72"]
 [ext_resource type="Script" path="res://scripts/shieldmamager.gd" id="3_k3slf"]
 [ext_resource type="Script" path="res://scripts/shield.gd" id="4_t0law"]
+[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="5_6hj7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
 size = Vector2(38, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh65l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpss3"]
+bg_color = Color(0.168627, 0.0431373, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oictu"]
+bg_color = Color(0.72549, 1, 0.784314, 1)
 
 [node name="Enemy Speedy" type="CharacterBody2D"]
 position = Vector2(49, 79)
@@ -45,3 +52,14 @@ script = ExtResource("4_t0law")
 position = Vector2(29, 29)
 shape = SubResource("RectangleShape2D_bh65l")
 script = ExtResource("4_t0law")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -19.0
+offset_top = -22.0
+offset_right = 19.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_kpss3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oictu")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_6hj7b")

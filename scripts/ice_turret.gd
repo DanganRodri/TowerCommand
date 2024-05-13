@@ -1,10 +1,10 @@
 extends Turret
 
-class_name DpsTurret
+class_name IceTurret
 
 func _ready():
 	atk = 1
-	atk_speed = 0.3
+	atk_speed = 2
 	def_pen = 0
-	range = 170.0
+	range = 130.0
 	super._ready()

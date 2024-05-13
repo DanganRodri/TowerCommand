@@ -16,13 +16,13 @@ var damageTimer : int = 0
 var inmune : bool = false
 var gold : int = 10
 
-func _init(_type, _hp, _speed,_maxSpeed,_inmune, gold) -> void:
+func _init(_type, _hp, _speed,_maxSpeed,_inmune, _gold) -> void:
 	self.type = _type
 	self.hp = _hp
 	self.speed = _speed
 	self.maxSpeed = _maxSpeed
 	self.inmune = _inmune
-	self.gold = gold
+	self.gold = _gold
 
 func _ready():
 	get_target()
@@ -33,12 +33,19 @@ func get_route():
 		tilemap.local_to_map(global_position),
 		tilemap.local_to_map(target)
 	).slice(1)
-	
-func checkIfDead():
-	if self.hp <= 0:
-		return true
-	return false
 
+func on_hit(damage):
+	hp -= damage
+	sprite.modulate = Color(1, 0, 0) # Rojo
+	self.damageTimer = 3
+	if self.hp <= 0:
+		on_destroy()
+	
+func on_destroy():
+	var game = get_parent()
+	game.gold = game.gold + self.gold
+	self.queue_free()
+	
 func resetColor():
 	if damageTimer == 0:
 		sprite.modulate = color
@@ -52,12 +59,6 @@ func get_target():
 	pass
 
 func _process(delta):
-	
-	if checkIfDead():
-		var game = get_parent()
-		game.gold = game.gold + self.gold
-		self.queue_free()
-		pass
 	
 	if color == Color():
 		color = sprite.modulate
