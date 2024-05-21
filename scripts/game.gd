@@ -7,6 +7,7 @@ var tanks = []
 var speedies = []
 var towers = []
 var gold : int = 0
+var spawnManager
 
 const RANGE_BORDER_COLOR = Color(0.2, 0.5, 1, 0.77)
 const RANGE_COLOR = Color(0, 0, 0, 0.1)
@@ -21,6 +22,7 @@ var level_parameters := {
 func _ready():
 	main = get_tree().get_root()
 	towers = Tower_Manager.get_children()
+	spawnManager = get_node("SpawnPoints")
 
 func _process(delta):
 	
@@ -65,7 +67,7 @@ func calculate_distance(e1, e2):
 	return e1.position.distance_to(e2.position)
 
 func get_all_enemies():
-	if enemies.size() == 0:
+	if enemies.size() == 0 and spawnManager.last_wave:
 		get_tree().change_scene_to_file("res://select_weapon.tscn")
 	
 	return enemies
