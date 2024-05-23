@@ -3,8 +3,8 @@ extends Turret
 class_name SniperTurret
 
 func _ready():
-	atk = 3
-	atk_speed = 1.75
+	atk = 15
+	atk_speed = 2
 	def_pen = 3
-	range = 230.0
+	range = 190.0
 	super._ready()

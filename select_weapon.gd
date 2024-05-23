@@ -58,7 +58,7 @@ func generate_weapon(weapon_container):
 			randomWeapon.damage = randf() * WeaponRules.max_RL_damage + WeaponRules.min_RL_damage
 	
 	var text = weapon_container.get_child(1)
-	text.bbcode_text = "Type: " + str(randomWeapon.type) + "\n" + "Atk. Speed: " + str(randomWeapon.atk_speed) + "\n" + "Damage: " + str(randomWeapon.damage) + "\n"
+	text.bbcode_text = "Type: " + str(randomWeapon.type) + "\n" + "Atk. Speed: " + str(randomWeapon.atk_speed) + "\n" + "Damage: " + str(randomWeapon.damage) + "\n" + "Cost: 200" + "\n"
 
 func generate_weapons():
 	generate_weapon(weapon_container1)

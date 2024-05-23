@@ -6,7 +6,7 @@ var basics = []
 var tanks = []
 var speedies = []
 var towers = []
-var gold : int = 0
+var gold : int = 420
 var spawnManager
 
 const RANGE_BORDER_COLOR = Color(0.2, 0.5, 1, 0.77)

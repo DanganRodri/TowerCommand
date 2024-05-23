@@ -2,10 +2,13 @@ extends Area2D
 
 class_name Barrier
 
-var hp = 10
+var hp = 30
 
-func _process(delta):
-	
-	if hp <= 0:
-		self.queue_free()
-		pass
+
+func on_hit(damage):
+	hp -= damage
+	if self.hp <= 0:
+		on_destroy()
+
+func on_destroy():
+	queue_free()

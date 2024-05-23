@@ -83,4 +83,8 @@ position = Vector2(0, 79)
 
 [node name="WaveTimer" type="Timer" parent="SpawnPoints"]
 
+[node name="WaveIndicator" type="Label" parent="SpawnPoints"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="timeout" from="SpawnPoints/WaveTimer" to="SpawnPoints" method="_on_wave_timer_timeout"]

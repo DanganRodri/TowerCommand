@@ -5,15 +5,19 @@ var enemy_tank = preload("res://entities/enemy_tank.tscn")
 var enemy_speedy = preload("res://entities/enemy_speedy.tscn")
 
 @onready var waveTimer = $WaveTimer
+@onready var waveIndicator = $WaveIndicator
 
 var wave : int = 0
-var wave1 = [[0,"basic"],[0,"basic"],[0,"basic"]]
-var wave2 = [[0,"tank"],[0,"tank"],[0,"tank"]]
-var waveList = [wave1, wave2]
+var wave1 = [[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"]]
+var wave2 = [[1,"basic"],[1,"tank"],[1,"basic"],[1,"basic"],[1,"tank"],[1,"basic"]]
+var wave3 = [[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"]]
+var wave4 = [[1,"basic"],[1,"tank"],[1,"basic"],[1,"basic"],[1,"tank"],[1,"basic"]]
+var waveList = [wave1, wave2, wave3, wave4]
 var spawnDelay : float = 1
 var wave_ended : bool = true
-var wave_interval : float = 10.0
+var wave_interval : float = 17.5
 var last_wave : bool = false
+var totalWaves = waveList.size()
 
 
 func _ready():
@@ -21,9 +25,10 @@ func _ready():
 
 func _process(delta):
 	if last_wave:
-		print("last wave")
+		return
 	
 	if wave_ended and not last_wave:
+		waveIndicator.text = "Wave: " + str(wave+1) + "/" + str(totalWaves)
 		spawnWave()
 	
 func spawnWave():

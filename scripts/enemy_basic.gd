@@ -3,5 +3,5 @@ extends Enemy
 class_name Basic
 
 func _init():
-	super._init("Basic", 3, 1, 150,false, 10)
+	super._init("Basic", 30, 1, 150,false)
 	

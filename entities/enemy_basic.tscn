@@ -13,7 +13,7 @@ bg_color = Color(0.168627, 0.0431373, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqoct"]
 bg_color = Color(0.72549, 1, 0.784314, 1)
 
-[node name="Enemy Basic" type="CharacterBody2D"]
+[node name="Enemy Basic" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_n31kb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

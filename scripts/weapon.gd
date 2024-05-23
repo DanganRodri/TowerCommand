@@ -13,7 +13,7 @@ var weapon_type = {
 var atk_speed = 0.1
 var is_ready : bool = true
 var type = weapon_type.AR
-var damage = 1.0
+var damage = 10.0
 
 
 const ar_cursor = ""

@@ -17,7 +17,7 @@ bg_color = Color(0.168627, 0.0431373, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oictu"]
 bg_color = Color(0.72549, 1, 0.784314, 1)
 
-[node name="Enemy Speedy" type="CharacterBody2D"]
+[node name="Enemy Speedy" type="CharacterBody2D" groups=["enemy"]]
 position = Vector2(49, 79)
 script = ExtResource("1_owtnb")
 
