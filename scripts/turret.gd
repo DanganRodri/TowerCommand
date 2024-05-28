@@ -7,7 +7,7 @@ class_name Turret
 var map_node
 var enemy_in_sight = []
 var target : Enemy = null
-var show_range : bool = true
+var show_range : bool = false
 
 var atk : int = 1
 var atk_speed : float = 0.4
