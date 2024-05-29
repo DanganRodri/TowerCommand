@@ -1,11 +1,47 @@
-[gd_scene load_steps=7 format=3 uid="uid://by4yhnfel8rw8"]
+[gd_scene load_steps=12 format=3 uid="uid://by4yhnfel8rw8"]
 
 [ext_resource type="Script" path="res://scripts/enemy_basic.gd" id="1_n31kb"]
-[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_53gft"]
+[ext_resource type="Texture2D" uid="uid://cx8kkwfr4jv11" path="res://assets/sprites/Enemy-sheet.png" id="2_wdhsr"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="3_up5lq"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vstny"]
+atlas = ExtResource("2_wdhsr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as1ne"]
+atlas = ExtResource("2_wdhsr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twotr"]
+atlas = ExtResource("2_wdhsr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qos4n"]
+atlas = ExtResource("2_wdhsr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qcpc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vstny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as1ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twotr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qos4n")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
-size = Vector2(38, 38)
+size = Vector2(43, 42)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4l2k"]
 bg_color = Color(0.168627, 0.0431373, 0, 1)
@@ -16,14 +52,17 @@ bg_color = Color(0.72549, 1, 0.784314, 1)
 [node name="Enemy Basic" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_n31kb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_53gft")
-metadata/_edit_lock_ = true
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(1.3125, 1.3125)
+sprite_frames = SubResource("SpriteFrames_0qcpc")
+animation = &"run"
+autoplay = "run"
+frame_progress = 0.397276
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_feq2d")
-metadata/_edit_lock_ = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -19.0

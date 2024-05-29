@@ -3,10 +3,9 @@ extends CharacterBody2D
 class_name Enemy
 
 @onready var tilemap = get_node("../TileMap")
-@onready var sprite = get_node("Sprite2D")
+@onready var sprite = get_node("AnimatedSprite2D")
 var current_path: Array[Vector2i]
 var target: Vector2
-
 var type : String = "Basic"
 var hp : float = 3.0
 var speed : float = 1.5
