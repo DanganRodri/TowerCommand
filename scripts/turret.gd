@@ -36,11 +36,11 @@ func _draw():
 	if self.show_range:
 		var center = Vector2(0,0)
 		var radius = self.range
-		var color = Game.RANGE_BORDER_COLOR
+		var color = GameData.COLOR_DATA["RANGE"]["BARRIER_RANGE_BORDER_COLOR"]
 		draw_circle(center, radius, color)
 		
 		radius -= 4.5
-		color = Game.RANGE_COLOR
+		color = GameData.COLOR_DATA["RANGE"]["BARRIER_RANGE_COLOR"]
 		draw_circle(center, radius, color)
 
 func _physics_process(delta):
@@ -54,10 +54,10 @@ func _physics_process(delta):
 
 func select_tower_to_defend():
 	var towers = self.get_parent().get_parent().get_node("Towers").get_children()
-	defending_tower = Game.check_closest(self, towers)
+	defending_tower = GlobalFunctions.check_closest(self, towers)
 
 func select_enemy():
-	target = Game.check_closest(defending_tower, enemy_in_sight)
+	target = GlobalFunctions.check_closest(defending_tower, enemy_in_sight)
 
 func turn():
 	self.look_at(target.position)

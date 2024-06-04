@@ -5,7 +5,7 @@ var enemy_tank = preload("res://entities/enemy_tank.tscn")
 var enemy_speedy = preload("res://entities/enemy_speedy.tscn")
 
 @onready var waveTimer = $WaveTimer
-@onready var waveIndicator = $WaveIndicator
+@onready var waveIndicator = $WaveIndicatorBackGround/WaveIndicator
 
 var wave : int = 0
 var wave1 = [[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"]]

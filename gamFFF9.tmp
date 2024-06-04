@@ -147,7 +147,6 @@ offset_right = 84.0
 offset_bottom = 23.0
 
 [node name="WaveIndicator" type="Label" parent="SpawnPoints/WaveIndicatorBackGround"]
-layout_mode = 0
 offset_left = 4.0
 offset_right = 44.0
 offset_bottom = 23.0

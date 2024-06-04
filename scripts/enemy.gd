@@ -92,7 +92,7 @@ func apply_color_filter():
 
 func get_target():
 	var towers = self.get_parent().get_node("Towers").get_children()
-	var tower = Game.check_closest(self, towers)
+	var tower = GlobalFunctions.check_closest(self, towers)
 	target = tower.position
 	pass
 
