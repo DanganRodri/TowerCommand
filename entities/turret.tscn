@@ -78,6 +78,7 @@ metadata/_edit_lock_ = true
 
 [node name="UpgradeList" type="Panel" parent="Upgrade"]
 visible = false
+z_index = 5
 anchors_preset = -1
 anchor_left = -0.076
 anchor_top = 0.086

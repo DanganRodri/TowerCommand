@@ -3,18 +3,30 @@ extends Turret
 class_name BlankTurret
 
 func _on_dps_pressed():
-	create_turret("res://entities/dps_turret.tscn")
+	if GameData.advanced_turrets["dps"]:
+		create_turret("res://entities/advanced_dps_turret.tscn")
+	else:	
+		create_turret("res://entities/dps_turret.tscn")
 
 func _on_aoe_pressed():
-	create_turret("res://entities/aoe_turret.tscn")
+	if GameData.advanced_turrets["aoe"]:
+		create_turret("res://entities/advanced_aoe_turret.tscn")
+	else:
+		create_turret("res://entities/aoe_turret.tscn")
 
 
 func _on_ice_pressed():
-	create_turret("res://entities/ice_turret.tscn")
+	if GameData.advanced_turrets["ice"]:
+		create_turret("res://entities/advanced_ice_turret.tscn")
+	else:
+		create_turret("res://entities/ice_turret.tscn")
 
 
 func _on_sniper_pressed():
-	create_turret("res://entities/sniper_turret.tscn")
+	if GameData.advanced_turrets["sniper"]:
+		create_turret("res://entities/advanced_sniper_turret.tscn")
+	else:
+		create_turret("res://entities/sniper_turret.tscn")
 
 func create_turret(turret_path):
 	var root = get_parent().get_parent()

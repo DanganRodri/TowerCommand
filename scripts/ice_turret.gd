@@ -33,4 +33,4 @@ func area_hit():
 	for enemy in result:
 		if enemy.collider and enemy.collider.is_in_group("enemy"):
 			enemy.collider.on_hit(atk)
-			enemy.collider.status_effect("slow", 1.5, 0.33)
+			enemy.collider.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)

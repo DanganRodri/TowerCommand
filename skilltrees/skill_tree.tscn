@@ -1,7 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://b11qa1ok58ptg"]
+[gd_scene load_steps=7 format=3 uid="uid://b11qa1ok58ptg"]
 
-[ext_resource type="Script" path="res://scripts/ice_upgrade_tree.gd" id="1_ehsgw"]
+[ext_resource type="Script" path="res://scripts/upgrade_tree_menu.gd" id="1_71stc"]
+[ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="1_r3b73"]
 [ext_resource type="PackedScene" uid="uid://dsdr7e8rggbmq" path="res://skilltrees/skill_button.tscn" id="1_r7i35"]
+[ext_resource type="Script" path="res://scripts/upgrades.gd" id="3_vicqi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vdlhl"]
+texture = ExtResource("1_r3b73")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sys0s"]
+bg_color = Color(0.984314, 0.364706, 0.25098, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.737255, 0.552941, 1)
+border_blend = true
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
 
 [node name="UpgradeTree" type="Panel"]
 anchors_preset = 15
@@ -9,13 +27,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_vdlhl")
+script = ExtResource("1_71stc")
 
 [node name="UpgradeEffects" type="Control" parent="."]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_ehsgw")
+script = ExtResource("3_vicqi")
 
 [node name="UpgradeButton" parent="." instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -23,8 +43,7 @@ offset_left = 41.0
 offset_top = 280.0
 offset_right = -1025.0
 offset_bottom = -281.0
-max_level = 2
-effect_id = 2
+effect_id = 4
 
 [node name="UpgradeButton" parent="UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -32,69 +51,89 @@ offset_left = 143.0
 offset_right = 143.0
 offset_bottom = 0.0
 disabled = true
-max_level = 1
+effect_id = 3
 
 [node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+visible = false
 layout_mode = 1
 offset_left = 144.0
 offset_right = 144.0
 offset_bottom = 0.0
 effect_id = 1
 
-[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton2" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
-offset_left = 0.0
+offset_left = 144.0
 offset_top = -200.0
-offset_right = 0.0
+offset_right = 144.0
 offset_bottom = -200.0
 max_level = 1
+effect_id = 5
 
-[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton2/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+max_level = 2
 
-[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton2/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
 
-[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton2" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton3" parent="UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
-offset_left = 0.0
+offset_left = 144.0
 offset_top = 200.0
-offset_right = 0.0
+offset_right = 144.0
 offset_bottom = 200.0
 max_level = 1
 
-[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton2/UpgradeButton2" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
 
-[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton2/UpgradeButton2" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+max_level = 2
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="UpgradeDesc" type="TextEdit" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -512.0
+offset_top = 20.0
+offset_right = -35.0
+offset_bottom = -19.0
 grow_horizontal = 0
 grow_vertical = 2
-placeholder_text = "Buenas tardes soy un texo de prueba pa ver como funciona la wea.
-
-Mese cuidan"
+editable = false
 wrap_mode = 1
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 12.0
+offset_right = 110.0
+offset_bottom = 94.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = SubResource("StyleBoxFlat_sys0s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sys0s")
+text = "X"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

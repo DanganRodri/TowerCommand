@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="1_426fl"]
 [ext_resource type="Script" path="res://scripts/SkillButton.gd" id="2_mqkiy"]
 
-[node name="UpgradeButton" type="TextureButton"]
+[node name="UpgradeButton" type="TextureButton" groups=["upgradebutton"]]
+z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -51,7 +52,7 @@ metadata/_edit_lock_ = true
 
 [node name="Line2D" type="Line2D" parent="."]
 top_level = true
-z_index = -1
+z_index = 1
 default_color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

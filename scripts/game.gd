@@ -1,12 +1,11 @@
 extends Node
 
-
 var main = null
 var enemies = []
 var basics = []
 var tanks = []
 var speedies = []
-var gold : int = 420
+var gold : int = GameData.MAX_GOLD
 var spawnManager
 
 var primaryWeapon: Weapon
@@ -19,10 +18,9 @@ var level_parameters := {
 func _ready():
 	main = get_tree().get_root()
 	spawnManager = get_node("SpawnPoints")
-	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _process(delta):
-	
 	
 	if Input.is_action_just_pressed("esc"):
 		get_tree().quit()
@@ -32,6 +30,10 @@ func _process(delta):
 	tanks = []
 	speedies = []
 	var childs = get_children()
+	
+	var goldLabel = get_node("UI/HUD/Gold")
+	if goldLabel:
+		goldLabel.gold = self.gold
 	
 	for node in childs:
 		if node is CharacterBody2D:
@@ -45,9 +47,8 @@ func _process(delta):
 					
 		if primaryWeapon == null and node is Weapon:
 			primaryWeapon = node as Weapon
-		
-		if node is Label:
-			node.gold = self.gold
+	
+	
 
 func get_all_enemies():
 	if enemies.size() == 0 and spawnManager.last_wave:

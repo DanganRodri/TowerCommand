@@ -34,15 +34,6 @@ func shoot():
 		var speedies = game.get_speedy_enemies()
 		var mouse_position = get_global_mouse_position()
 		
-		for tank in tanks:
-			var barrier = tank.get_node("Barrier")
-			if barrier != null:
-				var colliderSize = barrier.get_child(0).get_shape().get_rect().size
-				
-				if collidesWithPoint(mouse_position, tank.position, colliderSize):
-					barrier.hp = barrier.hp - 1
-					return
-		
 		for speedie in speedies:
 			var shields = speedie.get_child(2)
 			for shield in shields.get_children():

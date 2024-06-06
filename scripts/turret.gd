@@ -7,8 +7,9 @@ class_name Turret
 var map_node
 var enemy_in_sight = []
 var target : Enemy = null
-var show_range : bool = false
+var show_range : bool = true
 
+var level : int = 1
 var atk : int = 1
 var atk_speed : float = 0.4
 var def_pen : int = 0
@@ -80,10 +81,11 @@ func _on_upgrade_pressed():
 	var root = get_parent().get_parent()
 	if root.gold >= self.cost:
 		root.gold = root.gold - self.cost
+		self.level = self.level + 1
 		self.total_cost = self.total_cost + self.cost
 		self.cost = self.cost + (self.cost * 0.6)
 		self.atk = self.atk + (self.atk * 0.2)
-		self.atk_speed = self.atk_speed + (self.atk_speed * 0.2)
+		self.atk_speed = self.atk_speed - (self.atk_speed * 0.05)
 		self.def_pen = self.def_pen + (self.def_pen * 0.2)
 		self.range = self.range + (self.range * 0.025)
 		self.get_node("Range/CollisionShape2D").get_shape().radius = range

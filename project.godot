@@ -17,9 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Game="res://scripts/game.gd"
-WeaponRules="res://scripts/globals.gd"
-Tower_Manager="res://scripts/tower_manager.gd"
 GameData="*res://Singletons/GameData.gd"
 GlobalFunctions="*res://Singletons/global_functions.gd"
 

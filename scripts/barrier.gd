@@ -11,4 +11,6 @@ func on_hit(damage):
 		on_destroy()
 
 func on_destroy():
-	queue_free()
+	position.x = 10000
+	position.y = 10000
+	self.hide()

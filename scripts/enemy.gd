@@ -58,10 +58,6 @@ func on_hit(damage):
 		protected.on_hit(damage)
 		return
 	
-	if get_node("Barrier"):
-		get_node("Barrier").on_hit(damage)
-		return
-	
 	damaged = true
 	damage_timer.start()
 	hp -= damage
@@ -71,15 +67,16 @@ func on_hit(damage):
 func status_effect(effect,duration,value):
 	match effect:
 		"slow":
-			slow_timer.wait_time = duration
-			slow_timer.start()
-			self.speed = self.speed * value
-			slowed = true
+			if not slowed:
+				slow_timer.wait_time = duration * GameData.stat_bonus["slow_duration"]
+				slow_timer.start()
+				self.speed = self.speed * (value / GameData.stat_bonus["slow"])
+				slowed = true
 			
 
 func on_destroy():
 	var game = get_parent()
-	game.gold = game.gold + self.gold
+	game.gold = min(GameData.MAX_GOLD, game.gold + self.gold)
 	self.queue_free()
 	
 func apply_color_filter():
