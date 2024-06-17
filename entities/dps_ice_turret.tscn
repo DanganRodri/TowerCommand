@@ -1,64 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bft1br0dn1qqa"]
+[gd_scene load_steps=9 format=3 uid="uid://b43hcs0ch3k7s"]
 
-[ext_resource type="Script" path="res://scripts/dps_turret.gd" id="1_xgn6f"]
-[ext_resource type="Texture2D" uid="uid://di3ts2e6gnu25" path="res://assets/sprites/Dps_turret-sheet.png" id="2_okx31"]
-[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_4of2i"]
-[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_b1yrm"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pipkb"]
-atlas = ExtResource("2_okx31")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_58knk"]
-atlas = ExtResource("2_okx31")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8dihj"]
-atlas = ExtResource("2_okx31")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgtjb"]
-atlas = ExtResource("2_okx31")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f50v0"]
-atlas = ExtResource("2_okx31")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbkv1"]
-atlas = ExtResource("2_okx31")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wll6o"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pipkb")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_58knk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8dihj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgtjb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f50v0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kbkv1")
-}],
-"loop": false,
-"name": &"shoot",
-"speed": 25.0
-}]
+[ext_resource type="Script" path="res://scripts/dps_ice_turret.gd" id="1_6mi47"]
+[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_japcr"]
+[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_y3y8e"]
+[ext_resource type="Texture2D" uid="uid://c2rpdu58jfjjt" path="res://assets/sprites/texture_bar.png" id="4_os631"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
 size = Vector2(65, 61)
@@ -66,7 +11,7 @@ size = Vector2(65, 61)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
 radius = 175.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0teg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktumx"]
 bg_color = Color(0.176471, 0.701961, 0.501961, 1)
 border_width_left = 7
 border_width_top = 7
@@ -79,7 +24,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dllg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqe0l"]
 bg_color = Color(0.901961, 0, 0, 1)
 border_width_left = 7
 border_width_top = 7
@@ -92,23 +37,21 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Dps Turret" type="StaticBody2D"]
+[node name="Dps Ice Turret" type="StaticBody2D" groups=["ice"]]
+position = Vector2(27, 26)
 input_pickable = true
-script = ExtResource("1_xgn6f")
+script = ExtResource("1_6mi47")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(10, 0)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_wll6o")
-animation = &"shoot"
-frame = 4
-frame_progress = 1.0
-flip_h = true
-script = ExtResource("3_b1yrm")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.792157, 0.564706, 1, 1)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("2_japcr")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_siseg")
+metadata/_edit_lock_ = true
 
 [node name="Range" type="Area2D" parent="."]
 visible = false
@@ -129,7 +72,7 @@ offset_left = 1.55199
 offset_top = 3.272
 offset_right = 2.15198
 offset_bottom = 3.2
-script = ExtResource("3_4of2i")
+script = ExtResource("3_y3y8e")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
 layout_mode = 0
@@ -142,9 +85,9 @@ alignment = 1
 [node name="Upgrade" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_o0teg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_o0teg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_o0teg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ktumx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ktumx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ktumx")
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
 layout_mode = 0
@@ -158,9 +101,9 @@ horizontal_alignment = 1
 [node name="Discard" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_2dllg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2dllg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2dllg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rqe0l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rqe0l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rqe0l")
 
 [node name="Discard" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
 layout_mode = 0
@@ -171,7 +114,35 @@ offset_bottom = 78.0
 text = "Discard"
 horizontal_alignment = 1
 
-[connection signal="draw" from="." to="." method="_on_draw"]
+[node name="Skill" type="Node" parent="."]
+
+[node name="Skill" type="Button" parent="Skill"]
+offset_left = 62.0
+offset_top = 18.0
+offset_right = 80.0
+offset_bottom = 36.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Skill/Skill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+value = 30.0
+fill_mode = 4
+texture_under = ExtResource("4_os631")
+texture_progress = ExtResource("4_os631")
+tint_under = Color(0.0745098, 0.0745098, 0.0745098, 1)
+tint_progress = Color(0.67451, 0, 0.156863, 1)
+
+[node name="Skill_CD" type="Timer" parent="Skill"]
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

@@ -8,7 +8,10 @@ enum Effect {
 	Dmg,
 	Slow,
 	SlowDuration,
-	AdvancedIce
+	AdvancedIce,
+	Freeze,
+	DpsIce,
+	WIP
 }
 
 @onready var panel = $Panel
@@ -19,6 +22,7 @@ enum Effect {
 
 @export var max_level : int = 3
 @export var effect_id : Effect
+@export var exclusive : bool = false
 
 var effect : Callable = test
 var selected : bool = false
@@ -64,20 +68,28 @@ func _on_pressed():
 		if level == max_level:
 			return
 		
-		apply_effect()
 		level = min(level + 1, max_level)
+		apply_effect()
 		panel.hide()
 		line_2d.default_color = Color(0.99999982118607, 0.94657629728317, 0.65052431821823)
 		
 		var childs = get_children()
 		
 		for child in childs:
-			if child is UpgradeNode and level >= 1:
+			if child is UpgradeNode and level == 1:
 				child.disabled = false
 				child.panel.hide()
+		
+		if exclusive:
+			var brothers = self.get_parent().get_children()
+			
+			for brother in brothers:
+				if brother != self and brother is UpgradeNode:
+					brother.disabled = true
+					brother.panel.show()
 
 func apply_effect():
-	effect.call()
+	effect.call(self)
 
 func test():
 	print("efectivamente funciona")

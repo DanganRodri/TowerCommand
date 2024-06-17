@@ -7,7 +7,8 @@ class_name Turret
 var map_node
 var enemy_in_sight = []
 var target : Enemy = null
-var show_range : bool = true
+var show_range : bool = false
+var last_fastforward_speed = 1
 
 var level : int = 1
 var atk : int = 1
@@ -25,6 +26,11 @@ func _on_input_event(viewport, event, shape_idx):
 		var upgradeList = get_node("Upgrade/UpgradeList")
 		upgradeList.visible = !upgradeList.visible
 		upgradeList.global_position = self.position + Vector2(-115, 28)
+		last_fastforward_speed = Engine.get_time_scale()
+		Engine.set_time_scale(GameData.SLOWMOTION)
+		self.show_range = true
+		hide()
+		show()
 
 func _ready():
 	if not self is BlankTurret:
@@ -37,18 +43,17 @@ func _draw():
 	if self.show_range:
 		var center = Vector2(0,0)
 		var radius = self.range
-		var color = GameData.COLOR_DATA["RANGE"]["BARRIER_RANGE_BORDER_COLOR"]
+		var color = GameData.COLOR_DATA["RANGE"]["TURRET_RANGE_BORDER_COLOR"]
 		draw_circle(center, radius, color)
-		
+			
 		radius -= 4.5
-		color = GameData.COLOR_DATA["RANGE"]["BARRIER_RANGE_COLOR"]
+		color = GameData.COLOR_DATA["RANGE"]["TURRET_RANGE_COLOR"]
 		draw_circle(center, radius, color)
 
 func _physics_process(delta):
 	if not self is BlankTurret and target == null:
 		select_enemy()
 	if target != null:
-		turn()
 		if not reloading:
 			fire()
 	
@@ -65,6 +70,7 @@ func turn():
 	
 func fire():
 	reloading = true
+	turn()
 	target.on_hit(atk)
 	await get_tree().create_timer(atk_speed).timeout
 	reloading = false
@@ -99,4 +105,5 @@ func _on_discard_pressed():
 	var root_node = get_parent().get_parent()
 	root_node.get_node("Turrets").add_child(new_turret)
 	new_turret.global_position = global_position
+	Engine.set_time_scale(last_fastforward_speed)
 	queue_free()

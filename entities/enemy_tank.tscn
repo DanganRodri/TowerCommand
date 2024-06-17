@@ -73,6 +73,7 @@ shape = SubResource("RectangleShape2D_feq2d")
 metadata/_edit_lock_ = true
 
 [node name="Barrier" type="Area2D" parent="."]
+z_index = 4
 script = ExtResource("3_a724s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]

@@ -1,11 +1,13 @@
 extends Node
 
+@onready var goldLabel = %Gold
+
 var main = null
 var enemies = []
 var basics = []
 var tanks = []
 var speedies = []
-var gold : int = GameData.MAX_GOLD
+var gold : int =  GameData.MAX_GOLD
 var spawnManager
 
 var primaryWeapon: Weapon
@@ -22,7 +24,7 @@ func _ready():
 
 func _process(delta):
 	
-	if Input.is_action_just_pressed("esc"):
+	if Input.is_action_just_released("esc"):
 		get_tree().quit()
 	
 	enemies = []
@@ -31,9 +33,7 @@ func _process(delta):
 	speedies = []
 	var childs = get_children()
 	
-	var goldLabel = get_node("UI/HUD/Gold")
-	if goldLabel:
-		goldLabel.gold = self.gold
+	goldLabel.gold = self.gold
 	
 	for node in childs:
 		if node is CharacterBody2D:
@@ -51,8 +51,8 @@ func _process(delta):
 	
 
 func get_all_enemies():
-	if enemies.size() == 0 and spawnManager.last_wave:
-		get_tree().change_scene_to_file("res://select_weapon.tscn")
+	#if enemies.size() == 0 and spawnManager.last_wave:
+		#get_tree().change_scene_to_file("res://select_weapon.tscn")
 	
 	return enemies
 
@@ -64,3 +64,4 @@ func get_tank_enemies():
 
 func get_speedy_enemies():
 	return speedies
+

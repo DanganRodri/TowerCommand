@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://hvvnfjpmdhwo"]
 
 [ext_resource type="Script" path="res://scripts/blank_turret.gd" id="1_4o1ll"]
-[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="1_yj1l2"]
+[ext_resource type="Texture2D" uid="uid://b2m3qisdv1vq5" path="res://assets/sprites/blank_turret.png" id="2_i3j4t"]
 [ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_v67vt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
-size = Vector2(65, 61)
+size = Vector2(39.0909, 39.0909)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13ero"]
 bg_color = Color(0.901961, 0, 0, 1)
@@ -61,16 +61,17 @@ corner_radius_bottom_left = 5
 
 [node name="Blank Turret" type="StaticBody2D"]
 position = Vector2(27, 26)
+scale = Vector2(2.2, 2.2)
 input_pickable = true
 script = ExtResource("1_4o1ll")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 0.0352941, 1, 1)
 scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("1_yj1l2")
+texture = ExtResource("2_i3j4t")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_siseg")
 metadata/_edit_lock_ = true
 

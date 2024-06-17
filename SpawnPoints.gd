@@ -21,7 +21,7 @@ var totalWaves = waveList.size()
 
 
 func _ready():
-	waveTimer.wait_time = wave_interval
+	waveTimer.wait_time = wave_interval * GameData.Challenges["TimeBetweenWaves"]
 
 func _process(delta):
 	if last_wave:

@@ -2,9 +2,12 @@ extends Turret
 
 class_name AdvancedIceTurret
 
+var freeze_wave = false
+var freeze_timer : Timer
+
 func _ready():
-	atk = 6
-	atk_speed = 1.8
+	atk = 4
+	atk_speed = 1.9
 	def_pen = 0
 	range = 155.0
 	super._ready()
@@ -18,6 +21,19 @@ func fire():
 	await get_tree().create_timer(atk_speed).timeout
 	reloading = false
 
+func freeze():
+	for enemy in enemy_in_sight:
+		enemy.on_hit(atk)
+		enemy.status_effect("freeze", GameData.BASE_FREEZE_DURATION , 0)
+	freeze_wave = false
+	freeze_timer.start()
+
 func _physics_process(delta):
-	if not reloading:
-		fire()
+	if not enemy_in_sight.is_empty():
+		if not reloading:
+			fire()
+		if freeze_wave:
+			freeze()
+
+func _on_freeze_timer():
+	freeze_wave = true
