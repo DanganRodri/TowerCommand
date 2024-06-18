@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b43hcs0ch3k7s"]
+[gd_scene load_steps=10 format=3 uid="uid://b43hcs0ch3k7s"]
 
 [ext_resource type="Script" path="res://scripts/dps_ice_turret.gd" id="1_6mi47"]
 [ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_japcr"]
 [ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_y3y8e"]
+[ext_resource type="Script" path="res://scripts/skill_buton.gd" id="4_8g7lx"]
 [ext_resource type="Texture2D" uid="uid://c2rpdu58jfjjt" path="res://assets/sprites/texture_bar.png" id="4_os631"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
@@ -114,15 +115,18 @@ offset_bottom = 78.0
 text = "Discard"
 horizontal_alignment = 1
 
-[node name="Skill" type="Node" parent="."]
+[node name="Skill" type="Node" parent="." groups=["ice_skill"]]
 
 [node name="Skill" type="Button" parent="Skill"]
+visible = false
 offset_left = 62.0
 offset_top = 18.0
 offset_right = 80.0
 offset_bottom = 36.0
+script = ExtResource("4_8g7lx")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Skill/Skill"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,10 +145,14 @@ texture_progress = ExtResource("4_os631")
 tint_under = Color(0.0745098, 0.0745098, 0.0745098, 1)
 tint_progress = Color(0.67451, 0, 0.156863, 1)
 
-[node name="Skill_CD" type="Timer" parent="Skill"]
+[node name="Skill_CD" type="Timer" parent="Skill/Skill"]
+wait_time = 10.0
+one_shot = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
 [connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
+[connection signal="pressed" from="Skill/Skill" to="." method="_on_skill_pressed"]
+[connection signal="timeout" from="Skill/Skill/Skill_CD" to="Skill/Skill" method="_on_skill_cd_timeout"]

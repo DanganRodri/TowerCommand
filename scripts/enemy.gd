@@ -77,11 +77,11 @@ func on_hit(damage):
 func status_effect(effect,duration,value):
 	match effect:
 		"slow":
-			if not slowed:
 				slow_timer.wait_time = duration * GameData.stat_bonus["slow_duration"]
 				slow_timer.start()
-				self.speed = self.speed * (value / GameData.stat_bonus["slow"])
-				slowed = true
+				if not slowed:
+					self.speed = self.speed * (value / GameData.stat_bonus["slow"])
+					slowed = true
 		
 		"freeze":
 			freeze_timer.wait_time = duration

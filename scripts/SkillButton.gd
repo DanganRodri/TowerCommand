@@ -11,6 +11,7 @@ enum Effect {
 	AdvancedIce,
 	Freeze,
 	DpsIce,
+	IceSkill,
 	WIP
 }
 

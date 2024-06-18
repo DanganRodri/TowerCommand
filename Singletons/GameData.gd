@@ -11,6 +11,8 @@ const BASE_SLOW_DURATION = 1.2
 const BASE_FREEZE_DURATION = 0.7
 const BASE_FREEZE_COOLDOWN = 16
 
+const SKILL_OFFSET = Vector2(40,-6)
+
 const GOLD_GAIN_PERCENTAGE_LEVELS = [1, 0.9, 0.75, 0.66]
 const ENEMY_DAMAGE_TAKEN_LEVELS = [1, 0.9, 0.75, 0.66]
 const TIME_BETWEEN_WAVES_LEVELS = [1, 0.75, 0.625, 0.5]
@@ -50,4 +52,11 @@ var advanced_turrets = {
 
 var pasive_skills =  {
 	"freeze": false
+}
+
+var active_skills = {
+	"dps": false,
+	"aoe": false,
+	"ice": false,
+	"sniper": false
 }

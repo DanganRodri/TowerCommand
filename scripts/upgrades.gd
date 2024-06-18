@@ -29,6 +29,9 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.DpsIce:
 			upgrade.effect = dps_ice
 			upgrade.description = "Transforms all ice turrets into dps ice turrets that heavily increases attack speed and damage." + "\n\n" + "Base stats increased." + "\n\n" + "(All the ice turrets builded for the rest of the game will be dps ice turrets)"
+		UpgradeNode.Effect.IceSkill:
+			upgrade.effect = ice_skill
+			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Creates an area on the designated location where enemies will be slowed and damaged over time."
 		UpgradeNode.Effect.WIP:
 			upgrade.effect = wip
 			upgrade.description = "WIP."
@@ -69,6 +72,8 @@ func freeze(_upgrade):
 			ice_turret.freeze_timer = freeze_timer
 			ice_turret.freeze_wave = true
 			freeze_timer.start()
+			
+			_upgrade.description = "Reduces the cooldown between freeze waves."
 		GameData.pasive_skills["freeze"] = true
 	
 	else:
@@ -83,6 +88,15 @@ func dps_ice(_upgrade):
 	for ice_turret in ice_turrets:
 		create_advanced_turret("res://entities/dps_ice_turret.tscn", ice_turret)
 	GameData.advanced_turrets["dps_ice"] = true
+	
+func ice_skill(_upgrade):
+	var ice_turrets = get_tree().get_nodes_in_group("ice")
+	for ice_turret in ice_turrets:
+		var ice_skill = ice_turret.get_node("Skill/Skill")
+		ice_skill.show()
+		ice_skill.global_position = ice_turret.position + GameData.SKILL_OFFSET
+	GameData.active_skills["ice"] = true
+	_upgrade.description = "Reduces the skill cooldown."
 
 func wip(_upgrade):
 	pass

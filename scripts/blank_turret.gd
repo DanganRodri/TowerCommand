@@ -40,6 +40,7 @@ func create_turret(turret_path):
 		root_node.get_node("Turrets").add_child(new_turret)
 		new_turret.global_position = global_position
 		check_pasive_skills(new_turret)
+		check_active_skills(new_turret)
 		Engine.set_time_scale(self.last_fastforward_speed)
 		queue_free()
 
@@ -53,3 +54,9 @@ func check_pasive_skills(turret):
 		turret.freeze_timer = freeze_timer
 		turret.freeze_wave = true
 		freeze_timer.start()
+
+func check_active_skills(turret):
+	if turret.is_in_group("ice") and GameData.active_skills["ice"]:
+		var skill = turret.get_node("Skill/Skill")
+		skill.global_position = turret.position + GameData.SKILL_OFFSET
+		skill.show()
