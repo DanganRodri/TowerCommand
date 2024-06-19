@@ -15,6 +15,7 @@ func _ready():
 
 func fire():
 	reloading = true
+	animated_sprite_2d.play("shoot")
 	for enemy in enemy_in_sight:
 		enemy.on_hit(atk)
 		enemy.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
@@ -22,6 +23,7 @@ func fire():
 	reloading = false
 
 func freeze():
+	animated_sprite_2d.play("shoot")
 	for enemy in enemy_in_sight:
 		enemy.on_hit(atk)
 		enemy.status_effect("freeze", GameData.BASE_FREEZE_DURATION , 0)

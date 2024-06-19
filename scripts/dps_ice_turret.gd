@@ -14,6 +14,8 @@ func _ready():
 
 func fire():
 	reloading = true
+	turn()
+	animated_sprite_2d.play("shoot")
 	target.on_hit(atk)
 	target.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
 	await get_tree().create_timer(atk_speed).timeout

@@ -97,18 +97,18 @@ input_pickable = true
 script = ExtResource("1_xgn6f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(10, 0)
+position = Vector2(10, -1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_wll6o")
 animation = &"shoot"
-frame = 4
-frame_progress = 1.0
 flip_h = true
 script = ExtResource("3_b1yrm")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_siseg")
+metadata/_edit_lock_ = true
 
 [node name="Range" type="Area2D" parent="."]
 visible = false

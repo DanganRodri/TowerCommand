@@ -1,8 +1,27 @@
-[gd_scene load_steps=9 format=3 uid="uid://hvvnfjpmdhwo"]
+[gd_scene load_steps=15 format=3 uid="uid://hvvnfjpmdhwo"]
 
 [ext_resource type="Script" path="res://scripts/blank_turret.gd" id="1_4o1ll"]
 [ext_resource type="Texture2D" uid="uid://b2m3qisdv1vq5" path="res://assets/sprites/blank_turret.png" id="2_i3j4t"]
 [ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_v67vt"]
+[ext_resource type="Texture2D" uid="uid://d3k8xtvnn1ejr" path="res://assets/sprites/Dps_turret.png" id="4_m7i4n"]
+[ext_resource type="Texture2D" uid="uid://b7rc1jn6wt64u" path="res://assets/sprites/aoe_turret.png" id="5_dgm2x"]
+[ext_resource type="Texture2D" uid="uid://ctbjlleqwbpc2" path="res://assets/sprites/ice_turret.png" id="6_b4vcu"]
+[ext_resource type="Texture2D" uid="uid://c5qjfpdv5tvcn" path="res://assets/sprites/sniper_turret.png" id="7_ntk34"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cclg"]
+atlas = ExtResource("2_i3j4t")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dlct0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cclg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
 size = Vector2(39.0909, 39.0909)
@@ -65,9 +84,9 @@ scale = Vector2(2.2, 2.2)
 input_pickable = true
 script = ExtResource("1_4o1ll")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("2_i3j4t")
+sprite_frames = SubResource("SpriteFrames_dlct0")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -105,6 +124,9 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_13ero")
 theme_override_styles/hover = SubResource("StyleBoxFlat_13ero")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_13ero")
+icon = ExtResource("4_m7i4n")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Dps"]
 layout_mode = 0
@@ -121,6 +143,9 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_yxe5e")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yxe5e")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_yxe5e")
+icon = ExtResource("5_dgm2x")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Aoe"]
 layout_mode = 0
@@ -136,6 +161,9 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_kdoqx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_kdoqx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_kdoqx")
+icon = ExtResource("6_b4vcu")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Ice"]
 layout_mode = 0
@@ -151,6 +179,9 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_hvu8e")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hvu8e")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_hvu8e")
+icon = ExtResource("7_ntk34")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Sniper"]
 layout_mode = 0

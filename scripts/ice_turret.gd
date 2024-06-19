@@ -15,6 +15,8 @@ func _ready():
 func fire():
 	reloading = true
 	#target.on_hit(atk)
+	turn()
+	animated_sprite_2d.play("shoot")
 	area_hit()
 	await get_tree().create_timer(atk_speed).timeout
 	reloading = false

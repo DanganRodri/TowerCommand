@@ -2,6 +2,14 @@ extends Turret
 
 class_name BlankTurret
 
+@onready var ice : Button = $Upgrade/UpgradeList/HBoxContainer/Ice
+
+func _process(delta):
+	if GameData.advanced_turrets["ice"]:
+		ice.icon = load("res://assets/sprites/advanced_ice_turret.png")
+	if GameData.active_skills["ice"]:
+		ice.icon = load("res://assets/sprites/dps_ice_turret.png")
+
 func _on_dps_pressed():
 	
 	if GameData.advanced_turrets["dps"]:

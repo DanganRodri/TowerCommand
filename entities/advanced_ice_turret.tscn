@@ -1,8 +1,64 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwsv21t7x64yu"]
+[gd_scene load_steps=16 format=3 uid="uid://cwsv21t7x64yu"]
 
 [ext_resource type="Script" path="res://scripts/advanced_ice_turret.gd" id="1_rwops"]
-[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_8y6aw"]
+[ext_resource type="Texture2D" uid="uid://birmvx5vbax1f" path="res://assets/sprites/advanced_ice-sheet.png" id="2_1wywi"]
+[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_801px"]
 [ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_chvqe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbfsj"]
+atlas = ExtResource("2_1wywi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwt86"]
+atlas = ExtResource("2_1wywi")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60g5o"]
+atlas = ExtResource("2_1wywi")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vts4"]
+atlas = ExtResource("2_1wywi")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m3kf"]
+atlas = ExtResource("2_1wywi")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh8ll"]
+atlas = ExtResource("2_1wywi")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55dib"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbfsj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwt86")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60g5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vts4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m3kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh8ll")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
 size = Vector2(65, 61)
@@ -37,21 +93,24 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Advanced Ice Turret" type="StaticBody2D" groups=["ice"]]
-position = Vector2(27, 26)
 input_pickable = true
 script = ExtResource("1_rwops")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0, 0.901961, 0.760784, 1)
-scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("2_8y6aw")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_55dib")
+animation = &"shoot"
+script = ExtResource("3_801px")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_siseg")
 metadata/_edit_lock_ = true
 
 [node name="Range" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource("CircleShape2D_dntdq")

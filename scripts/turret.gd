@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 class_name Turret
-
+@onready var animated_sprite_2d = $AnimatedSprite2D
 #Stats of the tower
 
 var map_node
@@ -71,6 +71,7 @@ func turn():
 func fire():
 	reloading = true
 	turn()
+	animated_sprite_2d.play("shoot")
 	target.on_hit(atk)
 	await get_tree().create_timer(atk_speed).timeout
 	reloading = false

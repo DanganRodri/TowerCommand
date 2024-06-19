@@ -1,7 +1,6 @@
 extends Turret
 
 class_name DpsTurret
-@onready var animated_sprite_2d = $AnimatedSprite2D
 
 func _ready():
 	atk = 10
@@ -13,8 +12,8 @@ func _ready():
 func fire():
 	reloading = true
 	turn()
-	target.on_hit(atk)
 	animated_sprite_2d.play("shoot")
+	target.on_hit(atk)
 	await get_tree().create_timer(atk_speed).timeout
 	reloading = false
 

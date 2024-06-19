@@ -1,13 +1,69 @@
-[gd_scene load_steps=10 format=3 uid="uid://b43hcs0ch3k7s"]
+[gd_scene load_steps=18 format=3 uid="uid://b43hcs0ch3k7s"]
 
 [ext_resource type="Script" path="res://scripts/dps_ice_turret.gd" id="1_6mi47"]
-[ext_resource type="Texture2D" uid="uid://c2w1qfuscahvq" path="res://icon.svg" id="2_japcr"]
+[ext_resource type="Texture2D" uid="uid://ft0k0h8jkwxo" path="res://assets/sprites/Dps_ice_turret-sheet.png" id="2_c4f8g"]
+[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_iihk8"]
 [ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_y3y8e"]
 [ext_resource type="Script" path="res://scripts/skill_buton.gd" id="4_8g7lx"]
 [ext_resource type="Texture2D" uid="uid://c2rpdu58jfjjt" path="res://assets/sprites/texture_bar.png" id="4_os631"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmo0t"]
+atlas = ExtResource("2_c4f8g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3w0n3"]
+atlas = ExtResource("2_c4f8g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o24mc"]
+atlas = ExtResource("2_c4f8g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scbfq"]
+atlas = ExtResource("2_c4f8g")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fatm"]
+atlas = ExtResource("2_c4f8g")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3643"]
+atlas = ExtResource("2_c4f8g")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqges"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmo0t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3w0n3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o24mc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scbfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fatm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3643")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 25.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
-size = Vector2(65, 61)
+size = Vector2(75, 48)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
 radius = 175.0
@@ -39,18 +95,22 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Dps Ice Turret" type="StaticBody2D" groups=["ice"]]
-position = Vector2(27, 26)
 input_pickable = true
 script = ExtResource("1_6mi47")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.792157, 0.564706, 1, 1)
-scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("2_japcr")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(13, -1)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rqges")
+animation = &"shoot"
+frame = 4
+frame_progress = 1.0
+script = ExtResource("3_iihk8")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
+position = Vector2(12.5, -1)
 shape = SubResource("RectangleShape2D_siseg")
 metadata/_edit_lock_ = true
 
