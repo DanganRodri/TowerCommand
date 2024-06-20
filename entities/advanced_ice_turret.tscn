@@ -101,6 +101,7 @@ modulate = Color(0, 0.901961, 0.760784, 1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_55dib")
 animation = &"shoot"
+autoplay = "default"
 script = ExtResource("3_801px")
 metadata/_edit_lock_ = true
 

@@ -6,6 +6,7 @@ enum Effect {
 	AddRange,
 	AtkSpeed,
 	Dmg,
+	Poison,
 	Slow,
 	SlowDuration,
 	AdvancedIce,

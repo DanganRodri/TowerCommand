@@ -107,6 +107,7 @@ script = ExtResource("1_r7ys7")
 position = Vector2(11, -1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ujisw")
+autoplay = "default"
 script = ExtResource("3_o4s2u")
 metadata/_edit_lock_ = true
 

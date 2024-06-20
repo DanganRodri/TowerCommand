@@ -108,6 +108,7 @@ position = Vector2(11, -1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4ds3a")
 animation = &"shoot"
+autoplay = "default"
 script = ExtResource("3_506c3")
 metadata/_edit_lock_ = true
 

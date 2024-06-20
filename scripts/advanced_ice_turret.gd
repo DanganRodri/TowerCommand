@@ -10,17 +10,19 @@ func _ready():
 	atk_speed = 1.9
 	def_pen = 0
 	range = 155.0
+	attack_frame = 4
 	super._ready()
 
 
 func fire():
-	reloading = true
 	animated_sprite_2d.play("shoot")
+
+func apply_attack():
+	reloading = true
 	for enemy in enemy_in_sight:
 		enemy.on_hit(atk)
 		enemy.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
-	await get_tree().create_timer(atk_speed).timeout
-	reloading = false
+	reload_timer.start()
 
 func freeze():
 	animated_sprite_2d.play("shoot")
@@ -32,8 +34,10 @@ func freeze():
 
 func _physics_process(delta):
 	if not enemy_in_sight.is_empty():
-		if not reloading:
+		if not reloading and animated_sprite_2d.animation == "default":
 			fire()
+		if not reloading and animated_sprite_2d.animation == "shoot" and animated_sprite_2d.frame == attack_frame:
+			apply_attack()
 		if freeze_wave:
 			freeze()
 

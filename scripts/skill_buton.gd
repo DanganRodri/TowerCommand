@@ -3,11 +3,14 @@ extends Button
 @onready var timer_progress = $TextureProgressBar
 @onready var skill_cd = $Skill_CD
 
-var go_on_cd = true
+var cd : float = 40.0
+var go_on_cd = false
 var on_cd = false
 
 func _ready():
+	skill_cd.wait_time = cd
 	timer_progress.max_value = skill_cd.wait_time
+	_on_skill_cd_timeout()
 
 func _process(delta):
 	if go_on_cd:
@@ -22,4 +25,6 @@ func _process(delta):
 
 func _on_skill_cd_timeout():
 	self.disabled = false
+	skill_cd.wait_time = cd
+	timer_progress.max_value = skill_cd.wait_time
 	timer_progress.hide()

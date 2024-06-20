@@ -14,6 +14,9 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.Dmg:
 			upgrade.effect = add_damage
 			upgrade.description = "Slightly increases the attack of the turret."
+		UpgradeNode.Effect.Poison:
+			upgrade.effect = poison_dps
+			upgrade.description = "Transforms all dps turrets into poison dps turrets that deal extra damage over time." + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be poison dps turrets)"
 		UpgradeNode.Effect.Slow:
 			upgrade.effect = add_slow
 			upgrade.description = "Slightly increases the slow effect of the turret."
@@ -45,6 +48,12 @@ func add_atkspeed(_upgrade):
 
 func add_damage(_upgrade):
 	print("daño incrementado")
+
+func poison_dps(_upgrade):
+	var dps_turrets = get_tree().get_nodes_in_group("dps")
+	for dps_turret in dps_turrets:
+		create_advanced_turret("res://entities/poison_dps_turret.tscn", dps_turret)
+	GameData.advanced_turrets["dps"] = true
 
 func add_slow(_upgrade):
 	GameData.stat_bonus["slow"] += 0.3
@@ -91,12 +100,17 @@ func dps_ice(_upgrade):
 	
 func ice_skill(_upgrade):
 	var ice_turrets = get_tree().get_nodes_in_group("ice")
-	for ice_turret in ice_turrets:
-		var ice_skill = ice_turret.get_node("Skill/Skill")
-		ice_skill.show()
-		ice_skill.global_position = ice_turret.position + GameData.SKILL_OFFSET
-	GameData.active_skills["ice"] = true
-	_upgrade.description = "Reduces the skill cooldown."
+	
+	if _upgrade.level == 1:
+		for ice_turret in ice_turrets:
+			var ice_skill = ice_turret.get_node("Skill/Skill")
+			ice_skill.show()
+			ice_skill.global_position = ice_turret.position + GameData.SKILL_OFFSET
+		GameData.active_skills["ice"] = true
+		_upgrade.description = "Reduces the skill cooldown."
+	else:
+		for ice_turret in ice_turrets:
+			ice_turret.skill.cd -= 5
 
 func wip(_upgrade):
 	pass

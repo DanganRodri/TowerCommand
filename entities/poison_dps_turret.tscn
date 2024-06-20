@@ -1,41 +1,39 @@
-[gd_scene load_steps=18 format=3 uid="uid://b43hcs0ch3k7s"]
+[gd_scene load_steps=16 format=3 uid="uid://bsobray5ea6ql"]
 
-[ext_resource type="Script" path="res://scripts/dps_ice_turret.gd" id="1_6mi47"]
-[ext_resource type="Texture2D" uid="uid://ft0k0h8jkwxo" path="res://assets/sprites/Dps_ice_turret-sheet.png" id="2_c4f8g"]
-[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_iihk8"]
-[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_y3y8e"]
-[ext_resource type="Script" path="res://scripts/skill_buton.gd" id="4_8g7lx"]
-[ext_resource type="Texture2D" uid="uid://c2rpdu58jfjjt" path="res://assets/sprites/texture_bar.png" id="4_os631"]
+[ext_resource type="Script" path="res://scripts/poison_dps_turret.gd" id="1_q25vv"]
+[ext_resource type="Texture2D" uid="uid://benrln5ulnm43" path="res://assets/sprites/poison_dps_turret-sheet.png" id="2_1jpdr"]
+[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_ebsqh"]
+[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="4_vspgw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dmo0t"]
-atlas = ExtResource("2_c4f8g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_yauai"]
+atlas = ExtResource("2_1jpdr")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3w0n3"]
-atlas = ExtResource("2_c4f8g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_bodj1"]
+atlas = ExtResource("2_1jpdr")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o24mc"]
-atlas = ExtResource("2_c4f8g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_i53t1"]
+atlas = ExtResource("2_1jpdr")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_scbfq"]
-atlas = ExtResource("2_c4f8g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwxc0"]
+atlas = ExtResource("2_1jpdr")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7fatm"]
-atlas = ExtResource("2_c4f8g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgajl"]
+atlas = ExtResource("2_1jpdr")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w3643"]
-atlas = ExtResource("2_c4f8g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev6qf"]
+atlas = ExtResource("2_1jpdr")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rqges"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_wll6o"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dmo0t")
+"texture": SubResource("AtlasTexture_yauai")
 }],
 "loop": true,
 "name": &"default",
@@ -43,19 +41,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3w0n3")
+"texture": SubResource("AtlasTexture_bodj1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o24mc")
+"texture": SubResource("AtlasTexture_i53t1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_scbfq")
+"texture": SubResource("AtlasTexture_pwxc0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7fatm")
+"texture": SubResource("AtlasTexture_cgajl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w3643")
+"texture": SubResource("AtlasTexture_ev6qf")
 }],
 "loop": false,
 "name": &"shoot",
@@ -63,12 +61,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
-size = Vector2(75, 48)
+size = Vector2(65, 61)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
 radius = 175.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktumx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0teg"]
 bg_color = Color(0.176471, 0.701961, 0.501961, 1)
 border_width_left = 7
 border_width_top = 7
@@ -81,7 +79,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqe0l"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dllg"]
 bg_color = Color(0.901961, 0, 0, 1)
 border_width_left = 7
 border_width_top = 7
@@ -94,21 +92,21 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Dps Ice Turret" type="StaticBody2D" groups=["ice"]]
+[node name="Poison Dps Turret" type="StaticBody2D" groups=["dps"]]
 input_pickable = true
-script = ExtResource("1_6mi47")
+script = ExtResource("1_q25vv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(13, -1)
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_rqges")
+sprite_frames = SubResource("SpriteFrames_wll6o")
+animation = &"shoot"
 autoplay = "default"
-script = ExtResource("3_iihk8")
+script = ExtResource("3_ebsqh")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(12.5, -1)
 shape = SubResource("RectangleShape2D_siseg")
 metadata/_edit_lock_ = true
 
@@ -131,7 +129,7 @@ offset_left = 1.55199
 offset_top = 3.272
 offset_right = 2.15198
 offset_bottom = 3.2
-script = ExtResource("3_y3y8e")
+script = ExtResource("4_vspgw")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
 layout_mode = 0
@@ -144,9 +142,9 @@ alignment = 1
 [node name="Upgrade" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_ktumx")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ktumx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ktumx")
+theme_override_styles/normal = SubResource("StyleBoxFlat_o0teg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o0teg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o0teg")
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
 layout_mode = 0
@@ -160,9 +158,9 @@ horizontal_alignment = 1
 [node name="Discard" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rqe0l")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rqe0l")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_rqe0l")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2dllg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2dllg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2dllg")
 
 [node name="Discard" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
 layout_mode = 0
@@ -173,44 +171,9 @@ offset_bottom = 78.0
 text = "Discard"
 horizontal_alignment = 1
 
-[node name="Skill" type="Node" parent="." groups=["ice_skill"]]
-
-[node name="Skill" type="Button" parent="Skill"]
-visible = false
-offset_left = 62.0
-offset_top = 18.0
-offset_right = 80.0
-offset_bottom = 36.0
-script = ExtResource("4_8g7lx")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Skill/Skill"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-value = 30.0
-fill_mode = 4
-texture_under = ExtResource("4_os631")
-texture_progress = ExtResource("4_os631")
-tint_under = Color(0.0745098, 0.0745098, 0.0745098, 1)
-tint_progress = Color(0.67451, 0, 0.156863, 1)
-
-[node name="Skill_CD" type="Timer" parent="Skill/Skill"]
-wait_time = 10.0
-one_shot = true
-
+[connection signal="draw" from="." to="." method="_on_draw"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
 [connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
 [connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
-[connection signal="pressed" from="Skill/Skill" to="." method="_on_skill_pressed"]
-[connection signal="timeout" from="Skill/Skill/Skill_CD" to="Skill/Skill" method="_on_skill_cd_timeout"]

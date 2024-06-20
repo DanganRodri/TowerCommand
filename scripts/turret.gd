@@ -20,6 +20,9 @@ var defending_tower : Tower = null
 var cost : int = 200
 var total_cost : int = cost
 
+var reload_timer : Timer
+var attack_frame : int = 4
+
 
 func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_mask == 1:
@@ -37,6 +40,12 @@ func _ready():
 		self.get_node("Range/CollisionShape2D").get_shape().radius = range
 		select_tower_to_defend()
 		self.cost = 150
+		
+		reload_timer = Timer.new()
+		reload_timer.wait_time = self.atk_speed
+		reload_timer.one_shot = true
+		reload_timer.connect("timeout", Callable(self, "_on_reload_timer"))
+		add_child(reload_timer)
 	
 
 func _draw():
@@ -53,10 +62,11 @@ func _draw():
 func _physics_process(delta):
 	if not self is BlankTurret and target == null:
 		select_enemy()
-	if target != null:
-		if not reloading:
+	if target != null and not reloading:
+		if  animated_sprite_2d.animation == "default":
 			fire()
-	
+		if animated_sprite_2d.animation == "shoot" and animated_sprite_2d.frame == attack_frame:
+			apply_attack()
 
 func select_tower_to_defend():
 	var towers = self.get_parent().get_parent().get_node("Towers").get_children()
@@ -69,12 +79,13 @@ func turn():
 	self.look_at(target.position)
 	
 func fire():
-	reloading = true
 	turn()
 	animated_sprite_2d.play("shoot")
+	
+func apply_attack():
+	reloading = true
 	target.on_hit(atk)
-	await get_tree().create_timer(atk_speed).timeout
-	reloading = false
+	reload_timer.start()
 
 func _on_range_body_entered(body):
 	if body is CharacterBody2D and not body.inmune:
@@ -108,3 +119,6 @@ func _on_discard_pressed():
 	new_turret.global_position = global_position
 	Engine.set_time_scale(last_fastforward_speed)
 	queue_free()
+
+func _on_reload_timer():
+	reloading = false

@@ -7,4 +7,5 @@ func _ready():
 	atk_speed = 2
 	def_pen = 3
 	range = 190.0
+	attack_frame = 7
 	super._ready()

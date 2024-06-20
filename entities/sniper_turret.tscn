@@ -121,6 +121,8 @@ script = ExtResource("1_dtlks")
 position = Vector2(16, -1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_rn031")
+animation = &"shoot"
+autoplay = "default"
 script = ExtResource("3_tioln")
 metadata/_edit_lock_ = true
 

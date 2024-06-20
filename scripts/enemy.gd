@@ -18,9 +18,13 @@ var inmune : bool = false
 var gold : int = 10
 var slowed : bool = false
 var freezed : bool = false
+var poisoned : bool = false
+var poison_staks : int = 0
 var protected : Barrier = null
 
 var slow_timer : Timer
+var poison_timer : Timer
+var poison_dot : Timer
 var freeze_timer : Timer
 
 func _init(_type, _hp, _speed,_maxSpeed,_inmune) -> void:
@@ -53,6 +57,18 @@ func _ready():
 	freeze_timer.one_shot = true
 	freeze_timer.connect("timeout", Callable(self, "_on_freeze_timer_timeout"))
 	add_child(freeze_timer)
+	
+	poison_timer = Timer.new()
+	poison_timer.wait_time = GameData.BASE_POISON_DURATION
+	poison_timer.one_shot = true
+	poison_timer.connect("timeout", Callable(self, "_on_poison_timer_timeout"))
+	add_child(poison_timer)
+	
+	poison_dot = Timer.new()
+	poison_dot.wait_time = GameData.BASE_POISON_DOT
+	poison_dot.one_shot = true
+	poison_dot.connect("timeout", Callable(self, "_on_poison_dot"))
+	add_child(poison_dot)
 
 func get_route():
 	current_path = tilemap.graph.get_id_path(
@@ -77,11 +93,11 @@ func on_hit(damage):
 func status_effect(effect,duration,value):
 	match effect:
 		"slow":
-				slow_timer.wait_time = duration * GameData.stat_bonus["slow_duration"]
-				slow_timer.start()
-				if not slowed:
-					self.speed = self.speed * (value / GameData.stat_bonus["slow"])
-					slowed = true
+			slow_timer.wait_time = duration * GameData.stat_bonus["slow_duration"]
+			slow_timer.start()
+			if not slowed:
+				self.speed = self.speed * (value / GameData.stat_bonus["slow"])
+				slowed = true
 		
 		"freeze":
 			freeze_timer.wait_time = duration
@@ -89,6 +105,14 @@ func status_effect(effect,duration,value):
 			self.speed = 0
 			self.sprite.stop()
 			freezed = true
+		
+		"poison":
+			poison_timer.wait_time = duration
+			poison_timer.start()
+			if not self.poisoned:
+				poison_dot.start()
+			self.poisoned = true
+			self.poison_staks += value
 			
 
 func on_destroy():
@@ -99,6 +123,9 @@ func on_destroy():
 func apply_color_filter():
 	if self.damaged:
 		sprite.modulate = Color(1, 0, 0) # Rojo
+		return
+	if self.poisoned:
+		sprite.modulate = Color(0.01300281099975, 0.62915825843811, 0) # Rojo
 		return
 	if self.freezed:
 		sprite.modulate = Color(0, 0.17647059261799, 0.60392159223557) # Azul claro
@@ -143,3 +170,13 @@ func _on_freeze_timer_timeout():
 	sprite.modulate = color
 	self.sprite.play("run")
 	freezed = false
+
+func _on_poison_timer_timeout():
+	self.poisoned = false
+	sprite.modulate = color
+	self.poison_staks = 0
+
+func _on_poison_dot():
+	self.hp -= self.poison_staks
+	if self.poisoned:
+		poison_dot.start()

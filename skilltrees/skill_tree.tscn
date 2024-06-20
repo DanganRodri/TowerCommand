@@ -37,7 +37,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_vicqi")
 
-[node name="UpgradeButton" parent="." instance=ExtResource("1_r7i35")]
+[node name="IceSkills" parent="." instance=ExtResource("1_r7i35")]
+visible = false
 layout_mode = 1
 offset_left = 41.0
 offset_top = 280.0
@@ -45,7 +46,7 @@ offset_right = -1025.0
 offset_bottom = -281.0
 effect_id = 4
 
-[node name="UpgradeButton" parent="UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="IceSkills" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 143.0
 offset_right = 143.0
@@ -53,7 +54,7 @@ offset_bottom = 0.0
 disabled = true
 effect_id = 3
 
-[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton2" parent="IceSkills/UpgradeButton" instance=ExtResource("1_r7i35")]
 visible = false
 layout_mode = 1
 offset_left = 144.0
@@ -61,7 +62,7 @@ offset_right = 144.0
 offset_bottom = 0.0
 effect_id = 1
 
-[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="IceSkills/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 144.0
 offset_top = -200.0
@@ -71,16 +72,16 @@ max_level = 1
 effect_id = 5
 exclusive = true
 
-[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="IceSkills/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 max_level = 2
-effect_id = 7
+effect_id = 9
 
-[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton2" parent="IceSkills/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = -56.0
@@ -88,7 +89,7 @@ offset_right = 160.0
 offset_bottom = -56.0
 effect_id = 6
 
-[node name="UpgradeButton3" parent="UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton3" parent="IceSkills/UpgradeButton" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 144.0
 offset_top = 200.0
@@ -98,7 +99,7 @@ max_level = 1
 effect_id = 7
 exclusive = true
 
-[node name="UpgradeButton" parent="UpgradeButton/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton" parent="IceSkills/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = -56.0
@@ -106,14 +107,92 @@ offset_right = 160.0
 offset_bottom = -56.0
 effect_id = 8
 
-[node name="UpgradeButton2" parent="UpgradeButton/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
+[node name="UpgradeButton2" parent="IceSkills/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
 layout_mode = 1
 offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 max_level = 2
-effect_id = 7
+effect_id = 9
+
+[node name="DpsSkills" parent="." instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 41.0
+offset_top = 280.0
+offset_right = -1025.0
+offset_bottom = -281.0
+effect_id = 10
+
+[node name="UpgradeButton" parent="DpsSkills" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 143.0
+offset_right = 143.0
+offset_bottom = 0.0
+disabled = true
+effect_id = 10
+
+[node name="UpgradeButton2" parent="DpsSkills/UpgradeButton" instance=ExtResource("1_r7i35")]
+visible = false
+layout_mode = 1
+offset_left = 144.0
+offset_right = 144.0
+offset_bottom = 0.0
+effect_id = 1
+
+[node name="UpgradeButton" parent="DpsSkills/UpgradeButton" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = -200.0
+offset_right = 144.0
+offset_bottom = -200.0
+max_level = 1
+effect_id = 3
+exclusive = true
+
+[node name="UpgradeButton" parent="DpsSkills/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 56.0
+max_level = 2
+effect_id = 10
+
+[node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = -56.0
+offset_right = 160.0
+offset_bottom = -56.0
+effect_id = 10
+
+[node name="UpgradeButton3" parent="DpsSkills/UpgradeButton" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = 200.0
+offset_right = 144.0
+offset_bottom = 200.0
+max_level = 1
+effect_id = 10
+exclusive = true
+
+[node name="UpgradeButton" parent="DpsSkills/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = -56.0
+offset_right = 160.0
+offset_bottom = -56.0
+effect_id = 10
+
+[node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton3" instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 56.0
+max_level = 2
+effect_id = 10
 
 [node name="UpgradeDesc" type="TextEdit" parent="."]
 unique_name_in_owner = true

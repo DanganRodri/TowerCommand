@@ -9,18 +9,14 @@ func _ready():
 	atk_speed = 2
 	def_pen = 0
 	range = 130.0
+	attack_frame = 5
 	super._ready()
 
 
-func fire():
+func apply_attack():
 	reloading = true
-	#target.on_hit(atk)
-	turn()
-	animated_sprite_2d.play("shoot")
 	area_hit()
-	await get_tree().create_timer(atk_speed).timeout
-	reloading = false
-
+	reload_timer.start()
 
 func area_hit():
 	var space_state = get_world_2d().direct_space_state
