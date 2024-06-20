@@ -17,6 +17,8 @@ func _on_dps_pressed():
 	
 	if GameData.advanced_turrets["dps"]:
 		create_turret("res://entities/poison_dps_turret.tscn")
+	elif GameData.advanced_turrets["double_dps"]:
+		create_turret("res://entities/double_dps_turret.tscn")
 	else:	
 		create_turret("res://entities/dps_turret.tscn")
 
@@ -68,6 +70,10 @@ func check_pasive_skills(turret):
 
 func check_active_skills(turret):
 	if turret.is_in_group("ice") and GameData.active_skills["ice"]:
+		var skill = turret.get_node("Skill/Skill")
+		skill.global_position = turret.position + GameData.SKILL_OFFSET
+		skill.show()
+	if turret.is_in_group("dps") and GameData.active_skills["dps"]:
 		var skill = turret.get_node("Skill/Skill")
 		skill.global_position = turret.position + GameData.SKILL_OFFSET
 		skill.show()

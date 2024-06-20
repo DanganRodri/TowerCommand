@@ -7,6 +7,8 @@ enum Effect {
 	AtkSpeed,
 	Dmg,
 	Poison,
+	DoubleDps,
+	DpsSkill,
 	Slow,
 	SlowDuration,
 	AdvancedIce,

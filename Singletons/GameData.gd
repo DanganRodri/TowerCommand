@@ -51,6 +51,7 @@ var advanced_turrets = {
 	"aoe": false,
 	"ice": false,
 	"sniper": false,
+	"double_dps": false,
 	"dps_ice": false
 }
 

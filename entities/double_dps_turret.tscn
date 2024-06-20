@@ -1,0 +1,254 @@
+[gd_scene load_steps=23 format=3 uid="uid://mvtxhddt6qm5"]
+
+[ext_resource type="Script" path="res://scripts/double_dps_turret.gd" id="1_s1fga"]
+[ext_resource type="Texture2D" uid="uid://dcys4hrgqisow" path="res://assets/sprites/double_dps_turret-sheet.png" id="2_63jiv"]
+[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_hvo41"]
+[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="4_xyv5y"]
+[ext_resource type="Script" path="res://scripts/skill_buton.gd" id="5_4s6ov"]
+[ext_resource type="Texture2D" uid="uid://c2rpdu58jfjjt" path="res://assets/sprites/texture_bar.png" id="6_4vrft"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emikj"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qs1br"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6wbk"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1bq5"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt2g8"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yh5d"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4ryw"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3csgm"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sad03"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw6bb"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thrf0"]
+atlas = ExtResource("2_63jiv")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqges"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emikj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qs1br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6wbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1bq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt2g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yh5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4ryw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3csgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sad03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw6bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thrf0")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 25.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
+size = Vector2(75, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
+radius = 175.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktumx"]
+bg_color = Color(0.176471, 0.701961, 0.501961, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.376471, 0.933333, 0.47451, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqe0l"]
+bg_color = Color(0.901961, 0, 0, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(1, 0.509804, 0.435294, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Double Dps Turret" type="StaticBody2D" groups=["dps"]]
+input_pickable = true
+script = ExtResource("1_s1fga")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(13, -1)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_rqges")
+animation = &"shoot"
+autoplay = "default"
+frame = 9
+frame_progress = 1.0
+script = ExtResource("3_hvo41")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(12.5, -1)
+shape = SubResource("RectangleShape2D_siseg")
+metadata/_edit_lock_ = true
+
+[node name="Range" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_dntdq")
+
+[node name="Upgrade" type="Node" parent="."]
+
+[node name="UpgradeList" type="Panel" parent="Upgrade"]
+visible = false
+anchors_preset = -1
+anchor_left = -0.076
+anchor_top = 0.086
+anchor_right = 0.124
+anchor_bottom = 0.225
+offset_left = 1.55199
+offset_top = 3.272
+offset_right = 2.15198
+offset_bottom = 3.2
+script = ExtResource("4_xyv5y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
+layout_mode = 0
+offset_top = 12.0
+offset_right = 231.0
+offset_bottom = 61.0
+theme_override_constants/separation = 42
+alignment = 1
+
+[node name="Upgrade" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ktumx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ktumx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ktumx")
+
+[node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
+layout_mode = 0
+offset_left = -8.99999
+offset_top = 52.0
+offset_right = 58.0
+offset_bottom = 78.0
+text = "Upgrade"
+horizontal_alignment = 1
+
+[node name="Discard" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_rqe0l")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rqe0l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rqe0l")
+
+[node name="Discard" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 52.0
+offset_right = 55.0
+offset_bottom = 78.0
+text = "Discard"
+horizontal_alignment = 1
+
+[node name="Skill" type="Node" parent="." groups=["ice_skill"]]
+
+[node name="Skill" type="Button" parent="Skill"]
+visible = false
+offset_left = 62.0
+offset_top = 18.0
+offset_right = 80.0
+offset_bottom = 36.0
+script = ExtResource("5_4s6ov")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Skill/Skill"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+value = 30.0
+fill_mode = 4
+texture_under = ExtResource("6_4vrft")
+texture_progress = ExtResource("6_4vrft")
+tint_under = Color(0.0745098, 0.0745098, 0.0745098, 1)
+tint_progress = Color(0.67451, 0, 0.156863, 1)
+
+[node name="Skill_CD" type="Timer" parent="Skill/Skill"]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Upgrade" to="." method="_on_upgrade_pressed"]
+[connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Discard" to="." method="_on_discard_pressed"]
+[connection signal="pressed" from="Skill/Skill" to="." method="_on_skill_pressed"]
+[connection signal="timeout" from="Skill/Skill/Skill_CD" to="Skill/Skill" method="_on_skill_cd_timeout"]

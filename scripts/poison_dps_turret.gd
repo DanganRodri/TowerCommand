@@ -16,3 +16,4 @@ func apply_attack():
 	target.on_hit(atk)
 	target.status_effect("poison", GameData.BASE_POISON_DURATION , GameData.BASE_POISON)
 	reload_timer.start()
+

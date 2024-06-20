@@ -17,6 +17,12 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.Poison:
 			upgrade.effect = poison_dps
 			upgrade.description = "Transforms all dps turrets into poison dps turrets that deal extra damage over time." + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be poison dps turrets)"
+		UpgradeNode.Effect.DoubleDps:
+			upgrade.effect = double_dps
+			upgrade.description = "Transforms all dps turrets into double dps turrets that deal damage up to two targets." + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be double dps turrets)"
+		UpgradeNode.Effect.DpsSkill:
+			upgrade.effect = dps_skill
+			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Creates an area on the designated location where will be damaged over time."
 		UpgradeNode.Effect.Slow:
 			upgrade.effect = add_slow
 			upgrade.description = "Slightly increases the slow effect of the turret."
@@ -54,6 +60,26 @@ func poison_dps(_upgrade):
 	for dps_turret in dps_turrets:
 		create_advanced_turret("res://entities/poison_dps_turret.tscn", dps_turret)
 	GameData.advanced_turrets["dps"] = true
+
+func double_dps(_upgrade):
+	var dps_turrets = get_tree().get_nodes_in_group("dps")
+	for dps_turret in dps_turrets:
+		create_advanced_turret("res://entities/double_dps_turret.tscn", dps_turret)
+	GameData.advanced_turrets["double_dps"] = true
+
+func dps_skill(_upgrade):
+	var dps_turrets = get_tree().get_nodes_in_group("dps")
+	
+	if _upgrade.level == 1:
+		for dps_turret in dps_turrets:
+			var dps_skill = dps_turret.get_node("Skill/Skill")
+			dps_skill.show()
+			dps_skill.global_position = dps_turret.position + GameData.SKILL_OFFSET
+		GameData.active_skills["dps"] = true
+		_upgrade.description = "Reduces the skill cooldown."
+	else:
+		for dps_turret in dps_turrets:
+			dps_turret.skill.cd -= 5
 
 func add_slow(_upgrade):
 	GameData.stat_bonus["slow"] += 0.3
