@@ -6,9 +6,9 @@ class_name DoubleDpsTurret
 var second_target : Enemy
 
 func _ready():
-	atk = 12
-	atk_speed = 0.65
-	def_pen = 9
+	atk = 12 * GameData.stat_bonus["atk_dps"]
+	atk_speed = 0.65 / GameData.stat_bonus["atk_speed_dps"]
+	def_pen = 9 * GameData.stat_bonus["def_pen_dps"]
 	range = 180.0
 	attack_frame = 4
 	super._ready()

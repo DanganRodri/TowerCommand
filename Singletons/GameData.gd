@@ -14,6 +14,7 @@ const BASE_FREEZE_COOLDOWN = 16
 const BASE_POISON = 2
 const BASE_POISON_DURATION = 3
 const BASE_POISON_DOT = 1
+var poison_splash : bool = false
 
 const SKILL_OFFSET = Vector2(40,-6)
 
@@ -41,9 +42,17 @@ var stat_bonus = {
 	"atk_speed": 1,
 	"dmg": 1,
 	"range": 1,
+	"atk_dps": 1,
+	"atk_speed_dps": 1,
+	"poison_dot": 1,
+	"weakened_value" : 1,
+	"def_pen_dps": 1,
 	"slow": 1,
 	"slow_duration": 1,
-	"freeze_cd": 1
+	"freeze_cd": 1,
+	"atk_ice": 1,
+	"range_ice": 1,
+	"atk_speed_ice": 1
 }
 
 var advanced_turrets = {

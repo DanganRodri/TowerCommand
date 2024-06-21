@@ -9,7 +9,7 @@ func _ready():
 	atk = 4
 	atk_speed = 1.9
 	def_pen = 0
-	range = 155.0
+	range = 155.0 * GameData.stat_bonus["range_ice"]
 	attack_frame = 4
 	super._ready()
 

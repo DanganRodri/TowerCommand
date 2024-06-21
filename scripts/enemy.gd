@@ -20,6 +20,7 @@ var slowed : bool = false
 var freezed : bool = false
 var poisoned : bool = false
 var poison_staks : int = 0
+var weakened : bool = false
 var protected : Barrier = null
 
 var slow_timer : Timer
@@ -79,6 +80,8 @@ func get_route():
 func on_hit(damage):
 	
 	damage = damage * GameData.Challenges["EnemyDamageTaken"]
+	if weakened:
+		damage *= GameData.stat_bonus["weakened_value"]
 	
 	if protected != null:
 		protected.on_hit(damage)
@@ -112,7 +115,9 @@ func status_effect(effect,duration,value):
 			if not self.poisoned:
 				poison_dot.start()
 			self.poisoned = true
-			self.poison_staks += value
+			self.poison_staks += value * GameData.stat_bonus["poison_dot"]
+		"weaken":
+			self.weakened = true
 			
 
 func on_destroy():
@@ -173,10 +178,13 @@ func _on_freeze_timer_timeout():
 
 func _on_poison_timer_timeout():
 	self.poisoned = false
+	self.weakened = false
 	sprite.modulate = color
 	self.poison_staks = 0
 
 func _on_poison_dot():
 	self.hp -= self.poison_staks
+	if self.hp <= 0:
+		self.on_destroy()
 	if self.poisoned:
 		poison_dot.start()

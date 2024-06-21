@@ -3,12 +3,17 @@ extends TextureButton
 class_name UpgradeNode
 
 enum Effect {
-	AddRange,
-	AtkSpeed,
+	RangeIce,
+	AddDpsIce,
 	Dmg,
+	AtkSpeedDps,
+	AtkDps,
 	Poison,
+	IncreasePoison,
+	Weaken,
 	DoubleDps,
 	DpsSkill,
+	DefPenDps,
 	Slow,
 	SlowDuration,
 	AdvancedIce,

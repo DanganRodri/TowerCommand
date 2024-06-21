@@ -5,24 +5,30 @@ class_name UpgradeTree
 func set_effect(upgrade : UpgradeNode):
 	var effect = upgrade.effect_id
 	match(effect):
-		UpgradeNode.Effect.AddRange:
-			upgrade.effect = add_range
-			upgrade.description = "Slightly increases the effective range of the turret."
-		UpgradeNode.Effect.AtkSpeed:
-			upgrade.effect = add_atkspeed
-			upgrade.description = "Slightly increases the attack speed of the turret."
-		UpgradeNode.Effect.Dmg:
-			upgrade.effect = add_damage
+		UpgradeNode.Effect.AtkDps:
+			upgrade.effect = atk_dps
 			upgrade.description = "Slightly increases the attack of the turret."
+		UpgradeNode.Effect.AtkSpeedDps:
+			upgrade.effect = atk_speed_dps
+			upgrade.description = "Slightly increases the attack speed of the turret."
 		UpgradeNode.Effect.Poison:
 			upgrade.effect = poison_dps
 			upgrade.description = "Transforms all dps turrets into poison dps turrets that deal extra damage over time." + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be poison dps turrets)"
+		UpgradeNode.Effect.IncreasePoison:
+			upgrade.effect = increase_poison
+			upgrade.description = "Increases the poison staks damage."
+		UpgradeNode.Effect.Weaken:
+			upgrade.effect = weaken
+			upgrade.description = "Enemies poisoned are weakened, increasing the damage they take from turrets."
 		UpgradeNode.Effect.DoubleDps:
 			upgrade.effect = double_dps
 			upgrade.description = "Transforms all dps turrets into double dps turrets that deal damage up to two targets." + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be double dps turrets)"
 		UpgradeNode.Effect.DpsSkill:
 			upgrade.effect = dps_skill
 			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Creates an area on the designated location where will be damaged over time."
+		UpgradeNode.Effect.DefPenDps:
+			upgrade.effect = def_pen_dps
+			upgrade.description = "Slightly increases the defense penetration of the turret."
 		UpgradeNode.Effect.Slow:
 			upgrade.effect = add_slow
 			upgrade.description = "Slightly increases the slow effect of the turret."
@@ -34,32 +40,55 @@ func set_effect(upgrade : UpgradeNode):
 			upgrade.description = "Transforms all ice turrets into advanced ice turrets that deal damage to all enemies within range." + "\n\n" + "Base stats increased." + "\n\n" + "(All the ice turrets builded for the rest of the game will be advanced ice turrets)"
 		UpgradeNode.Effect.Freeze:
 			upgrade.effect = freeze
-			upgrade.description = "Advanced ice turrets throw a freezing wave that makes enemies unable to move for a brief period of time." + "\n\n" + "Additional skill point increases the freeze wave frequency."
+			upgrade.description = "Advanced ice turrets throw a freezing wave that makes enemies unable to move for a brief period of time."
 		UpgradeNode.Effect.DpsIce:
 			upgrade.effect = dps_ice
 			upgrade.description = "Transforms all ice turrets into dps ice turrets that heavily increases attack speed and damage." + "\n\n" + "Base stats increased." + "\n\n" + "(All the ice turrets builded for the rest of the game will be dps ice turrets)"
 		UpgradeNode.Effect.IceSkill:
 			upgrade.effect = ice_skill
 			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Creates an area on the designated location where enemies will be slowed and damaged over time."
+		UpgradeNode.Effect.RangeIce:
+			upgrade.effect = add_range_ice
+			upgrade.description = "Slightly increases the effective range of the turret."
+		UpgradeNode.Effect.AddDpsIce:
+			upgrade.effect = increase_dps_ice
+			upgrade.description = "Slightly increases the attack speed and attack of the turret."
 		UpgradeNode.Effect.WIP:
 			upgrade.effect = wip
 			upgrade.description = "WIP."
 
 
-func add_range(_upgrade):
-	GameData.stat_bonus["range"] += 0.10
+###	DPS UPGRADES /---------------------------------------------------------------------------------------------/
 
-func add_atkspeed(_upgrade):
-	print("velocidad de ataque incrementado")
+func atk_dps(_upgrade):
+	GameData.stat_bonus["atk_dps"] += 0.1
+	var dps_turrets = get_tree().get_nodes_in_group("dps")
+	for dps_turret in dps_turrets:
+		dps_turret.atk *= GameData.stat_bonus["atk_dps"]
 
-func add_damage(_upgrade):
-	print("daño incrementado")
+func atk_speed_dps(_upgrade):
+	GameData.stat_bonus["atk_speed_dps"] += 0.1
+	var dps_turrets = get_tree().get_nodes_in_group("dps")
+	for dps_turret in dps_turrets:
+		dps_turret.atk_speed /= GameData.stat_bonus["atk_speed_dps"]
 
 func poison_dps(_upgrade):
 	var dps_turrets = get_tree().get_nodes_in_group("dps")
 	for dps_turret in dps_turrets:
 		create_advanced_turret("res://entities/poison_dps_turret.tscn", dps_turret)
 	GameData.advanced_turrets["dps"] = true
+
+func increase_poison(_upgrade):
+	if _upgrade.level == 2:
+		_upgrade.description = "The turret attacks now splashes the poison to nearby enemies."
+		_upgrade.desc.text = _upgrade.description
+	if _upgrade.level == 3:
+		var dps_turrets = get_tree().get_nodes_in_group("dps")
+		for dps_turret in dps_turrets:
+			dps_turret.splash = true
+		GameData.poison_splash = true
+		return
+	GameData.stat_bonus["poison_dot"] += 1
 
 func double_dps(_upgrade):
 	var dps_turrets = get_tree().get_nodes_in_group("dps")
@@ -77,9 +106,21 @@ func dps_skill(_upgrade):
 			dps_skill.global_position = dps_turret.position + GameData.SKILL_OFFSET
 		GameData.active_skills["dps"] = true
 		_upgrade.description = "Reduces the skill cooldown."
+		_upgrade.desc.text = _upgrade.description
 	else:
 		for dps_turret in dps_turrets:
 			dps_turret.skill.cd -= 5
+
+func def_pen_dps(_upgrade):
+	GameData.stat_bonus["def_pen_dps"] += 0.1
+	var dps_turrets = get_tree().get_nodes_in_group("dps")
+	for dps_turret in dps_turrets:
+		dps_turret.def_pen *= GameData.stat_bonus["def_pen_dps"]
+
+func weaken(_upgrade):
+	GameData.stat_bonus["weakened_value"] += 0.1
+	
+###	ICE UPGRADES /---------------------------------------------------------------------------------------------/
 
 func add_slow(_upgrade):
 	GameData.stat_bonus["slow"] += 0.3
@@ -108,7 +149,8 @@ func freeze(_upgrade):
 			ice_turret.freeze_wave = true
 			freeze_timer.start()
 			
-			_upgrade.description = "Reduces the cooldown between freeze waves."
+		_upgrade.description = "Reduces the cooldown between freeze waves."
+		_upgrade.desc.text = _upgrade.description
 		GameData.pasive_skills["freeze"] = true
 	
 	else:
@@ -134,9 +176,25 @@ func ice_skill(_upgrade):
 			ice_skill.global_position = ice_turret.position + GameData.SKILL_OFFSET
 		GameData.active_skills["ice"] = true
 		_upgrade.description = "Reduces the skill cooldown."
+		_upgrade.desc.text = _upgrade.description
 	else:
 		for ice_turret in ice_turrets:
 			ice_turret.skill.cd -= 5
+
+func add_range_ice(_upgrade):
+	GameData.stat_bonus["range_ice"] += 0.05
+	var ice_turrets = get_tree().get_nodes_in_group("ice")
+	for ice_turret in ice_turrets:
+		ice_turret.range *= GameData.stat_bonus["range_ice"]
+	
+
+func increase_dps_ice(_upgrade):
+	GameData.stat_bonus["atk_ice"] += 0.1
+	GameData.stat_bonus["atk_speed_ice"] += 0.2
+	var ice_turrets = get_tree().get_nodes_in_group("ice")
+	for ice_turret in ice_turrets:
+		ice_turret.atk *= GameData.stat_bonus["atk_ice"]
+		ice_turret.atk_speed /= GameData.stat_bonus["atk_speed_ice"]
 
 func wip(_upgrade):
 	pass

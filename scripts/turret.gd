@@ -122,3 +122,4 @@ func _on_discard_pressed():
 
 func _on_reload_timer():
 	reloading = false
+	reload_timer.wait_time = self.atk_speed

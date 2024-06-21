@@ -5,8 +5,8 @@ class_name DpsIceTurret
 @onready var skill = $Skill/Skill
 
 func _ready():
-	atk = 12
-	atk_speed = 0.7
+	atk = 12 * GameData.stat_bonus["atk_ice"]
+	atk_speed = 0.7 / GameData.stat_bonus["atk_speed_ice"]
 	def_pen = 7
 	range = 175.0
 	attack_frame = 4

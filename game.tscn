@@ -258,6 +258,10 @@ position = Vector2(2, 271)
 position = Vector2(2, 79)
 
 [node name="WaveTimer" type="Timer" parent="SpawnPoints"]
+autostart = true
+
+[node name="SpawnInterval" type="Timer" parent="SpawnPoints"]
+one_shot = true
 
 [node name="WaveIndicatorBackGround" type="Panel" parent="SpawnPoints"]
 offset_left = 2.0
@@ -274,3 +278,4 @@ offset_bottom = 23.0
 [connection signal="pressed" from="UI/HUD/HBoxContainer/Fastforward_button" to="UI" method="_on_fastforward_button_pressed"]
 [connection signal="pressed" from="UI/HUD/Open_upgrade_menu" to="UI/UpgradeTree" method="_on_open_upgrade_menu_pressed"]
 [connection signal="timeout" from="SpawnPoints/WaveTimer" to="SpawnPoints" method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="SpawnPoints/SpawnInterval" to="SpawnPoints" method="_on_spawn_interval_timeout"]
