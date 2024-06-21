@@ -95,6 +95,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Dps Ice Turret" type="StaticBody2D" groups=["ice"]]
+z_index = 1
 input_pickable = true
 script = ExtResource("1_6mi47")
 
@@ -122,6 +123,7 @@ shape = SubResource("CircleShape2D_dntdq")
 
 [node name="UpgradeList" type="Panel" parent="Upgrade"]
 visible = false
+z_index = 2
 anchors_preset = -1
 anchor_left = -0.076
 anchor_top = 0.086

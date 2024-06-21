@@ -7,10 +7,12 @@ class_name BlankTurret
 
 func _process(delta):
 	if GameData.advanced_turrets["dps"]:
-		dps.icon = load("res://entities/poison_dps_turret.tscn")
+		dps.icon = load("res://assets/sprites/poison_dps_turret.png")
+	if GameData.advanced_turrets["double_dps"]:
+		dps.icon = load("res://assets/sprites/double_dps_turret.png")
 	if GameData.advanced_turrets["ice"]:
 		ice.icon = load("res://assets/sprites/advanced_ice_turret.png")
-	if GameData.active_skills["ice"]:
+	if GameData.advanced_turrets["dps_ice"]:
 		ice.icon = load("res://assets/sprites/dps_ice_turret.png")
 
 func _on_dps_pressed():
