@@ -13,7 +13,7 @@ var last_fastforward_speed = 1
 var level : int = 1
 var atk : int = 1
 var atk_speed : float = 0.4
-var def_pen : int = 0
+var def_pen : float = 0.0
 var range : float = 0.0
 var reloading : bool = false
 var defending_tower : Tower = null
@@ -51,13 +51,18 @@ func _ready():
 func _draw():
 	if self.show_range:
 		var center = Vector2(0,0)
-		var radius = self.range
+		var radius = self.range * GameData.stat_bonus["range_ice"]
 		var color = GameData.COLOR_DATA["RANGE"]["TURRET_RANGE_BORDER_COLOR"]
 		draw_circle(center, radius, color)
 			
 		radius -= 4.5
 		color = GameData.COLOR_DATA["RANGE"]["TURRET_RANGE_COLOR"]
 		draw_circle(center, radius, color)
+
+func _process(delta):
+	if not self is BlankTurret:
+		self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_ice"]
+	
 
 func _physics_process(delta):
 	if not self is BlankTurret and target == null:
@@ -84,7 +89,7 @@ func fire():
 	
 func apply_attack():
 	reloading = true
-	target.on_hit(atk)
+	target.on_hit(atk, def_pen)
 	reload_timer.start()
 
 func _on_range_body_entered(body):
@@ -104,7 +109,7 @@ func _on_upgrade_pressed():
 		self.cost = self.cost + (self.cost * 0.6)
 		self.atk = self.atk + (self.atk * 0.2)
 		self.atk_speed = self.atk_speed - (self.atk_speed * 0.05)
-		self.def_pen = self.def_pen + (self.def_pen * 0.2)
+		self.def_pen = min(self.def_pen + (self.def_pen * 0.2), 100.0)
 		self.range = self.range + (self.range * 0.025)
 		self.get_node("Range/CollisionShape2D").get_shape().radius = range
 		hide()
@@ -122,4 +127,15 @@ func _on_discard_pressed():
 
 func _on_reload_timer():
 	reloading = false
-	reload_timer.wait_time = self.atk_speed
+	
+	if self.is_in_group("dps"):
+		reload_timer.wait_time = self.atk_speed / GameData.stat_bonus["atk_speed_dps"]
+	
+	if self.is_in_group("aoe"):
+		reload_timer.wait_time = self.atk_speed / GameData.stat_bonus["atk_speed_aoe"]
+	
+	if self.is_in_group("ice"):
+		reload_timer.wait_time = self.atk_speed / GameData.stat_bonus["atk_speed_ice"]
+	
+	if self.is_in_group("sniper"):
+		reload_timer.wait_time = self.atk_speed / GameData.stat_bonus["atk_speed_sniper"]

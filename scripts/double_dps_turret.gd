@@ -6,9 +6,9 @@ class_name DoubleDpsTurret
 var second_target : Enemy
 
 func _ready():
-	atk = 12 * GameData.stat_bonus["atk_dps"]
-	atk_speed = 0.65 / GameData.stat_bonus["atk_speed_dps"]
-	def_pen = 9 * GameData.stat_bonus["def_pen_dps"]
+	atk = 12 
+	atk_speed = 0.65 
+	def_pen = 9 
 	range = 180.0
 	attack_frame = 4
 	super._ready()
@@ -47,10 +47,10 @@ func select_second_enemy():
 func apply_attack():
 	reloading = true
 	if target != null:
-		target.on_hit(atk)
+		target.on_hit(atk * GameData.stat_bonus["atk_dps"], def_pen * GameData.stat_bonus["def_pen_dps"])
 		
 	if second_target != null:
-		second_target.on_hit(atk)
+		second_target.on_hit(atk, def_pen)
 	reload_timer.start()
 
 func _on_skill_pressed():

@@ -1,41 +1,41 @@
 [gd_scene load_steps=15 format=3 uid="uid://dhxphl8er2710"]
 
 [ext_resource type="Script" path="res://scripts/enemy_tank.gd" id="1_2b0qn"]
-[ext_resource type="Texture2D" uid="uid://cx8kkwfr4jv11" path="res://assets/sprites/Enemy-sheet.png" id="2_8qysx"]
+[ext_resource type="Texture2D" uid="uid://dgwend2j7dful" path="res://assets/sprites/tank_enemy-sheet.png" id="2_16cfv"]
 [ext_resource type="Script" path="res://scripts/barrier.gd" id="3_a724s"]
 [ext_resource type="Script" path="res://scripts/HealthBar.gd" id="4_3mtcv"]
 [ext_resource type="Script" path="res://scripts/CollisionRadius.gd" id="4_hjijd"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vstny"]
-atlas = ExtResource("2_8qysx")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmb2k"]
+atlas = ExtResource("2_16cfv")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_as1ne"]
-atlas = ExtResource("2_8qysx")
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mjmk"]
+atlas = ExtResource("2_16cfv")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_twotr"]
-atlas = ExtResource("2_8qysx")
+[sub_resource type="AtlasTexture" id="AtlasTexture_stum4"]
+atlas = ExtResource("2_16cfv")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qos4n"]
-atlas = ExtResource("2_8qysx")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbb8r"]
+atlas = ExtResource("2_16cfv")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w1n2h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vstny")
+"texture": SubResource("AtlasTexture_mmb2k")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_as1ne")
+"texture": SubResource("AtlasTexture_1mjmk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_twotr")
+"texture": SubResource("AtlasTexture_stum4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qos4n")
+"texture": SubResource("AtlasTexture_vbb8r")
 }],
 "loop": true,
 "name": &"run",
@@ -43,7 +43,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
-size = Vector2(42, 44)
+size = Vector2(63, 66)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1q5rr"]
 radius = 105.7
@@ -55,7 +55,7 @@ bg_color = Color(0.168627, 0.0431373, 0, 1)
 bg_color = Color(0.72549, 1, 0.784314, 1)
 
 [node name="Enemy Tank" type="CharacterBody2D" groups=["enemy"]]
-position = Vector2(51, 271)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_2b0qn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -64,11 +64,12 @@ scale = Vector2(1.3125, 1.3125)
 sprite_frames = SubResource("SpriteFrames_w1n2h")
 animation = &"run"
 autoplay = "run"
-frame_progress = 0.565788
+frame_progress = 0.36709
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
+scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_feq2d")
 metadata/_edit_lock_ = true
 

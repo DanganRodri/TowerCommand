@@ -15,6 +15,6 @@ func _on_do_t_timer_timeout():
 
 func ice_skill_effect():
 	for enemy in enemy_in_area:
-		enemy.on_hit(damage)
+		enemy.on_hit(damage, 100)
 		enemy.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
 

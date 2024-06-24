@@ -13,7 +13,7 @@ var weapon_type = {
 var atk_speed = 0.1
 var is_ready : bool = true
 var type = weapon_type.AR
-var damage = 10.0
+var damage = 4
 
 
 const ar_cursor = ""
@@ -47,7 +47,7 @@ func shoot():
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
 			if collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
-				enemy.on_hit(self.damage)
+				enemy.on_hit(self.damage, 0)
 				break
 			
 

@@ -18,6 +18,8 @@ var poison_splash : bool = false
 
 const SKILL_OFFSET = Vector2(40,-6)
 
+const SPAWN_INTERVAL_BASE = 1.0
+
 const GOLD_GAIN_PERCENTAGE_LEVELS = [1, 0.9, 0.75, 0.66]
 const ENEMY_DAMAGE_TAKEN_LEVELS = [1, 0.9, 0.75, 0.66]
 const TIME_BETWEEN_WAVES_LEVELS = [1, 0.75, 0.625, 0.5]
@@ -32,7 +34,7 @@ const COLOR_DATA = {
 }
 
 var Challenges = { 
-	"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[3],
+	"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[0],
 	"EnemyDamageTaken": ENEMY_DAMAGE_TAKEN_LEVELS[0],
 	"TimeBetweenWaves": TIME_BETWEEN_WAVES_LEVELS[0]
 }
@@ -52,7 +54,9 @@ var stat_bonus = {
 	"freeze_cd": 1,
 	"atk_ice": 1,
 	"range_ice": 1,
-	"atk_speed_ice": 1
+	"atk_speed_ice": 1,
+	"atk_speed_aoe": 1,
+	"atk_speed_sniper": 1
 }
 
 var advanced_turrets = {

@@ -5,16 +5,16 @@ class_name DpsIceTurret
 @onready var skill = $Skill/Skill
 
 func _ready():
-	atk = 12 * GameData.stat_bonus["atk_ice"]
-	atk_speed = 0.7 / GameData.stat_bonus["atk_speed_ice"]
-	def_pen = 7
+	atk = 12 
+	atk_speed = 0.7
+	def_pen = 8.5
 	range = 175.0
 	attack_frame = 4
 	super._ready()
 
 func apply_attack():
 	reloading = true
-	target.on_hit(atk)
+	target.on_hit(atk * GameData.stat_bonus["atk_ice"], def_pen)
 	target.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
 	reload_timer.start()
 

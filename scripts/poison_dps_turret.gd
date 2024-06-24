@@ -6,8 +6,8 @@ var splash : bool = false
 var explosion_radius : float = 50.0
 
 func _ready():
-	atk = 11 * GameData.stat_bonus["atk_dps"]
-	atk_speed = 0.725 / GameData.stat_bonus["atk_speed_dps"]
+	atk = 11
+	atk_speed = 0.725 
 	def_pen = 9
 	range = 175.0
 	attack_frame = 4
@@ -17,7 +17,7 @@ func _ready():
 
 func apply_attack():
 	reloading = true
-	target.on_hit(atk)
+	target.on_hit(atk * GameData.stat_bonus["atk_dps"] , def_pen)
 	if splash:
 		area_hit()
 	else:

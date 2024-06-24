@@ -20,14 +20,14 @@ func fire():
 func apply_attack():
 	reloading = true
 	for enemy in enemy_in_sight:
-		enemy.on_hit(atk)
+		enemy.on_hit(atk, def_pen)
 		enemy.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
 	reload_timer.start()
 
 func freeze():
 	animated_sprite_2d.play("shoot")
 	for enemy in enemy_in_sight:
-		enemy.on_hit(atk)
+		enemy.on_hit(atk, 100)
 		enemy.status_effect("freeze", GameData.BASE_FREEZE_DURATION , 0)
 	freeze_wave = false
 	freeze_timer.start()

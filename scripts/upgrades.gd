@@ -62,15 +62,9 @@ func set_effect(upgrade : UpgradeNode):
 
 func atk_dps(_upgrade):
 	GameData.stat_bonus["atk_dps"] += 0.1
-	var dps_turrets = get_tree().get_nodes_in_group("dps")
-	for dps_turret in dps_turrets:
-		dps_turret.atk *= GameData.stat_bonus["atk_dps"]
 
 func atk_speed_dps(_upgrade):
 	GameData.stat_bonus["atk_speed_dps"] += 0.1
-	var dps_turrets = get_tree().get_nodes_in_group("dps")
-	for dps_turret in dps_turrets:
-		dps_turret.atk_speed /= GameData.stat_bonus["atk_speed_dps"]
 
 func poison_dps(_upgrade):
 	var dps_turrets = get_tree().get_nodes_in_group("dps")
@@ -113,9 +107,6 @@ func dps_skill(_upgrade):
 
 func def_pen_dps(_upgrade):
 	GameData.stat_bonus["def_pen_dps"] += 0.1
-	var dps_turrets = get_tree().get_nodes_in_group("dps")
-	for dps_turret in dps_turrets:
-		dps_turret.def_pen *= GameData.stat_bonus["def_pen_dps"]
 
 func weaken(_upgrade):
 	GameData.stat_bonus["weakened_value"] += 0.1
@@ -191,10 +182,6 @@ func add_range_ice(_upgrade):
 func increase_dps_ice(_upgrade):
 	GameData.stat_bonus["atk_ice"] += 0.1
 	GameData.stat_bonus["atk_speed_ice"] += 0.2
-	var ice_turrets = get_tree().get_nodes_in_group("ice")
-	for ice_turret in ice_turrets:
-		ice_turret.atk *= GameData.stat_bonus["atk_ice"]
-		ice_turret.atk_speed /= GameData.stat_bonus["atk_speed_ice"]
 
 func wip(_upgrade):
 	pass

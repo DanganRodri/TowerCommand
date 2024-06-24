@@ -3,7 +3,7 @@ extends Enemy
 class_name Tank
 
 func _init():
-	super._init("Tank", 100, 40, 100,false)
+	super._init("Tank", 100, 2.0, 40, 100,false)
 	
 
 func _on_barrier_body_entered(body):

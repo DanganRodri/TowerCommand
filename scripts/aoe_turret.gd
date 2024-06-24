@@ -7,7 +7,7 @@ var explosion_radius : float = 100.0
 func _ready():
 	atk = 10
 	atk_speed = 2
-	def_pen = 0
+	def_pen = 5.0
 	range = 150.0
 	attack_frame = 5
 	super._ready()
@@ -32,7 +32,7 @@ func area_hit():
 	
 	for enemy in result:
 		if enemy.collider and enemy.collider.is_in_group("enemy"):
-			enemy.collider.on_hit(atk)
+			enemy.collider.on_hit(atk, self.def_pen)
 	
 	
 	

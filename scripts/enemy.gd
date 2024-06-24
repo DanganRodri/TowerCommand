@@ -8,6 +8,7 @@ var current_path: Array[Vector2i]
 var target: Vector2
 var type : String = "Basic"
 var hp : float = 3.0
+var def : float = 1.0
 var speed : float = 1.5
 var base_speed : float = speed
 var maxSpeed : int = 150
@@ -28,9 +29,10 @@ var poison_timer : Timer
 var poison_dot : Timer
 var freeze_timer : Timer
 
-func _init(_type, _hp, _speed,_maxSpeed,_inmune) -> void:
+func _init(_type, _hp, _def, _speed,_maxSpeed,_inmune) -> void:
 	self.type = _type
 	self.hp = _hp
+	self.def = _def
 	self.speed = _speed
 	self.base_speed = _speed
 	self.maxSpeed = _maxSpeed
@@ -77,11 +79,15 @@ func get_route():
 		tilemap.local_to_map(target)
 	).slice(1)
 
-func on_hit(damage):
+func on_hit(damage, def_pen):
 	
-	damage = damage * GameData.Challenges["EnemyDamageTaken"]
+	def_pen = min(def_pen, 100.0)
+	damage = damage - (def * ( 1.0 - def_pen / 100.0 ))
+	
 	if weakened:
 		damage *= GameData.stat_bonus["weakened_value"]
+		
+	damage = damage * GameData.Challenges["EnemyDamageTaken"]
 	
 	if protected != null:
 		protected.on_hit(damage)
@@ -154,6 +160,10 @@ func _process(delta):
 	
 	if not current_path.is_empty():
 		var target_position = tilemap.map_to_local(current_path.front())
+		var collision = self.get_node("CollisionShape2D")
+		var shape = collision.shape
+		var height = shape.extents.y
+		target_position[1] -= height / 2
 		global_position = global_position.move_toward(target_position, self.speed * delta)
 	
 		if global_position == target_position:
