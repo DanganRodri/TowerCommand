@@ -56,7 +56,21 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.WIP:
 			upgrade.effect = wip
 			upgrade.description = "WIP."
-
+		UpgradeNode.Effect.AtkAoe:
+			upgrade.effect = atk_aoe
+			upgrade.description = "Slightly increases the attack of the turret."
+		UpgradeNode.Effect.AtkSpeedAoe:
+			upgrade.effect = atk_speed_aoe
+			upgrade.description = "Slightly increases the attack speed of the turret."
+		UpgradeNode.Effect.AdvancedAoe:
+			upgrade.effect = advanced_aoe
+			upgrade.description = "Transforms all aoe turrets into advanced aoe turrets that deal damage to all enemies within range." + "\n\n" + "Base stats increased." + "\n\n" + "(All the aoe turrets builded for the rest of the game will be advanced aoe turrets)"
+		UpgradeNode.Effect.Burn:
+			upgrade.effect = burn
+			upgrade.description = "Advanced aoe turrets throw a burning wave that deals damage and burns enemies, taking damage over time."
+		UpgradeNode.Effect.RangeAoe:
+			upgrade.effect = add_range_aoe
+			upgrade.description = "Slightly increases the effective range of the turret."
 
 ###	DPS UPGRADES /---------------------------------------------------------------------------------------------/
 
@@ -147,7 +161,7 @@ func freeze(_upgrade):
 	else:
 		GameData.stat_bonus["freeze_cd"] += 0.1
 		for ice_turret in ice_turrets:
-			ice_turret.freeze_timer.wait_time = GameData.BASE_FREEZE_COOLDOWN * GameData.stat_bonus["freeze_cd"]
+			ice_turret.freeze_timer.wait_time = GameData.BASE_FREEZE_COOLDOWN / GameData.stat_bonus["freeze_cd"]
 			ice_turret.freeze_wave = true
 			ice_turret.freeze_timer.start()
 
@@ -174,14 +188,53 @@ func ice_skill(_upgrade):
 
 func add_range_ice(_upgrade):
 	GameData.stat_bonus["range_ice"] += 0.05
-	var ice_turrets = get_tree().get_nodes_in_group("ice")
-	for ice_turret in ice_turrets:
-		ice_turret.range *= GameData.stat_bonus["range_ice"]
 	
-
 func increase_dps_ice(_upgrade):
 	GameData.stat_bonus["atk_ice"] += 0.1
 	GameData.stat_bonus["atk_speed_ice"] += 0.2
+
+###	AOE UPGRADES /---------------------------------------------------------------------------------------------/
+
+func atk_aoe(_upgrade):
+	GameData.stat_bonus["atk_aoe"] += 0.1
+
+func atk_speed_aoe(_upgrade):
+	GameData.stat_bonus["atk_speed_aoe"] += 0.1
+
+func advanced_aoe(_upgrade):
+	var aoe_turrets = get_tree().get_nodes_in_group("aoe")
+	for aoe_turret in aoe_turrets:
+		create_advanced_turret("res://entities/advanced_aoe_turret.tscn", aoe_turret)
+	GameData.advanced_turrets["aoe"] = true
+
+func add_range_aoe(_upgrade):
+	GameData.stat_bonus["range_aoe"] += 0.05
+
+func burn(_upgrade):
+	var aoe_turrets = get_tree().get_nodes_in_group("aoe")
+	
+	if _upgrade.level == 1:
+		for aoe_turret in aoe_turrets:
+			var burn_timer = Timer.new()
+			burn_timer.wait_time = GameData.BASE_BURN_COOLDOWN
+			burn_timer.one_shot = true
+			burn_timer.connect("timeout", Callable(aoe_turret, "_on_burn_timer"))
+			aoe_turret.add_child(burn_timer)
+			aoe_turret.burn_timer = burn_timer
+			aoe_turret.burn_wave = true
+			burn_timer.start()
+			
+		_upgrade.description = "Reduces the cooldown between burn waves and increases burn damage."
+		_upgrade.desc.text = _upgrade.description
+		GameData.pasive_skills["burn"] = true
+	
+	else:
+		GameData.stat_bonus["burn_cd"] += 0.05
+		GameData.stat_bonus["burn_damage"] += 1
+		for aoe_turret in aoe_turrets:
+			aoe_turret.burn_timer.wait_time = GameData.BASE_BURN_COOLDOWN / GameData.stat_bonus["burn_cd"]
+			aoe_turret.burn_wave = true
+			aoe_turret.burn_timer.start()
 
 func wip(_upgrade):
 	pass

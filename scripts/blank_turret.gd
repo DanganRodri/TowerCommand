@@ -4,6 +4,9 @@ class_name BlankTurret
 
 @onready var ice : Button = $Upgrade/UpgradeList/HBoxContainer/Ice
 @onready var dps = $Upgrade/UpgradeList/HBoxContainer/Dps
+@onready var aoe = $Upgrade/UpgradeList/HBoxContainer/Aoe
+@onready var sniper = $Upgrade/UpgradeList/HBoxContainer/Sniper
+
 
 func _process(delta):
 	if GameData.advanced_turrets["dps"]:
@@ -14,7 +17,9 @@ func _process(delta):
 		ice.icon = load("res://assets/sprites/advanced_ice_turret.png")
 	if GameData.advanced_turrets["dps_ice"]:
 		ice.icon = load("res://assets/sprites/dps_ice_turret.png")
-
+	if GameData.advanced_turrets["aoe"]:
+		aoe.icon = load("res://assets/sprites/advanced_aoe_turret.png")
+		
 func _on_dps_pressed():
 	
 	if GameData.advanced_turrets["dps"]:
@@ -69,6 +74,16 @@ func check_pasive_skills(turret):
 		turret.freeze_timer = freeze_timer
 		turret.freeze_wave = true
 		freeze_timer.start()
+	
+	if turret.is_in_group("oae") and GameData.pasive_skills["burn"]:
+		var burn_timer = Timer.new()
+		burn_timer.wait_time = GameData.BASE_BURN_COOLDOWN * GameData.stat_bonus["burn_cd"]
+		burn_timer.one_shot = true
+		burn_timer.connect("timeout", Callable(turret, "_on_burn_timer"))
+		turret.add_child(burn_timer)
+		turret.burn_timer = burn_timer
+		turret.burn_wave = true
+		burn_timer.start()
 
 func check_active_skills(turret):
 	if turret.is_in_group("ice") and GameData.active_skills["ice"]:

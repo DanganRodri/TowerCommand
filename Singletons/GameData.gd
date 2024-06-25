@@ -11,6 +11,11 @@ const BASE_SLOW_DURATION = 1.2
 const BASE_FREEZE_DURATION = 0.7
 const BASE_FREEZE_COOLDOWN = 16
 
+const BASE_BURN_DURATION = 2
+const BASE_BURN_COOLDOWN = 16
+const BASE_BURN_DAMAGE = 0.5
+const BASE_BURN_DOT = 0.5
+
 const BASE_POISON = 2
 const BASE_POISON_DURATION = 3
 const BASE_POISON_DOT = 1
@@ -55,8 +60,13 @@ var stat_bonus = {
 	"atk_ice": 1,
 	"range_ice": 1,
 	"atk_speed_ice": 1,
+	"atk_aoe": 1,
 	"atk_speed_aoe": 1,
-	"atk_speed_sniper": 1
+	"range_aoe": 1,
+	"burn_cd": 1,
+	"burn_damage": 1,
+	"atk_speed_sniper": 1,
+	"range_sniper": 1
 }
 
 var advanced_turrets = {
@@ -69,7 +79,8 @@ var advanced_turrets = {
 }
 
 var pasive_skills =  {
-	"freeze": false
+	"freeze": false,
+	"burn": false
 }
 
 var active_skills = {

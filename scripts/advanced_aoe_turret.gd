@@ -1,15 +1,15 @@
 extends Turret
 
-class_name AdvancedIceTurret
+class_name AdvancedAoeTurret
 
-var freeze_wave = false
-var freeze_timer : Timer
+var burn_wave = false
+var burn_timer : Timer
 
 func _ready():
-	atk = 4
-	atk_speed = 1.9
-	def_pen = 0
-	range = 155.0
+	atk = 12
+	atk_speed = 1.7
+	def_pen = 10
+	range = 160.0
 	attack_frame = 4
 	super._ready()
 
@@ -21,16 +21,15 @@ func apply_attack():
 	reloading = true
 	for enemy in enemy_in_sight:
 		enemy.on_hit(atk, def_pen)
-		enemy.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
 	reload_timer.start()
 
-func freeze():
+func burn():
 	animated_sprite_2d.play("shoot")
 	for enemy in enemy_in_sight:
 		enemy.on_hit(atk, 100)
-		enemy.status_effect("freeze", GameData.BASE_FREEZE_DURATION , 0)
-	freeze_wave = false
-	freeze_timer.start()
+		enemy.status_effect("burn", GameData.BASE_BURN_DURATION , 0)
+	burn_wave = false
+	burn_timer.start()
 
 func _physics_process(delta):
 	if not enemy_in_sight.is_empty():
@@ -38,8 +37,9 @@ func _physics_process(delta):
 			fire()
 		if not reloading and animated_sprite_2d.animation == "shoot" and animated_sprite_2d.frame == attack_frame:
 			apply_attack()
-		if freeze_wave:
-			freeze()
+		if burn_wave:
+			burn()
 
-func _on_freeze_timer():
-	freeze_wave = true
+func _on_burn_timer():
+	burn_wave = true
+

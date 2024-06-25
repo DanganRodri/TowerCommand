@@ -51,7 +51,14 @@ func _ready():
 func _draw():
 	if self.show_range:
 		var center = Vector2(0,0)
-		var radius = self.range * GameData.stat_bonus["range_ice"]
+		var radius = self.range
+		if self.is_in_group("aoe"):
+			radius = self.range * GameData.stat_bonus["range_aoe"]
+		if self.is_in_group("ice"):
+			radius = self.range * GameData.stat_bonus["range_ice"]
+		if self.is_in_group("sniper"):
+			radius = self.range * GameData.stat_bonus["range_sniper"]
+			
 		var color = GameData.COLOR_DATA["RANGE"]["TURRET_RANGE_BORDER_COLOR"]
 		draw_circle(center, radius, color)
 			
@@ -61,8 +68,12 @@ func _draw():
 
 func _process(delta):
 	if not self is BlankTurret:
-		self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_ice"]
-	
+		if self.is_in_group("aoe"):
+			self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_aoe"]
+		if self.is_in_group("ice"):
+			self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_ice"]
+		if self.is_in_group("sniper"):
+			self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_sniper"]
 
 func _physics_process(delta):
 	if not self is BlankTurret and target == null:

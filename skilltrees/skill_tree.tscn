@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b11qa1ok58ptg"]
+[gd_scene load_steps=22 format=3 uid="uid://b11qa1ok58ptg"]
 
 [ext_resource type="Script" path="res://scripts/upgrade_tree_menu.gd" id="1_71stc"]
 [ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="1_r3b73"]
@@ -12,8 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://nwnn6om0o5ks" path="res://assets/HUD/poison_dps_button.png" id="7_t08go"]
 [ext_resource type="Texture2D" uid="uid://du68xkcfwd47q" path="res://assets/HUD/double_dps_button.png" id="8_issny"]
 [ext_resource type="Texture2D" uid="uid://c3aty6jn0kpm6" path="res://assets/HUD/aoe_button.png" id="8_sj3w4"]
+[ext_resource type="Texture2D" uid="uid://csn2fk5likk6m" path="res://assets/HUD/advanced_aoe_button.png" id="9_7hkam"]
 [ext_resource type="Texture2D" uid="uid://b0q4fhvxpt4xy" path="res://assets/HUD/ice_button.png" id="9_aray4"]
 [ext_resource type="Texture2D" uid="uid://bpt3diahbg5fs" path="res://assets/HUD/sniper_button.png" id="10_c5yhu"]
+[ext_resource type="Texture2D" uid="uid://nrf6qpl55s75" path="res://assets/HUD/burning_aoe_button.png" id="10_e2x2a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vdlhl"]
 texture = ExtResource("1_r3b73")
@@ -221,6 +223,79 @@ offset_bottom = 56.0
 max_level = 2
 effect_id = 10
 
+[node name="AoeSkills" parent="." groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+visible = false
+layout_mode = 1
+offset_left = 41.0
+offset_top = 280.0
+offset_right = -1025.0
+offset_bottom = -281.0
+effect_id = 18
+
+[node name="UpgradeButton" parent="AoeSkills" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 143.0
+offset_right = 143.0
+offset_bottom = 0.0
+disabled = true
+effect_id = 19
+
+[node name="UpgradeButton" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = -200.0
+offset_right = 144.0
+offset_bottom = -200.0
+texture_normal = ExtResource("9_7hkam")
+max_level = 1
+effect_id = 20
+exclusive = true
+
+[node name="UpgradeButton" parent="AoeSkills/UpgradeButton/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 56.0
+max_level = 2
+effect_id = 22
+
+[node name="UpgradeButton2" parent="AoeSkills/UpgradeButton/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = -56.0
+offset_right = 160.0
+offset_bottom = -56.0
+effect_id = 21
+
+[node name="UpgradeButton3" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = 200.0
+offset_right = 144.0
+offset_bottom = 200.0
+texture_normal = ExtResource("10_e2x2a")
+max_level = 1
+effect_id = 8
+exclusive = true
+
+[node name="UpgradeButton" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = -56.0
+offset_right = 160.0
+offset_bottom = -56.0
+effect_id = 9
+
+[node name="UpgradeButton2" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 56.0
+max_level = 2
+effect_id = 10
+
 [node name="UpgradeDesc" type="TextEdit" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
@@ -380,4 +455,5 @@ vertical_alignment = 1
 [connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="Select Tree/Exit" to="Select Tree" method="_on_exit_pressed"]
 [connection signal="pressed" from="Select Tree/DpsTreeButton" to="Select Tree" method="_on_dps_tree_button_pressed"]
+[connection signal="pressed" from="Select Tree/AoeTreeButton" to="Select Tree" method="_on_aoe_tree_button_pressed"]
 [connection signal="pressed" from="Select Tree/IceTreeButton" to="Select Tree" method="_on_ice_tree_button_pressed"]

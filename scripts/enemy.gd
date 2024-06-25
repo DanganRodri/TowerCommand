@@ -19,6 +19,7 @@ var inmune : bool = false
 var gold : int = 10
 var slowed : bool = false
 var freezed : bool = false
+var burned : bool = false
 var poisoned : bool = false
 var poison_staks : int = 0
 var weakened : bool = false
@@ -28,6 +29,8 @@ var slow_timer : Timer
 var poison_timer : Timer
 var poison_dot : Timer
 var freeze_timer : Timer
+var burn_timer : Timer
+var burn_dot : Timer
 
 func _init(_type, _hp, _def, _speed,_maxSpeed,_inmune) -> void:
 	self.type = _type
@@ -60,6 +63,18 @@ func _ready():
 	freeze_timer.one_shot = true
 	freeze_timer.connect("timeout", Callable(self, "_on_freeze_timer_timeout"))
 	add_child(freeze_timer)
+	
+	burn_timer = Timer.new()
+	burn_timer.wait_time = 0.75
+	burn_timer.one_shot = true
+	burn_timer.connect("timeout", Callable(self, "_on_burn_timer_timeout"))
+	add_child(burn_timer)
+	
+	burn_dot = Timer.new()
+	burn_dot.wait_time = GameData.BASE_BURN_DOT
+	burn_dot.one_shot = true
+	burn_dot.connect("timeout", Callable(self, "_on_burn_dot"))
+	add_child(burn_dot)
 	
 	poison_timer = Timer.new()
 	poison_timer.wait_time = GameData.BASE_POISON_DURATION
@@ -124,7 +139,13 @@ func status_effect(effect,duration,value):
 			self.poison_staks += value * GameData.stat_bonus["poison_dot"]
 		"weaken":
 			self.weakened = true
-			
+		
+		"burn":
+			burn_timer.wait_time = duration
+			burn_timer.start()
+			if not self.burned:
+				burn_dot.start()
+			self.burned = true
 
 func on_destroy():
 	var game = get_parent()
@@ -136,13 +157,16 @@ func apply_color_filter():
 		sprite.modulate = Color(1, 0, 0) # Rojo
 		return
 	if self.poisoned:
-		sprite.modulate = Color(0.01300281099975, 0.62915825843811, 0) # Rojo
+		sprite.modulate = Color(0.01300281099975, 0.62915825843811, 0) # Verde
 		return
 	if self.freezed:
-		sprite.modulate = Color(0, 0.17647059261799, 0.60392159223557) # Azul claro
+		sprite.modulate = Color(0, 0.17647059261799, 0.60392159223557) # Azul oscuro
 		return
 	if self.slowed:
 		sprite.modulate = Color(0.4, 0.83, 1) # Azul claro
+		return
+	if self.burned:
+		sprite.modulate = Color(0.85827624797821, 0.42022228240967, 0.10299212485552) # Naranja
 		return
 
 func get_target():
@@ -185,6 +209,17 @@ func _on_freeze_timer_timeout():
 	sprite.modulate = color
 	self.sprite.play("run")
 	freezed = false
+
+func _on_burn_timer_timeout():
+	self.burned = false
+	sprite.modulate = color
+
+func _on_burn_dot():
+	self.hp -= GameData.BASE_BURN_DAMAGE + GameData.stat_bonus["burn_damage"]
+	if self.hp <= 0:
+		self.on_destroy()
+	if self.burned:
+		burn_dot.start()
 
 func _on_poison_timer_timeout():
 	self.poisoned = false

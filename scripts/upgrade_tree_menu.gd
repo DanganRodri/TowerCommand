@@ -28,6 +28,14 @@ func show_tree(tree_group: String):
 			var ice_upgrade_buttons = get_tree().get_nodes_in_group(tree_group)
 			for iub in ice_upgrade_buttons:
 				iub.show()
+		"aoe_upgrade_button":
+			var aoe_upgrade_buttons = get_tree().get_nodes_in_group(tree_group)
+			for aub in aoe_upgrade_buttons:
+				aub.show()
+		"sniper_upgrade_button":
+			var sniper_upgrade_buttons = get_tree().get_nodes_in_group(tree_group)
+			for sub in sniper_upgrade_buttons:
+				sub.show()
 
 func _input(event):
 	if event is InputEventKey and event.is_action_pressed("esc"):

@@ -20,7 +20,12 @@ enum Effect {
 	Freeze,
 	DpsIce,
 	IceSkill,
-	WIP
+	WIP,
+	AtkSpeedAoe,
+	AtkAoe,
+	AdvancedAoe,
+	Burn,
+	RangeAoe
 }
 
 @onready var panel = $Panel

@@ -99,7 +99,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="AoE Turret" type="StaticBody2D"]
+[node name="AoE Turret" type="StaticBody2D" groups=["aoe"]]
 z_index = 1
 input_pickable = true
 script = ExtResource("1_yoc0n")
