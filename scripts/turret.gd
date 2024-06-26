@@ -2,6 +2,7 @@ extends StaticBody2D
 
 class_name Turret
 @onready var animated_sprite_2d = $AnimatedSprite2D
+var color : Color = Color()
 #Stats of the tower
 
 var map_node
@@ -22,10 +23,10 @@ var total_cost : int = cost
 
 var reload_timer : Timer
 var attack_frame : int = 4
-
+var stunned : bool = false
 
 func _on_input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_mask == 1:
+	if event is InputEventMouseButton and event.button_mask == 1 and not self.stunned:
 		var upgradeList = get_node("Upgrade/UpgradeList")
 		upgradeList.visible = !upgradeList.visible
 		upgradeList.global_position = self.position + Vector2(-115, 28)
@@ -36,6 +37,9 @@ func _on_input_event(viewport, event, shape_idx):
 		show()
 
 func _ready():
+	
+	color = animated_sprite_2d.modulate
+	
 	if not self is BlankTurret:
 		self.get_node("Range/CollisionShape2D").get_shape().radius = range
 		select_tower_to_defend()
@@ -74,8 +78,15 @@ func _process(delta):
 			self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_ice"]
 		if self.is_in_group("sniper"):
 			self.get_node("Range/CollisionShape2D").get_shape().radius = range * GameData.stat_bonus["range_sniper"]
+	
+		if self.stunned:
+			animated_sprite_2d.modulate = GameData.COLOR_DATA["STATUS"]["STUN_COLOR"]
+		else:
+			animated_sprite_2d.modulate = color
 
 func _physics_process(delta):
+	if self.stunned:
+			return
 	if not self is BlankTurret and target == null:
 		select_enemy()
 	if target != null and not reloading:

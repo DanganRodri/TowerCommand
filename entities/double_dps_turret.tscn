@@ -129,7 +129,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Double Dps Turret" type="StaticBody2D" groups=["dps"]]
+[node name="Double Dps Turret" type="StaticBody2D" groups=["builded_turret", "dps"]]
 input_pickable = true
 script = ExtResource("1_s1fga")
 

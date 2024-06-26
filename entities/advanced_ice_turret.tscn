@@ -92,13 +92,12 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Advanced Ice Turret" type="StaticBody2D" groups=["ice"]]
+[node name="Advanced Ice Turret" type="StaticBody2D" groups=["builded_turret", "ice"]]
 z_index = 1
 input_pickable = true
 script = ExtResource("1_rwops")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0, 0.901961, 0.760784, 1)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_55dib")
 animation = &"shoot"

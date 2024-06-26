@@ -8,9 +8,9 @@ func _init():
 
 func _on_barrier_body_entered(body):
 	if body is CharacterBody2D:
-		body.protected = self.get_node("Barrier")
+		body.protected.append(self.get_node("Barrier")) 
 
 
 func _on_barrier_body_exited(body):
 	if body is CharacterBody2D:
-		body.protected = null
+		body.protected.erase(self.get_node("Barrier"))

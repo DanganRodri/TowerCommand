@@ -99,7 +99,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Ice Turret" type="StaticBody2D" groups=["ice"]]
+[node name="Ice Turret" type="StaticBody2D" groups=["builded_turret", "ice"]]
 z_index = 1
 input_pickable = true
 script = ExtResource("1_r7ys7")

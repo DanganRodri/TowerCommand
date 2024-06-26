@@ -71,6 +71,27 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.RangeAoe:
 			upgrade.effect = add_range_aoe
 			upgrade.description = "Slightly increases the effective range of the turret."
+		UpgradeNode.Effect.BurningAoe:
+			upgrade.effect = burning_aoe
+			upgrade.description = "Transforms all aoe turrets into burning aoe turrets that burns enemies on hit, causing damage to them over time." + "\n\n" + "Base stats increased." + "\n\n" + "(All the aoe turrets builded for the rest of the game will be burning aoe turrets)"
+		UpgradeNode.Effect.BurnUpgrade:
+			upgrade.effect = burn_upgrade
+			upgrade.description = "Increases burn damage."
+		UpgradeNode.Effect.DefPenSniper:
+			upgrade.effect = def_pen_sniper
+			upgrade.description = "Slightly increases the defense penetration of the turret."
+		UpgradeNode.Effect.AtkSniper:
+			upgrade.effect = atk_sniper
+			upgrade.description = "Slightly increases the attack of the turret."
+		UpgradeNode.Effect.PlasmaSniper:
+			upgrade.effect = plasma_sniper
+			upgrade.description = "Transforms all sniper turrets into plsama sniper turrets that shots plasma bullets, dealing damage to nearby enemies when impact ." + "\n\n" + "Base stats increased." + "\n\n" + "(All the sniper turrets builded for the rest of the game will be advanced sniper turrets)"
+		UpgradeNode.Effect.ChargedSniper:
+			upgrade.effect = charged_sniper
+			upgrade.description = "Every third attack will be a charged attack that deals double true damage"
+		UpgradeNode.Effect.AtkSpeedSniper:
+			upgrade.effect = atk_speed_sniper
+			upgrade.description = "Slightly increases the attack speed of the turret."
 
 ###	DPS UPGRADES /---------------------------------------------------------------------------------------------/
 
@@ -236,6 +257,46 @@ func burn(_upgrade):
 			aoe_turret.burn_wave = true
 			aoe_turret.burn_timer.start()
 
+func burning_aoe(_upgrade):
+	var aoe_turrets = get_tree().get_nodes_in_group("aoe")
+	for aoe_turret in aoe_turrets:
+		create_advanced_turret("res://entities/burning_aoe_turret.tscn", aoe_turret)
+	GameData.advanced_turrets["burning_aoe"] = true
+
+func burn_upgrade(_upgrade):
+	GameData.stat_bonus["burn_damage"] += 1.5
+
+###	SNIPER UPGRADES /---------------------------------------------------------------------------------------------/
+
+func def_pen_sniper(_upgrade):
+	GameData.stat_bonus["def_pen_sniper"] += 0.1
+
+func atk_sniper(_upgrade):
+	GameData.stat_bonus["atk_sniper"] += 0.1
+
+func plasma_sniper(_upgrade):
+	var sniper_turrets = get_tree().get_nodes_in_group("sniper")
+	for sniper_turret in sniper_turrets:
+		create_advanced_turret("res://entities/plasma_sniper_turret.tscn", sniper_turret)
+	GameData.advanced_turrets["sniper"] = true
+
+func charged_sniper(_upgrade):
+	if _upgrade.level == 1:
+		GameData.pasive_skills["charged_sniper"] = true
+		_upgrade.description = "Increases de explosion radius of charged shots."
+		_upgrade.desc.text = _upgrade.description
+	if _upgrade.level == 2:
+		GameData.pasive_skills["explosion_radius_upgrade"] = true
+		_upgrade.description = "Charged shots stun enemies,making them unable to move for a brief period of time and turning off their abilities."
+		_upgrade.desc.text = _upgrade.description
+	if _upgrade.level == 3:
+		GameData.pasive_skills["stun_upgrade"] = true
+		
+
+func atk_speed_sniper(_upgrade):
+	GameData.stat_bonus["atk_speed_sniper"] += 0.2
+
+###	OTHER STUFF /---------------------------------------------------------------------------------------------/
 func wip(_upgrade):
 	pass
 	

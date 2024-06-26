@@ -25,7 +25,15 @@ enum Effect {
 	AtkAoe,
 	AdvancedAoe,
 	Burn,
-	RangeAoe
+	RangeAoe,
+	BurningAoe,
+	AoeSkill,
+	BurnUpgrade,
+	DefPenSniper,
+	AtkSniper,
+	PlasmaSniper,
+	ChargedSniper,
+	AtkSpeedSniper
 }
 
 @onready var panel = $Panel

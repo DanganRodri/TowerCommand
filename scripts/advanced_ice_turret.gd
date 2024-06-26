@@ -33,6 +33,8 @@ func freeze():
 	freeze_timer.start()
 
 func _physics_process(delta):
+	if self.stunned:
+			return
 	if not enemy_in_sight.is_empty():
 		if not reloading and animated_sprite_2d.animation == "default":
 			fire()

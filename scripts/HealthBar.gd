@@ -7,4 +7,6 @@ func _ready():
 func _process(delta):
 	if self.max_value != self.value:
 		self.visible = true
+	if get_parent() is Shield:
+		self.visible = true
 	self.value = get_parent().hp

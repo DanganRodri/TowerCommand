@@ -19,6 +19,10 @@ func _process(delta):
 		ice.icon = load("res://assets/sprites/dps_ice_turret.png")
 	if GameData.advanced_turrets["aoe"]:
 		aoe.icon = load("res://assets/sprites/advanced_aoe_turret.png")
+	if GameData.advanced_turrets["burning_aoe"]:
+		aoe.icon = load("res://assets/sprites/burning_aoe_turret.png")
+	if GameData.advanced_turrets["sniper"]:
+		sniper.icon = load("res://assets/sprites/plasma_turret.png")
 		
 func _on_dps_pressed():
 	
@@ -32,6 +36,8 @@ func _on_dps_pressed():
 func _on_aoe_pressed():
 	if GameData.advanced_turrets["aoe"]:
 		create_turret("res://entities/advanced_aoe_turret.tscn")
+	elif GameData.advanced_turrets["burning_aoe"]:
+		create_turret("res://entities/burning_aoe_turret.tscn")
 	else:
 		create_turret("res://entities/aoe_turret.tscn")
 
@@ -47,7 +53,7 @@ func _on_ice_pressed():
 
 func _on_sniper_pressed():
 	if GameData.advanced_turrets["sniper"]:
-		create_turret("res://entities/advanced_sniper_turret.tscn")
+		create_turret("res://entities/plasma_sniper_turret.tscn")
 	else:
 		create_turret("res://entities/sniper_turret.tscn")
 
@@ -75,7 +81,7 @@ func check_pasive_skills(turret):
 		turret.freeze_wave = true
 		freeze_timer.start()
 	
-	if turret.is_in_group("oae") and GameData.pasive_skills["burn"]:
+	if turret.is_in_group("aoe") and GameData.pasive_skills["burn"]:
 		var burn_timer = Timer.new()
 		burn_timer.wait_time = GameData.BASE_BURN_COOLDOWN * GameData.stat_bonus["burn_cd"]
 		burn_timer.one_shot = true

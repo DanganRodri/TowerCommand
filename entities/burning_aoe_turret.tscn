@@ -1,39 +1,51 @@
-[gd_scene load_steps=16 format=3 uid="uid://bft1br0dn1qqa"]
+[gd_scene load_steps=19 format=3 uid="uid://bgiyfdqhcwaxg"]
 
-[ext_resource type="Script" path="res://scripts/dps_turret.gd" id="1_xgn6f"]
-[ext_resource type="Texture2D" uid="uid://di3ts2e6gnu25" path="res://assets/sprites/Dps_turret-sheet.png" id="2_okx31"]
-[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_4of2i"]
-[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_b1yrm"]
+[ext_resource type="Script" path="res://scripts/burning_aoe_turret.gd" id="1_dx4k7"]
+[ext_resource type="Texture2D" uid="uid://cg51vmu886nil" path="res://assets/sprites/burning_aoe_turret-sheet.png" id="2_sky0w"]
+[ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_gg62d"]
+[ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="4_hlfhe"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pipkb"]
-atlas = ExtResource("2_okx31")
+[sub_resource type="AtlasTexture" id="AtlasTexture_86drp"]
+atlas = ExtResource("2_sky0w")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_58knk"]
-atlas = ExtResource("2_okx31")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rc8kv"]
+atlas = ExtResource("2_sky0w")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8dihj"]
-atlas = ExtResource("2_okx31")
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0fo1"]
+atlas = ExtResource("2_sky0w")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgtjb"]
-atlas = ExtResource("2_okx31")
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfr53"]
+atlas = ExtResource("2_sky0w")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f50v0"]
-atlas = ExtResource("2_okx31")
+[sub_resource type="AtlasTexture" id="AtlasTexture_anxfc"]
+atlas = ExtResource("2_sky0w")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbkv1"]
-atlas = ExtResource("2_okx31")
+[sub_resource type="AtlasTexture" id="AtlasTexture_3soj3"]
+atlas = ExtResource("2_sky0w")
 region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wll6o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8gb0"]
+atlas = ExtResource("2_sky0w")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlcdc"]
+atlas = ExtResource("2_sky0w")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdlpe"]
+atlas = ExtResource("2_sky0w")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ds3a"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pipkb")
+"texture": SubResource("AtlasTexture_86drp")
 }],
 "loop": true,
 "name": &"default",
@@ -41,23 +53,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_58knk")
+"texture": SubResource("AtlasTexture_rc8kv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8dihj")
+"texture": SubResource("AtlasTexture_w0fo1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vgtjb")
+"texture": SubResource("AtlasTexture_hfr53")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f50v0")
+"texture": SubResource("AtlasTexture_anxfc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kbkv1")
+"texture": SubResource("AtlasTexture_3soj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8gb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlcdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdlpe")
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 25.0
+"speed": 9.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siseg"]
@@ -66,7 +87,7 @@ size = Vector2(65, 61)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
 radius = 175.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0teg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvv3r"]
 bg_color = Color(0.176471, 0.701961, 0.501961, 1)
 border_width_left = 7
 border_width_top = 7
@@ -79,7 +100,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2dllg"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lhv2"]
 bg_color = Color(0.901961, 0, 0, 1)
 border_width_left = 7
 border_width_top = 7
@@ -92,22 +113,22 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Dps Turret" type="StaticBody2D" groups=["builded_turret", "dps"]]
+[node name="Burnign AoE Turret" type="StaticBody2D" groups=["aoe", "builded_turret"]]
 z_index = 1
 input_pickable = true
-script = ExtResource("1_xgn6f")
+script = ExtResource("1_dx4k7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(10, -1)
+position = Vector2(11, -1)
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_wll6o")
+sprite_frames = SubResource("SpriteFrames_4ds3a")
+animation = &"shoot"
 autoplay = "default"
-flip_h = true
-script = ExtResource("3_b1yrm")
+script = ExtResource("3_gg62d")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(4, 0)
 shape = SubResource("RectangleShape2D_siseg")
 metadata/_edit_lock_ = true
 
@@ -131,7 +152,7 @@ offset_left = 1.55199
 offset_top = 3.272
 offset_right = 2.15198
 offset_bottom = 3.2
-script = ExtResource("3_4of2i")
+script = ExtResource("4_hlfhe")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
 layout_mode = 0
@@ -144,9 +165,9 @@ alignment = 1
 [node name="Upgrade" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_o0teg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_o0teg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_o0teg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fvv3r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fvv3r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fvv3r")
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
 layout_mode = 0
@@ -160,9 +181,9 @@ horizontal_alignment = 1
 [node name="Discard" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_2dllg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_2dllg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2dllg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7lhv2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_7lhv2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_7lhv2")
 
 [node name="Discard" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
 layout_mode = 0
@@ -173,7 +194,6 @@ offset_bottom = 78.0
 text = "Discard"
 horizontal_alignment = 1
 
-[connection signal="draw" from="." to="." method="_on_draw"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

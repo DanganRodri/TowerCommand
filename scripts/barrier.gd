@@ -4,7 +4,6 @@ class_name Barrier
 
 var hp = 30
 
-
 func on_hit(damage):
 	hp -= damage
 	if self.hp <= 0:

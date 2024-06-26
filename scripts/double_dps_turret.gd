@@ -15,6 +15,8 @@ func _ready():
 
 
 func _physics_process(delta):
+	if self.stunned:
+			return
 	if target == null and not enemy_in_sight.is_empty():
 		select_enemy()
 	if second_target == null:

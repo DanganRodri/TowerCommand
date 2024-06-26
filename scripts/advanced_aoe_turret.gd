@@ -20,18 +20,20 @@ func fire():
 func apply_attack():
 	reloading = true
 	for enemy in enemy_in_sight:
-		enemy.on_hit(atk, def_pen)
+		enemy.on_hit(atk * GameData.stat_bonus["atk_aoe"], def_pen)
 	reload_timer.start()
 
 func burn():
 	animated_sprite_2d.play("shoot")
 	for enemy in enemy_in_sight:
-		enemy.on_hit(atk, 100)
+		enemy.on_hit(atk * 0.3 * GameData.stat_bonus["atk_aoe"], 100)
 		enemy.status_effect("burn", GameData.BASE_BURN_DURATION , 0)
 	burn_wave = false
 	burn_timer.start()
 
 func _physics_process(delta):
+	if self.stunned:
+			return
 	if not enemy_in_sight.is_empty():
 		if not reloading and animated_sprite_2d.animation == "default":
 			fire()

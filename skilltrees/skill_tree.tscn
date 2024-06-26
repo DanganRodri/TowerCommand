@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b11qa1ok58ptg"]
+[gd_scene load_steps=25 format=3 uid="uid://b11qa1ok58ptg"]
 
 [ext_resource type="Script" path="res://scripts/upgrade_tree_menu.gd" id="1_71stc"]
 [ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="1_r3b73"]
@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://b0q4fhvxpt4xy" path="res://assets/HUD/ice_button.png" id="9_aray4"]
 [ext_resource type="Texture2D" uid="uid://bpt3diahbg5fs" path="res://assets/HUD/sniper_button.png" id="10_c5yhu"]
 [ext_resource type="Texture2D" uid="uid://nrf6qpl55s75" path="res://assets/HUD/burning_aoe_button.png" id="10_e2x2a"]
+[ext_resource type="Texture2D" uid="uid://bfvd6b5v2g84p" path="res://assets/HUD/plasma_button.png" id="11_n4gpu"]
+[ext_resource type="Texture2D" uid="uid://mk1guuydirq2" path="res://assets/HUD/charged_plasma_button.png" id="12_yl8ab"]
+[ext_resource type="Texture2D" uid="uid://ddqtk24hylgxv" path="res://assets/HUD/doble_sniper_button.png" id="13_ldtua"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vdlhl"]
 texture = ExtResource("1_r3b73")
@@ -101,6 +104,7 @@ offset_left = 144.0
 offset_top = -200.0
 offset_right = 144.0
 offset_bottom = -200.0
+disabled = true
 texture_normal = ExtResource("5_vyn5r")
 max_level = 1
 effect_id = 13
@@ -112,6 +116,7 @@ offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+disabled = true
 max_level = 2
 
 [node name="UpgradeButton2" parent="IceSkills/UpgradeButton/UpgradeButton" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -120,6 +125,7 @@ offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
+disabled = true
 effect_id = 14
 
 [node name="UpgradeButton3" parent="IceSkills/UpgradeButton" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -128,6 +134,7 @@ offset_left = 144.0
 offset_top = 200.0
 offset_right = 144.0
 offset_bottom = 200.0
+disabled = true
 texture_normal = ExtResource("6_64083")
 max_level = 1
 effect_id = 15
@@ -139,6 +146,7 @@ offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
+disabled = true
 effect_id = 16
 
 [node name="UpgradeButton2" parent="IceSkills/UpgradeButton/UpgradeButton3" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -147,6 +155,7 @@ offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+disabled = true
 max_level = 2
 effect_id = 1
 
@@ -173,6 +182,7 @@ offset_left = 144.0
 offset_top = -200.0
 offset_right = 144.0
 offset_bottom = -200.0
+disabled = true
 texture_normal = ExtResource("7_t08go")
 max_level = 1
 effect_id = 5
@@ -184,6 +194,7 @@ offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+disabled = true
 max_level = 2
 effect_id = 7
 
@@ -193,6 +204,7 @@ offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
+disabled = true
 effect_id = 6
 
 [node name="UpgradeButton3" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -201,6 +213,7 @@ offset_left = 144.0
 offset_top = 200.0
 offset_right = 144.0
 offset_bottom = 200.0
+disabled = true
 texture_normal = ExtResource("8_issny")
 max_level = 1
 effect_id = 8
@@ -212,6 +225,7 @@ offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
+disabled = true
 effect_id = 9
 
 [node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton3" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -220,6 +234,7 @@ offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+disabled = true
 max_level = 2
 effect_id = 10
 
@@ -246,6 +261,7 @@ offset_left = 144.0
 offset_top = -200.0
 offset_right = 144.0
 offset_bottom = -200.0
+disabled = true
 texture_normal = ExtResource("9_7hkam")
 max_level = 1
 effect_id = 20
@@ -257,6 +273,7 @@ offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+disabled = true
 max_level = 2
 effect_id = 22
 
@@ -266,6 +283,7 @@ offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
+disabled = true
 effect_id = 21
 
 [node name="UpgradeButton3" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -274,9 +292,10 @@ offset_left = 144.0
 offset_top = 200.0
 offset_right = 144.0
 offset_bottom = 200.0
+disabled = true
 texture_normal = ExtResource("10_e2x2a")
 max_level = 1
-effect_id = 8
+effect_id = 23
 exclusive = true
 
 [node name="UpgradeButton" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -285,7 +304,8 @@ offset_left = 160.0
 offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
-effect_id = 9
+disabled = true
+effect_id = 24
 
 [node name="UpgradeButton2" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -293,8 +313,89 @@ offset_left = 160.0
 offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
+disabled = true
 max_level = 2
-effect_id = 10
+effect_id = 25
+
+[node name="SniperSkills" parent="." groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+visible = false
+layout_mode = 1
+offset_left = 41.0
+offset_top = 280.0
+offset_right = -1025.0
+offset_bottom = -281.0
+effect_id = 26
+
+[node name="UpgradeButton" parent="SniperSkills" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 143.0
+offset_right = 143.0
+offset_bottom = 0.0
+disabled = true
+effect_id = 27
+
+[node name="UpgradeButton" parent="SniperSkills/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = -200.0
+offset_right = 144.0
+offset_bottom = -200.0
+disabled = true
+texture_normal = ExtResource("11_n4gpu")
+max_level = 1
+effect_id = 28
+exclusive = true
+
+[node name="UpgradeButton" parent="SniperSkills/UpgradeButton/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 56.0
+disabled = true
+max_level = 2
+effect_id = 30
+
+[node name="UpgradeButton2" parent="SniperSkills/UpgradeButton/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = -56.0
+offset_right = 160.0
+offset_bottom = -56.0
+disabled = true
+texture_normal = ExtResource("12_yl8ab")
+effect_id = 29
+
+[node name="UpgradeButton3" parent="SniperSkills/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 144.0
+offset_top = 200.0
+offset_right = 144.0
+offset_bottom = 200.0
+disabled = true
+texture_normal = ExtResource("13_ldtua")
+max_level = 1
+effect_id = 23
+exclusive = true
+
+[node name="UpgradeButton" parent="SniperSkills/UpgradeButton/UpgradeButton3" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = -56.0
+offset_right = 160.0
+offset_bottom = -56.0
+disabled = true
+effect_id = 24
+
+[node name="UpgradeButton2" parent="SniperSkills/UpgradeButton/UpgradeButton3" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 160.0
+offset_top = 56.0
+offset_right = 160.0
+offset_bottom = 56.0
+disabled = true
+max_level = 2
+effect_id = 25
 
 [node name="UpgradeDesc" type="TextEdit" parent="."]
 unique_name_in_owner = true
@@ -457,3 +558,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="Select Tree/DpsTreeButton" to="Select Tree" method="_on_dps_tree_button_pressed"]
 [connection signal="pressed" from="Select Tree/AoeTreeButton" to="Select Tree" method="_on_aoe_tree_button_pressed"]
 [connection signal="pressed" from="Select Tree/IceTreeButton" to="Select Tree" method="_on_ice_tree_button_pressed"]
+[connection signal="pressed" from="Select Tree/SniperTreeButton" to="Select Tree" method="_on_sniper_tree_button_pressed"]

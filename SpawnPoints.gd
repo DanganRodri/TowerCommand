@@ -2,7 +2,7 @@ extends Node
 
 var enemy_basic = preload("res://entities/enemy_basic.tscn")
 var enemy_tank = preload("res://entities/enemy_tank.tscn")
-var enemy_speedy = preload("res://entities/enemy_speedy.tscn")
+var enemy_jammer = preload("res://entities/enemy_jammer.tscn")
 
 @onready var waveTimer = $WaveTimer
 @onready var waveIndicator = $WaveIndicatorBackGround/WaveIndicator
@@ -13,7 +13,7 @@ var basic_size
 var wave : int = 0
 var wave1 = [[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"],[0,"basic"]]
 var wave2 = [[1,"basic"],[1,"tank"],[1,"basic"],[1,"basic"],[1,"tank"],[1,"basic"]]
-var wave3 = [[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"]]
+var wave3 = [[2,"basic"],[2,"basic"],[2,"basic"],[2,"jammer"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"],[2,"basic"]]
 var wave4 = [[1,"basic"],[1,"tank"],[1,"basic"],[1,"basic"],[1,"tank"],[1,"basic"]]
 var waveList = [wave1, wave2, wave3, wave4]
 var spawnDelay : float = 1
@@ -93,8 +93,8 @@ func instantiateEnemy(type):
 			enemy = enemy_basic.instantiate()
 		"tank":
 			enemy = enemy_tank.instantiate()
-		"speedy":
-			enemy = enemy_speedy.instantiate()
+		"jammer":
+			enemy = enemy_jammer.instantiate()
 	
 	return enemy
 

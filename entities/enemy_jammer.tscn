@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=3 uid="uid://csu7onqbvhwhd"]
+
+[ext_resource type="Script" path="res://scripts/enemy_jammer.gd" id="1_0tp46"]
+[ext_resource type="Texture2D" uid="uid://dtg1cjj5isqub" path="res://assets/sprites/jammer_enemy.png" id="2_4hr84"]
+[ext_resource type="Script" path="res://scripts/shield.gd" id="4_m04q2"]
+[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="5_3msi3"]
+[ext_resource type="Texture2D" uid="uid://b67ujuo4lkkam" path="res://assets/sprites/jammer_shield.png" id="5_h57hi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uthjb"]
+atlas = ExtResource("2_4hr84")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frqq5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uthjb")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
+size = Vector2(42, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh65l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpss3"]
+bg_color = Color(0.168627, 0.0431373, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oictu"]
+bg_color = Color(0.72549, 1, 0.784314, 1)
+
+[node name="Enemy Jammer" type="CharacterBody2D" groups=["enemy"]]
+z_index = 2
+position = Vector2(49, 79)
+script = ExtResource("1_0tp46")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(1.3125, 1.3125)
+sprite_frames = SubResource("SpriteFrames_frqq5")
+animation = &"run"
+autoplay = "run"
+frame_progress = 0.917064
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_feq2d")
+metadata/_edit_lock_ = true
+
+[node name="Shields" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shields" groups=["shield"]]
+position = Vector2(-25, -20)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_m04q2")
+
+[node name="HealthBar2" type="ProgressBar" parent="Shields/CollisionShape2D"]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 30.0
+offset_bottom = -9.0
+scale = Vector2(0.434089, 0.563807)
+theme_override_styles/background = SubResource("StyleBoxFlat_kpss3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oictu")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_3msi3")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Shields/CollisionShape2D"]
+position = Vector2(-4.76837e-07, -1.43051e-06)
+scale = Vector2(0.90625, 0.90625)
+texture = ExtResource("5_h57hi")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Shields" groups=["shield"]]
+position = Vector2(25, -20)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_m04q2")
+
+[node name="HealthBar2" type="ProgressBar" parent="Shields/CollisionShape2D2"]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 30.0
+offset_bottom = -9.0
+scale = Vector2(0.434089, 0.563807)
+theme_override_styles/background = SubResource("StyleBoxFlat_kpss3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oictu")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_3msi3")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Shields/CollisionShape2D2"]
+position = Vector2(-4.76837e-07, -1.43051e-06)
+scale = Vector2(0.90625, 0.90625)
+texture = ExtResource("5_h57hi")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Shields" groups=["shield"]]
+position = Vector2(-25, 28)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_m04q2")
+
+[node name="HealthBar2" type="ProgressBar" parent="Shields/CollisionShape2D3"]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 30.0
+offset_bottom = -9.0
+scale = Vector2(0.434089, 0.563807)
+theme_override_styles/background = SubResource("StyleBoxFlat_kpss3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oictu")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_3msi3")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Shields/CollisionShape2D3"]
+position = Vector2(-4.76837e-07, -1.43051e-06)
+scale = Vector2(0.90625, 0.90625)
+texture = ExtResource("5_h57hi")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Shields" groups=["shield"]]
+position = Vector2(25, 28)
+shape = SubResource("RectangleShape2D_bh65l")
+script = ExtResource("4_m04q2")
+
+[node name="HealthBar2" type="ProgressBar" parent="Shields/CollisionShape2D4"]
+offset_left = -8.0
+offset_top = -14.0
+offset_right = 30.0
+offset_bottom = -9.0
+scale = Vector2(0.434089, 0.563807)
+theme_override_styles/background = SubResource("StyleBoxFlat_kpss3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oictu")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_3msi3")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Shields/CollisionShape2D4"]
+position = Vector2(-4.76837e-07, -1.43051e-06)
+scale = Vector2(0.90625, 0.90625)
+texture = ExtResource("5_h57hi")
+metadata/_edit_lock_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -19.0
+offset_top = -22.0
+offset_right = 19.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_kpss3")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oictu")
+value = 50.0
+show_percentage = false
+script = ExtResource("5_3msi3")

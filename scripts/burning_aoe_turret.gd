@@ -1,15 +1,15 @@
 extends Turret
 
-class_name IceTurret
+class_name BurningAoeTurret
 
-var explosion_radius : float = 50.0
+var explosion_radius : float = 75.0
 
 func _ready():
-	atk = 4
-	atk_speed = 2
-	def_pen = 0
-	range = 130.0
-	attack_frame = 5
+	atk = 12
+	atk_speed = 1.65
+	def_pen = 10.0
+	range = 160.0
+	attack_frame = 7
 	super._ready()
 
 
@@ -17,8 +17,10 @@ func apply_attack():
 	reloading = true
 	area_hit()
 	reload_timer.start()
+	
 
 func area_hit():
+	
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsShapeQueryParameters2D.new()
 	var shape = CircleShape2D.new()
@@ -30,5 +32,8 @@ func area_hit():
 	
 	for enemy in result:
 		if enemy.collider and enemy.collider.is_in_group("enemy"):
-			enemy.collider.on_hit(atk, self.def_pen)
-			enemy.collider.status_effect("slow", GameData.BASE_SLOW_DURATION , GameData.BASE_SLOW)
+			enemy.collider.on_hit(atk * GameData.stat_bonus["aoe_atk"], self.def_pen)
+			enemy.collider.status_effect("burn", GameData.BASE_BURN_DURATION , 0)
+	
+	
+	

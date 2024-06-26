@@ -8,8 +8,10 @@ const SLOWMOTION = 0.15
 const BASE_SLOW = 0.60
 const BASE_SLOW_DURATION = 1.2
 
-const BASE_FREEZE_DURATION = 0.7
+const BASE_FREEZE_DURATION = 1
 const BASE_FREEZE_COOLDOWN = 16
+
+const BASE_STUN_DURATION = 0.5
 
 const BASE_BURN_DURATION = 2
 const BASE_BURN_COOLDOWN = 16
@@ -35,6 +37,15 @@ const COLOR_DATA = {
 		"TURRET_RANGE_COLOR": Color(1, 1, 1, 0.10000000149012),
 		"BARRIER_RANGE_BORDER_COLOR": Color(0, 0.5686274766922, 1, 0.76862746477127),
 		"BARRIER_RANGE_COLOR": Color(0, 0, 0, 0.1)
+	},
+	"STATUS": {
+		"INMUNE_COLOR": Color(0.91303491592407, 0.9362650513649, 0.00000462055232), # Amarillo
+		"DAMAGED_COLOR": Color(1, 0, 0), # Rojo
+		"POISONED_COLOR": Color(0.01300281099975, 0.62915825843811, 0), # Verde
+		"FREEZED_COLOR": Color(0, 0.17647059261799, 0.60392159223557), # Azul oscuro
+		"SLOWED_COLOR": Color(0.4, 0.83, 1), # Azul claro
+		"BURNED_COLOR": Color(0.85827624797821, 0.42022228240967, 0.10299212485552), # Naranja
+		"STUN_COLOR": Color(0.17647059261799, 1, 0.77647060155869) # Turquesa
 	}
 }
 
@@ -66,7 +77,9 @@ var stat_bonus = {
 	"burn_cd": 1,
 	"burn_damage": 1,
 	"atk_speed_sniper": 1,
-	"range_sniper": 1
+	"range_sniper": 1,
+	"atk_sniper": 1,
+	"def_pen_sniper": 1
 }
 
 var advanced_turrets = {
@@ -75,12 +88,17 @@ var advanced_turrets = {
 	"ice": false,
 	"sniper": false,
 	"double_dps": false,
-	"dps_ice": false
+	"dps_ice": false,
+	"burning_aoe": false,
+	"global_sniper": false
 }
 
 var pasive_skills =  {
 	"freeze": false,
-	"burn": false
+	"burn": false,
+	"charged_sniper": false,
+	"explosion_radius_upgrade": false,
+	"stun_upgrade": false
 }
 
 var active_skills = {

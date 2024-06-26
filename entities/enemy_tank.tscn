@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dhxphl8er2710"]
+[gd_scene load_steps=16 format=3 uid="uid://dhxphl8er2710"]
 
 [ext_resource type="Script" path="res://scripts/enemy_tank.gd" id="1_2b0qn"]
 [ext_resource type="Texture2D" uid="uid://dgwend2j7dful" path="res://assets/sprites/tank_enemy-sheet.png" id="2_16cfv"]
@@ -45,14 +45,17 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
 size = Vector2(63, 66)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1q5rr"]
-radius = 105.7
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsnee"]
 bg_color = Color(0.168627, 0.0431373, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1m72f"]
+bg_color = Color(0.403922, 0.92549, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1q5rr"]
+radius = 105.7
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3p3pe"]
-bg_color = Color(0.72549, 1, 0.784314, 1)
+bg_color = Color(0.988235, 1, 0.784314, 1)
 
 [node name="Enemy Tank" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(1.5, 1.5)
@@ -73,9 +76,20 @@ scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_feq2d")
 metadata/_edit_lock_ = true
 
-[node name="Barrier" type="Area2D" parent="."]
+[node name="Barrier" type="Area2D" parent="." groups=["barrier"]]
 z_index = 4
 script = ExtResource("3_a724s")
+
+[node name="BarrierHealthBar" type="ProgressBar" parent="Barrier"]
+offset_left = -19.0
+offset_top = -30.0
+offset_right = 19.0
+offset_bottom = -25.0
+theme_override_styles/background = SubResource("StyleBoxFlat_xsnee")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1m72f")
+value = 50.0
+show_percentage = false
+script = ExtResource("4_3mtcv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
 shape = SubResource("CircleShape2D_1q5rr")

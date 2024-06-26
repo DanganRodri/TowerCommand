@@ -231,7 +231,7 @@ unique_name_in_owner = true
 position = Vector2(318, 176)
 
 [node name="Turret2" parent="Turrets" instance=ExtResource("14_cdrpe")]
-position = Vector2(558, 370)
+position = Vector2(403, 370)
 
 [node name="Turret3" parent="Turrets" instance=ExtResource("14_cdrpe")]
 position = Vector2(537, 176)
@@ -243,7 +243,13 @@ position = Vector2(166, 371)
 position = Vector2(89, 176)
 
 [node name="Turret6" parent="Turrets" instance=ExtResource("14_cdrpe")]
-position = Vector2(780, 271)
+position = Vector2(780, 176)
+
+[node name="Turret7" parent="Turrets" instance=ExtResource("14_cdrpe")]
+position = Vector2(780, 367)
+
+[node name="Turret8" parent="Turrets" instance=ExtResource("14_cdrpe")]
+position = Vector2(1002, 367)
 
 [node name="SpawnPoints" type="Node" parent="."]
 script = ExtResource("12_y8whl")

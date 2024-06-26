@@ -2,7 +2,7 @@ extends Turret
 
 class_name AoeTurret
 
-var explosion_radius : float = 100.0
+var explosion_radius : float = 50.0
 
 func _ready():
 	atk = 10
@@ -32,7 +32,7 @@ func area_hit():
 	
 	for enemy in result:
 		if enemy.collider and enemy.collider.is_in_group("enemy"):
-			enemy.collider.on_hit(atk, self.def_pen)
+			enemy.collider.on_hit(atk * GameData.stat_bonus["atk_aoe"], self.def_pen)
 	
 	
 	

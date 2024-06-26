@@ -13,7 +13,7 @@ var weapon_type = {
 var atk_speed = 0.1
 var is_ready : bool = true
 var type = weapon_type.AR
-var damage = 4
+var atk = 4
 
 
 const ar_cursor = ""
@@ -31,23 +31,29 @@ func shoot():
 		var game = get_parent()
 		var enemies = game.get_all_enemies()
 		var tanks = game.get_tank_enemies()
-		var speedies = game.get_speedy_enemies()
+		var shields = get_tree().get_nodes_in_group("shield")
 		var mouse_position = get_global_mouse_position()
 		
-		for speedie in speedies:
-			var shields = speedie.get_child(2)
-			for shield in shields.get_children():
-				if shield is Shield and shield.disabled == false:
-					var colliderSize = shield.get_shape().get_rect().size
-					if collidesWithPoint(mouse_position, shield.position + speedie.position, colliderSize):
-						shield.hitted = true
-						return
+		var barriers = get_tree().get_nodes_in_group("barrier")
+		
+		for barrier in barriers:
+			var barrier_col = barrier.get_node("CollisionShape2D")
+			var colliderSize = barrier_col.get_shape().get_rect().size
+			if collidesWithPoint(mouse_position, barrier.global_position, colliderSize):
+				barrier.on_hit(self.atk)
+				return
+		
+		for shield in shields:
+			var colliderSize = shield.get_shape().get_rect().size
+			if collidesWithPoint(mouse_position, shield.global_position, colliderSize):
+				shield.on_hit(atk)
+				return
 		
 		for enemy in enemies:
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
 			if collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
-				enemy.on_hit(self.damage, 0)
+				enemy.on_hit(self.atk, 0)
 				break
 			
 

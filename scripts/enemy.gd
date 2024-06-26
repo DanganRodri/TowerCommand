@@ -14,21 +14,26 @@ var base_speed : float = speed
 var maxSpeed : int = 150
 var color : Color = Color()
 var damage_timer : Timer
+var gold : int = 10
+
+#Status effects
 var damaged : bool = false
 var inmune : bool = false
-var gold : int = 10
 var slowed : bool = false
 var freezed : bool = false
 var burned : bool = false
 var poisoned : bool = false
 var poison_staks : int = 0
 var weakened : bool = false
-var protected : Barrier = null
+var stunned : bool = false
+var stealth : bool = false
+var protected : Array[Barrier] = []
 
 var slow_timer : Timer
 var poison_timer : Timer
 var poison_dot : Timer
 var freeze_timer : Timer
+var stun_timer : Timer
 var burn_timer : Timer
 var burn_dot : Timer
 
@@ -63,6 +68,12 @@ func _ready():
 	freeze_timer.one_shot = true
 	freeze_timer.connect("timeout", Callable(self, "_on_freeze_timer_timeout"))
 	add_child(freeze_timer)
+	
+	stun_timer = Timer.new()
+	stun_timer.wait_time = GameData.BASE_STUN_DURATION
+	stun_timer.one_shot = true
+	stun_timer.connect("timeout", Callable(self, "_on_stun_timer_timeout"))
+	add_child(stun_timer)
 	
 	burn_timer = Timer.new()
 	burn_timer.wait_time = 0.75
@@ -104,8 +115,8 @@ func on_hit(damage, def_pen):
 		
 	damage = damage * GameData.Challenges["EnemyDamageTaken"]
 	
-	if protected != null:
-		protected.on_hit(damage)
+	if not protected.is_empty():
+		protected[0].on_hit(damage)
 		return
 	
 	damaged = true
@@ -129,6 +140,15 @@ func status_effect(effect,duration,value):
 			self.speed = 0
 			self.sprite.stop()
 			freezed = true
+			
+		"stun":
+			stun_timer.wait_time = duration
+			stun_timer.start()
+			self.speed = 0
+			self.sprite.stop()
+			stunned = true
+			self.inmune = false
+			self.stealth = false
 		
 		"poison":
 			poison_timer.wait_time = duration
@@ -153,20 +173,26 @@ func on_destroy():
 	self.queue_free()
 	
 func apply_color_filter():
+	if self.inmune:
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["INMUNE_COLOR"]
+		return
 	if self.damaged:
-		sprite.modulate = Color(1, 0, 0) # Rojo
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["DAMAGED_COLOR"]
+		return
+	if self.stunned:
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["STUN_COLOR"]
 		return
 	if self.poisoned:
-		sprite.modulate = Color(0.01300281099975, 0.62915825843811, 0) # Verde
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["POISONED_COLOR"]
 		return
 	if self.freezed:
-		sprite.modulate = Color(0, 0.17647059261799, 0.60392159223557) # Azul oscuro
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["FREEZED_COLOR"]
 		return
 	if self.slowed:
-		sprite.modulate = Color(0.4, 0.83, 1) # Azul claro
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["SLOWED_COLOR"]
 		return
 	if self.burned:
-		sprite.modulate = Color(0.85827624797821, 0.42022228240967, 0.10299212485552) # Naranja
+		sprite.modulate = GameData.COLOR_DATA["STATUS"]["BURNED_COLOR"]
 		return
 
 func get_target():
@@ -209,6 +235,12 @@ func _on_freeze_timer_timeout():
 	sprite.modulate = color
 	self.sprite.play("run")
 	freezed = false
+
+func _on_stun_timer_timeout():
+	self.speed = base_speed
+	sprite.modulate = color
+	self.sprite.play("run")
+	stunned = false
 
 func _on_burn_timer_timeout():
 	self.burned = false
