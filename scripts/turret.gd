@@ -115,7 +115,7 @@ func apply_attack():
 	reload_timer.start()
 
 func _on_range_body_entered(body):
-	if body is CharacterBody2D and not body.inmune:
+	if body is CharacterBody2D and not body.stealth:
 		enemy_in_sight.append(body)
 
 func _on_range_body_exited(body):

@@ -35,6 +35,7 @@ bg_color = Color(0.72549, 1, 0.784314, 1)
 [node name="Enemy Jammer" type="CharacterBody2D" groups=["enemy"]]
 z_index = 2
 position = Vector2(49, 79)
+collision_layer = 4
 script = ExtResource("1_0tp46")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

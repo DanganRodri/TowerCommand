@@ -107,11 +107,17 @@ func get_route():
 
 func on_hit(damage, def_pen):
 	
+	if self.inmune:
+		return
+	
 	def_pen = min(def_pen, 100.0)
 	damage = damage - (def * ( 1.0 - def_pen / 100.0 ))
 	
 	if weakened:
-		damage *= GameData.stat_bonus["weakened_value"]
+		if self.type == "Boss":
+			damage *= (GameData.stat_bonus["weakened_value"] / 2 )
+		else:
+			damage *= GameData.stat_bonus["weakened_value"]
 		
 	damage = damage * GameData.Challenges["EnemyDamageTaken"]
 	
@@ -126,6 +132,10 @@ func on_hit(damage, def_pen):
 		on_destroy()
 
 func status_effect(effect,duration,value):
+	
+	if self.inmune:
+		return
+	
 	match effect:
 		"slow":
 			slow_timer.wait_time = duration * GameData.stat_bonus["slow_duration"]
@@ -135,6 +145,8 @@ func status_effect(effect,duration,value):
 				slowed = true
 		
 		"freeze":
+			if self.type == "Boss":
+				return
 			freeze_timer.wait_time = duration
 			freeze_timer.start()
 			self.speed = 0
@@ -156,7 +168,11 @@ func status_effect(effect,duration,value):
 			if not self.poisoned:
 				poison_dot.start()
 			self.poisoned = true
-			self.poison_staks += value * GameData.stat_bonus["poison_dot"]
+			if self.type == "Boss":
+				self.poison_staks += min(value * GameData.stat_bonus["poison_dot"], GameData.MAX_BOSS_POISON_STAKS)
+			else:
+				self.poison_staks += value * GameData.stat_bonus["poison_dot"]
+				
 		"weaken":
 			self.weakened = true
 		
@@ -178,6 +194,9 @@ func apply_color_filter():
 		return
 	if self.damaged:
 		sprite.modulate = GameData.COLOR_DATA["STATUS"]["DAMAGED_COLOR"]
+		return
+	if self.stealth:
+		sprite.modulate = Color(color,0.65)
 		return
 	if self.stunned:
 		sprite.modulate = GameData.COLOR_DATA["STATUS"]["STUN_COLOR"]

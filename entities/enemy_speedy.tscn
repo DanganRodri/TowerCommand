@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://bspya0gqnth8i"]
+
+[ext_resource type="Script" path="res://scripts/enemy_speedy.gd" id="1_134ac"]
+[ext_resource type="Texture2D" uid="uid://cnajt5v1l3ycf" path="res://assets/sprites/speedy_enemy-sheet.png" id="2_kxo23"]
+[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="3_meph7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_466q8"]
+atlas = ExtResource("2_kxo23")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4upad"]
+atlas = ExtResource("2_kxo23")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhsoo"]
+atlas = ExtResource("2_kxo23")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jheip"]
+atlas = ExtResource("2_kxo23")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qcpc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_466q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4upad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhsoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jheip")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
+size = Vector2(43, 42)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4l2k"]
+bg_color = Color(0.168627, 0.0431373, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqoct"]
+bg_color = Color(0.72549, 1, 0.784314, 1)
+
+[node name="Enemy Speedy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_134ac")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+scale = Vector2(1.3125, 1.3125)
+sprite_frames = SubResource("SpriteFrames_0qcpc")
+animation = &"run"
+autoplay = "run"
+frame_progress = 0.504383
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_feq2d")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -19.0
+offset_top = -22.0
+offset_right = 19.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_w4l2k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fqoct")
+value = 50.0
+show_percentage = false
+script = ExtResource("3_meph7")

@@ -21,6 +21,7 @@ const BASE_BURN_DOT = 0.5
 const BASE_POISON = 2
 const BASE_POISON_DURATION = 3
 const BASE_POISON_DOT = 1
+const MAX_BOSS_POISON_STAKS = 3
 var poison_splash : bool = false
 
 const SKILL_OFFSET = Vector2(40,-6)
