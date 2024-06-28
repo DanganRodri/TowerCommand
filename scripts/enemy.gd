@@ -168,6 +168,7 @@ func status_effect(effect,duration,value):
 			if not self.poisoned:
 				poison_dot.start()
 			self.poisoned = true
+			self.weakened = true
 			if self.type == "Boss":
 				self.poison_staks += min(value * GameData.stat_bonus["poison_dot"], GameData.MAX_BOSS_POISON_STAKS)
 			else:

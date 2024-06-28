@@ -4,6 +4,7 @@ class_name DoubleDpsTurret
 
 @onready var skill = $Skill/Skill
 var second_target : Enemy
+var bullet = preload("res://entities/bullet.tscn")
 
 func _ready():
 	atk = 12 
@@ -39,7 +40,7 @@ func select_enemy():
 	
 func select_second_enemy():
 	
-	if enemy_in_sight.is_empty() and target != null:
+	if enemy_in_sight.size() == 1 and target != null:
 		second_target = target
 		return
 		
@@ -49,10 +50,24 @@ func select_second_enemy():
 func apply_attack():
 	reloading = true
 	if target != null:
-		target.on_hit(atk * GameData.stat_bonus["atk_dps"], def_pen * GameData.stat_bonus["def_pen_dps"])
+		var new_bullet : Bullet = bullet.instantiate()
+		get_node("Bullets").add_child(new_bullet)
+		new_bullet.global_position = self.global_position
+		new_bullet.target = self.target
+		new_bullet.target_pos = self.target.global_position
+		new_bullet.atk = atk * GameData.stat_bonus["atk_dps"]
+		new_bullet.def_pen = def_pen * GameData.stat_bonus["def_pen_dps"]
+		#target.on_hit(atk * GameData.stat_bonus["atk_dps"], def_pen * GameData.stat_bonus["def_pen_dps"])
 		
 	if second_target != null:
-		second_target.on_hit(atk, def_pen)
+		var new_bullet : Bullet = bullet.instantiate()
+		get_node("Bullets").add_child(new_bullet)
+		new_bullet.global_position = self.global_position
+		new_bullet.target = self.second_target
+		new_bullet.target_pos = self.second_target.global_position
+		new_bullet.atk = atk * GameData.stat_bonus["atk_dps"]
+		new_bullet.def_pen = def_pen * GameData.stat_bonus["def_pen_dps"]
+		#second_target.on_hit(atk, def_pen)
 	reload_timer.start()
 
 func _on_skill_pressed():

@@ -7,6 +7,7 @@ var charge : int = 1
 var charge_unlocked : bool = false
 var explosion_radius_upgrade = false
 var stun_upgrade = false
+var bullet = preload("res://entities/bullet.tscn")
 
 func _ready():
 	atk = 20
@@ -55,8 +56,25 @@ func apply_attack():
 			self.explosion_radius += 25.0
 		def_pen_difference = 100.0 - self.def_pen
 		self.def_pen = 100.0
-		
-	area_hit()
+	
+	var new_bullet : Bullet = bullet.instantiate()
+	get_node("Bullets").add_child(new_bullet)
+	new_bullet.scale *= 1.2
+	new_bullet.global_position = self.global_position
+	new_bullet.target = self.target
+	new_bullet.target_pos = self.target.global_position
+	new_bullet.atk = atk * GameData.stat_bonus["atk_sniper"]
+	new_bullet.def_pen = def_pen * GameData.stat_bonus["def_pen_sniper"]
+	new_bullet.on_area = true
+	new_bullet.explosion_radius = explosion_radius
+	
+	if charge == 3 and stun_upgrade:
+		new_bullet.modulate = GameData.COLOR_DATA["STATUS"]["STUN_COLOR"]
+		new_bullet.scale *= 2
+		new_bullet.status_effect = "stun"
+		new_bullet.status_duration = GameData.BASE_STUN_DURATION
+		new_bullet.status_value = 0
+	#area_hit()
 	
 	if charge_unlocked and charge == 3:
 		self.atk /= 2

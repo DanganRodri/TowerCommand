@@ -209,6 +209,8 @@ tint_progress = Color(0.67451, 0, 0.156863, 1)
 wait_time = 10.0
 one_shot = true
 
+[node name="Bullets" type="Node" parent="."]
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

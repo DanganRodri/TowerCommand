@@ -22,7 +22,7 @@ func set_effect(upgrade : UpgradeNode):
 			upgrade.description = "Enemies poisoned are weakened, increasing the damage they take from turrets."
 		UpgradeNode.Effect.DoubleDps:
 			upgrade.effect = double_dps
-			upgrade.description = "Transforms all dps turrets into double dps turrets that deal damage up to two targets." + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be double dps turrets)"
+			upgrade.description = "Transforms all dps turrets into double dps turrets that deal damage up to two targets. (If there is only one target it will take twice as damage)" + "\n\n" + "Base stats increased." + "\n\n" + "(All the dps turrets builded for the rest of the game will be double dps turrets)"
 		UpgradeNode.Effect.DpsSkill:
 			upgrade.effect = dps_skill
 			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Creates an area on the designated location where will be damaged over time."
