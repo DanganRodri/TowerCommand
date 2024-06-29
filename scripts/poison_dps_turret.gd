@@ -12,7 +12,10 @@ func _ready():
 	def_pen = 9
 	range = 175.0
 	attack_frame = 4
-	splash = GameData.poison_splash
+	if GameData.stat_bonus["poison_splash"] > 1:
+		splash = true
+	else:
+		splash = false
 	super._ready()
 
 

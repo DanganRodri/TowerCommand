@@ -23,10 +23,6 @@ func _ready():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _process(delta):
-	
-	if Input.is_action_just_released("esc"):
-		get_tree().quit()
-	
 	enemies = []
 	basics = []
 	tanks = []
@@ -51,8 +47,8 @@ func _process(delta):
 	
 
 func get_all_enemies():
-	#if enemies.size() == 0 and spawnManager.last_wave:
-		#get_tree().change_scene_to_file("res://select_weapon.tscn")
+	if enemies.size() == 0 and spawnManager.last_wave:
+		get_tree().change_scene_to_file("res://scenes/menu_handler.tscn")
 	
 	return enemies
 

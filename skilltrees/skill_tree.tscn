@@ -66,6 +66,7 @@ corner_radius_bottom_left = 9
 texture = ExtResource("1_r3b73")
 
 [node name="UpgradeTree" type="Panel"]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,12 +77,14 @@ script = ExtResource("1_71stc")
 
 [node name="UpgradeEffects" type="Control" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("3_vicqi")
 
 [node name="IceSkills" parent="." groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 visible = false
 layout_mode = 1
 offset_left = 41.0
@@ -160,6 +163,7 @@ max_level = 2
 effect_id = 1
 
 [node name="DpsSkills" parent="." groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 visible = false
 layout_mode = 1
 offset_left = 41.0
@@ -169,6 +173,7 @@ offset_bottom = -281.0
 effect_id = 3
 
 [node name="UpgradeButton" parent="DpsSkills" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 143.0
 offset_right = 143.0
@@ -177,6 +182,7 @@ disabled = true
 effect_id = 4
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 144.0
 offset_top = -200.0
@@ -189,6 +195,7 @@ effect_id = 5
 exclusive = true
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 160.0
 offset_top = 56.0
@@ -199,6 +206,7 @@ max_level = 2
 effect_id = 7
 
 [node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 160.0
 offset_top = -56.0
@@ -208,6 +216,7 @@ disabled = true
 effect_id = 6
 
 [node name="UpgradeButton3" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 144.0
 offset_top = 200.0
@@ -220,6 +229,7 @@ effect_id = 8
 exclusive = true
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton/UpgradeButton3" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 160.0
 offset_top = -56.0
@@ -229,6 +239,7 @@ disabled = true
 effect_id = 9
 
 [node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton3" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 layout_mode = 1
 offset_left = 160.0
 offset_top = 56.0
@@ -239,6 +250,7 @@ max_level = 2
 effect_id = 10
 
 [node name="AoeSkills" parent="." groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 visible = false
 layout_mode = 1
 offset_left = 41.0
@@ -318,6 +330,7 @@ max_level = 2
 effect_id = 25
 
 [node name="SniperSkills" parent="." groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
 visible = false
 layout_mode = 1
 offset_left = 41.0
@@ -399,6 +412,7 @@ effect_id = 25
 
 [node name="UpgradeDesc" type="TextEdit" parent="."]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -440,6 +454,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_id0oa")
 text = "<"
 
 [node name="Select Tree" type="Panel" parent="."]
+process_mode = 3
 visible = false
 visibility_layer = 16384
 z_index = 4
@@ -468,6 +483,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_sys0s")
 text = "X"
 
 [node name="PlayerTreeButton" type="TextureButton" parent="Select Tree"]
+process_mode = 3
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -482,6 +498,7 @@ grow_vertical = 2
 texture_normal = ExtResource("6_5t8cq")
 
 [node name="DpsTreeButton" type="TextureButton" parent="Select Tree"]
+process_mode = 3
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -497,6 +514,7 @@ texture_normal = ExtResource("7_flwnr")
 stretch_mode = 0
 
 [node name="AoeTreeButton" type="TextureButton" parent="Select Tree"]
+process_mode = 3
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -512,6 +530,7 @@ texture_normal = ExtResource("8_sj3w4")
 stretch_mode = 0
 
 [node name="IceTreeButton" type="TextureButton" parent="Select Tree"]
+process_mode = 3
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -527,6 +546,7 @@ texture_normal = ExtResource("9_aray4")
 stretch_mode = 0
 
 [node name="SniperTreeButton" type="TextureButton" parent="Select Tree"]
+process_mode = 3
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -542,6 +562,7 @@ texture_normal = ExtResource("10_c5yhu")
 stretch_mode = 0
 
 [node name="RichTextLabel" type="Label" parent="Select Tree"]
+process_mode = 3
 layout_mode = 0
 offset_left = 312.0
 offset_top = 40.0

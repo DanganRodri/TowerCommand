@@ -115,7 +115,7 @@ func increase_poison(_upgrade):
 		var dps_turrets = get_tree().get_nodes_in_group("dps")
 		for dps_turret in dps_turrets:
 			dps_turret.splash = true
-		GameData.poison_splash = true
+		GameData.stat_bonus["poison_splash"] += 1
 		return
 	GameData.stat_bonus["poison_dot"] += 1
 

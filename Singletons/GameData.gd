@@ -22,7 +22,6 @@ const BASE_POISON = 2
 const BASE_POISON_DURATION = 3
 const BASE_POISON_DOT = 1
 const MAX_BOSS_POISON_STAKS = 3
-var poison_splash : bool = false
 
 const SKILL_OFFSET = Vector2(40,-6)
 
@@ -64,6 +63,7 @@ var stat_bonus = {
 	"atk_dps": 1,
 	"atk_speed_dps": 1,
 	"poison_dot": 1,
+	"poison_splash": 1,
 	"weakened_value" : 1,
 	"def_pen_dps": 1,
 	"slow": 1,
@@ -108,3 +108,70 @@ var active_skills = {
 	"ice": false,
 	"sniper": false
 }
+
+
+func reset_bonuses():
+	stat_bonus = {
+		"atk": 1,
+		"atk_speed": 1,
+		"dmg": 1,
+		"range": 1,
+		"atk_dps": 1,
+		"atk_speed_dps": 1,
+		"poison_dot": 1,
+		"poison_splash": 1,
+		"weakened_value" : 1,
+		"def_pen_dps": 1,
+		"slow": 1,
+		"slow_duration": 1,
+		"freeze_cd": 1,
+		"atk_ice": 1,
+		"range_ice": 1,
+		"atk_speed_ice": 1,
+		"atk_aoe": 1,
+		"atk_speed_aoe": 1,
+		"range_aoe": 1,
+		"burn_cd": 1,
+		"burn_damage": 1,
+		"atk_speed_sniper": 1,
+		"range_sniper": 1,
+		"atk_sniper": 1,
+		"def_pen_sniper": 1
+	}
+
+	advanced_turrets = {
+		"dps": false,
+		"aoe": false,
+		"ice": false,
+		"sniper": false,
+		"double_dps": false,
+		"dps_ice": false,
+		"burning_aoe": false,
+		"global_sniper": false
+	}
+
+	pasive_skills =  {
+		"freeze": false,
+		"burn": false,
+		"charged_sniper": false,
+		"explosion_radius_upgrade": false,
+		"stun_upgrade": false
+	}
+
+	active_skills = {
+		"dps": false,
+		"aoe": false,
+		"ice": false,
+		"sniper": false
+	}
+
+func reset_challenges():
+	Challenges = { 
+		"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[0],
+		"EnemyDamageTaken": ENEMY_DAMAGE_TAKEN_LEVELS[0],
+		"TimeBetweenWaves": TIME_BETWEEN_WAVES_LEVELS[0]
+	}
+
+func full_reset():
+	reset_bonuses()
+	reset_challenges()

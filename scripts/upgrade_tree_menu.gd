@@ -2,10 +2,16 @@ extends Panel
 
 var turrets = null
 @onready var select_tree = $"Select Tree"
+@onready var game = $"../.."
+@onready var ui = $".."
+
 
 func _on_exit_pressed():
 	self.hide()
+	ui.on_upgrade_menu = false
+	ui.unpause_countdown()
 	hide_upgrade_buttons()
+	
 
 func hide_upgrade_buttons():
 	var upgrade_buttons = get_tree().get_nodes_in_group("upgradebutton")
@@ -13,8 +19,9 @@ func hide_upgrade_buttons():
 		ub.hide()
 
 func _on_open_upgrade_menu_pressed():
+	ui.on_upgrade_menu = true
 	get_tree().paused = true
-	turrets = get_tree().root.get_node("Game").get_node("Turrets")
+	turrets = game.get_node("Turrets")
 	self.show()
 	select_tree.show()
 
@@ -38,7 +45,7 @@ func show_tree(tree_group: String):
 				sub.show()
 
 func _input(event):
-	if event is InputEventKey and event.is_action_pressed("esc"):
+	if event is InputEventKey and event.is_action_pressed("Pause") and ui.on_upgrade_menu:
 		_on_exit_pressed()
 
 

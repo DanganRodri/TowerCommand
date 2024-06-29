@@ -1,8 +1,10 @@
 extends Panel
 
-
+@onready var ui = $"../.."
 
 func _on_exit_pressed():
+	ui.on_upgrade_menu = false
+	ui.unpause_countdown()
 	get_parent().hide()
 
 
