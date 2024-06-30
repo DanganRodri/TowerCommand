@@ -13,12 +13,13 @@ config_version=5
 config/name="TFG"
 run/main_scene="res://scenes/menu_handler.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/sprites/Tower.png"
 
 [autoload]
 
 GameData="*res://Singletons/GameData.gd"
 GlobalFunctions="*res://Singletons/global_functions.gd"
+AudioHandler="*res://scenes/audio_handler.tscn"
 
 [display]
 

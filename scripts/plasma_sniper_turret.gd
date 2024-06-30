@@ -39,6 +39,7 @@ func _physics_process(delta):
 
 func fire():
 	turn()
+	AudioHandler.play_SFX("res://SFX/plasma_charge.wav")
 	if charge_unlocked and charge == 3:
 		animated_sprite_2d.play("charged_shoot")
 		return
@@ -49,6 +50,7 @@ func fire():
 func apply_attack():
 	reloading = true
 	var def_pen_difference = 0
+	AudioHandler.play_SFX("res://SFX/plasma_shot.wav")
 	
 	if charge_unlocked and charge == 3:
 		self.atk *= 2
