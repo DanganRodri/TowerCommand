@@ -47,6 +47,10 @@ func show_tree(tree_group: String):
 			var sniper_upgrade_buttons = get_tree().get_nodes_in_group(tree_group)
 			for sub in sniper_upgrade_buttons:
 				sub.show()
+		"player_upgrade_button":
+			var player_upgrade_buttons = get_tree().get_nodes_in_group(tree_group)
+			for pub in player_upgrade_buttons:
+				pub.show()
 
 func _input(event):
 	if event is InputEventKey and event.is_action_pressed("Pause") and ui.on_upgrade_menu:

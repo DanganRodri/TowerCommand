@@ -410,6 +410,62 @@ disabled = true
 max_level = 2
 effect_id = 25
 
+[node name="PlayerSkills" parent="." groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
+layout_mode = 1
+offset_left = 64.0
+offset_top = 168.0
+offset_right = -1002.0
+offset_bottom = -393.0
+max_level = 1
+effect_id = 26
+
+[node name="UpgradeButton" parent="PlayerSkills" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 112.0
+offset_right = 112.0
+offset_bottom = 0.0
+disabled = true
+max_level = 1
+effect_id = 27
+
+[node name="UpgradeButton3" parent="PlayerSkills/UpgradeButton" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 112.0
+offset_right = 112.0
+offset_bottom = 0.0
+disabled = true
+max_level = 1
+effect_id = 27
+
+[node name="UpgradeButton2" parent="PlayerSkills/UpgradeButton/UpgradeButton3" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 111.0
+offset_right = 111.0
+offset_bottom = 0.0
+disabled = true
+max_level = 1
+effect_id = 27
+
+[node name="UpgradeButton3" parent="PlayerSkills/UpgradeButton/UpgradeButton3/UpgradeButton2" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
+layout_mode = 1
+offset_left = 113.0
+offset_right = 113.0
+offset_bottom = 0.0
+disabled = true
+max_level = 1
+effect_id = 27
+
+[node name="PlayerSkills2" parent="." groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
+process_mode = 3
+layout_mode = 1
+offset_left = 288.0
+offset_top = 367.0
+offset_right = -778.0
+offset_bottom = -194.0
+max_level = 15436
+effect_id = 26
+
 [node name="UpgradeDesc" type="TextEdit" parent="."]
 unique_name_in_owner = true
 process_mode = 3
@@ -419,9 +475,9 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -512.0
-offset_top = 20.0
+offset_top = 61.0
 offset_right = -35.0
-offset_bottom = -19.0
+offset_bottom = -60.0
 grow_horizontal = 0
 grow_vertical = 2
 editable = false
@@ -576,6 +632,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="Select Tree/Exit" to="Select Tree" method="_on_exit_pressed"]
+[connection signal="pressed" from="Select Tree/PlayerTreeButton" to="Select Tree" method="_on_player_tree_button_pressed"]
 [connection signal="pressed" from="Select Tree/DpsTreeButton" to="Select Tree" method="_on_dps_tree_button_pressed"]
 [connection signal="pressed" from="Select Tree/AoeTreeButton" to="Select Tree" method="_on_aoe_tree_button_pressed"]
 [connection signal="pressed" from="Select Tree/IceTreeButton" to="Select Tree" method="_on_ice_tree_button_pressed"]

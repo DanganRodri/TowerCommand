@@ -32,3 +32,9 @@ func _on_sniper_tree_button_pressed():
 	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	self.hide()
 	get_parent().show_tree("sniper_upgrade_button")
+
+
+func _on_player_tree_button_pressed():
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
+	self.hide()
+	get_parent().show_tree("player_upgrade_button")

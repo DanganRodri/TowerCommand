@@ -23,7 +23,6 @@ func _process(delta):
 	
 
 func on_menu_enter():
-	print("on menu enter")
 	on_menu = true
 
 func on_menu_exit():

@@ -185,9 +185,8 @@ func status_effect(effect,duration,value):
 			self.burned = true
 
 func on_destroy():
-	var game = get_parent()
 	AudioHandler.play_SFX("res://SFX/478328__joao_janz__8-bit-gun-2_4.wav")
-	game.gold = min(GameData.MAX_GOLD, game.gold + (self.gold * GameData.Challenges["GoldGainPercentage"]) )
+	GameData.gold = min(GameData.MAX_GOLD, GameData.gold + (self.gold * GameData.Challenges["GoldGainPercentage"]) )
 	self.queue_free()
 	
 func apply_color_filter():

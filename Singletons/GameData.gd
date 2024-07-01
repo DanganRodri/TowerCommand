@@ -49,6 +49,8 @@ const COLOR_DATA = {
 	}
 }
 
+var gold : int = MAX_GOLD
+
 var Challenges = { 
 	"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[0],
 	"EnemyDamageTaken": ENEMY_DAMAGE_TAKEN_LEVELS[0],
@@ -80,7 +82,8 @@ var stat_bonus = {
 	"atk_speed_sniper": 1,
 	"range_sniper": 1,
 	"atk_sniper": 1,
-	"def_pen_sniper": 1
+	"def_pen_sniper": 1,
+	"gold_gain": 1
 }
 
 var advanced_turrets = {

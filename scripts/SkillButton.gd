@@ -42,27 +42,33 @@ enum Effect {
 @onready var upgrade_effects = %UpgradeEffects
 @onready var desc = %UpgradeDesc
 
+
 @export var max_level : int = 3
 @export var effect_id : Effect
+@export var cost : int = 250
 @export var exclusive : bool = false
+
 
 var effect : Callable = test
 var selected : bool = false
 var base_color : Color = self.modulate
 var description : String = "ERROR: no desc availible."
 
+
 var level : int = 0:
 	set(value):
 		level = value
 		if max_level > 1:
 			label.text = str(level) + "/" + str(max_level)
-	
+		if max_level == 15436:
+			label.text = "Lvl " + str(level + 1)
 
 func _ready():
 	upgrade_effects.set_effect(self)
-	
 	if max_level > 1:
 		label.text = str(level) + "/" + str(max_level)
+	if max_level == 15436:
+		label.text = "Lvl " + str(level + 1)
 	if get_parent() is UpgradeNode:
 		line_2d.add_point(global_position + size/2)
 		line_2d.add_point(get_parent().global_position + size/2)
@@ -87,8 +93,14 @@ func _on_pressed():
 		return
 	
 	else:
+			
 		if level == max_level:
 			return
+		
+		if cost > GameData.gold:
+			return
+		
+		GameData.gold -= cost
 		
 		level = min(level + 1, max_level)
 		apply_effect()

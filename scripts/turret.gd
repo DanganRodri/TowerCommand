@@ -137,9 +137,8 @@ func _on_range_body_exited(body):
 	enemy_in_sight.erase(body)
 
 func _on_upgrade_pressed():
-	var root = get_parent().get_parent()
-	if root.gold >= self.cost:
-		root.gold = root.gold - self.cost
+	if GameData.gold >= self.cost:
+		GameData.gold -= self.cost
 		self.level = self.level + 1
 		self.total_cost = self.total_cost + self.cost
 		self.cost = self.cost + (self.cost * 0.6)
@@ -152,8 +151,7 @@ func _on_upgrade_pressed():
 		show()
 
 func _on_discard_pressed():
-	var root = get_parent().get_parent()
-	root.gold = root.gold + (self.total_cost * 0.75)
+	GameData.gold = min(GameData.MAX_GOLD , GameData.gold + (self.total_cost * 0.75))
 	var new_turret = load("res://entities/turret.tscn").instantiate()
 	var root_node = get_parent().get_parent()
 	root_node.get_node("Turrets").add_child(new_turret)

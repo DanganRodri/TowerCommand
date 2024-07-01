@@ -31,7 +31,7 @@ func _process(delta):
 	speedies = []
 	var childs = get_children()
 	
-	goldLabel.gold = self.gold
+	#GameData.gold = self.gold
 	
 	for node in childs:
 		if node is CharacterBody2D:
