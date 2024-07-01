@@ -26,7 +26,7 @@ func _input(event):
 		return
 
 func _on_fastforward_button_pressed():
-	
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	if Engine.get_time_scale() == GameData.SLOWMOTION:
 		return
 	
@@ -48,6 +48,8 @@ func unpause_countdown():
 	countdown.show()
 
 func _on_pause_button_pressed():
+	CursorManager.on_menu_enter()
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	if get_tree().is_paused():
 		if not on_unpause:
 			unpause_countdown()
@@ -57,6 +59,7 @@ func _on_pause_button_pressed():
 
 
 func _on_exit_button_pressed():
+	CursorManager.on_menu_exit()
 	if get_tree().is_paused():
 		get_tree().paused = false
 	
@@ -66,10 +69,13 @@ func _on_exit_button_pressed():
 
 
 func _on_continue_button_pressed():
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	_on_pause_button_pressed()
 
 
 func _on_restart_button_pressed():
+	CursorManager.on_menu_exit()
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	var rootNode = get_tree().root.get_node("SceneHandler")
 	
 	if get_tree().is_paused():
@@ -85,6 +91,7 @@ func _on_restart_button_pressed():
 
 
 func _on_unpause_timer_timeout():
+	CursorManager.on_menu_exit()
 	on_unpause = false
 	back_ground.show()
 	countdown.hide()

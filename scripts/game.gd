@@ -1,6 +1,7 @@
 extends Node
 
 @onready var goldLabel = %Gold
+var crosshair_cursor = preload("res://assets/HUD/cursor_big.png")
 
 var main = null
 var enemies = []
@@ -18,6 +19,7 @@ var level_parameters := {
 }
 
 func _ready():
+	#Input.set_custom_mouse_cursor(crosshair_cursor, Input.CURSOR_ARROW, Vector2(24.5, 24.5))
 	main = get_tree().get_root()
 	spawnManager = get_node("SpawnPoints")
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

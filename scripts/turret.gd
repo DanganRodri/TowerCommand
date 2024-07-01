@@ -3,6 +3,9 @@ extends StaticBody2D
 class_name Turret
 @onready var animated_sprite_2d = $AnimatedSprite2D
 var color : Color = Color()
+
+var cursor = preload("res://assets/HUD/arrow_cursor.png")
+var crosshair_cursor = preload("res://assets/HUD/cursor_big.png")
 #Stats of the tower
 
 var map_node
@@ -69,6 +72,17 @@ func _draw():
 		radius -= 4.5
 		color = GameData.COLOR_DATA["RANGE"]["TURRET_RANGE_COLOR"]
 		draw_circle(center, radius, color)
+
+
+func mouse_hover():
+	var mouse_position = get_global_mouse_position()
+	var colliderSize = self.get_node("CollisionShape2D").get_shape().get_rect().size
+	
+	if GlobalFunctions.collidesWithPoint(mouse_position, self.global_position, colliderSize):
+		Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(0, 0))
+		CursorManager.hover_cursor = true
+	else:
+		Input.set_custom_mouse_cursor(crosshair_cursor, Input.CURSOR_ARROW, Vector2(0, 0))
 
 func _process(delta):
 	if not self is BlankTurret:

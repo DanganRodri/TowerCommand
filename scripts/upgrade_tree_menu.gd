@@ -7,6 +7,8 @@ var turrets = null
 
 
 func _on_exit_pressed():
+	CursorManager.on_menu_exit()
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	self.hide()
 	ui.on_upgrade_menu = false
 	ui.unpause_countdown()
@@ -19,6 +21,8 @@ func hide_upgrade_buttons():
 		ub.hide()
 
 func _on_open_upgrade_menu_pressed():
+	CursorManager.on_menu_enter()
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	ui.on_upgrade_menu = true
 	get_tree().paused = true
 	turrets = game.get_node("Turrets")
@@ -50,5 +54,6 @@ func _input(event):
 
 
 func _on_return_pressed():
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	select_tree.show()
 	hide_upgrade_buttons()

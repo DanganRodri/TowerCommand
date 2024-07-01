@@ -71,7 +71,7 @@ func _ready():
 		
 		
 func _on_pressed():
-	
+	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	if selected == false:
 		var upgradebuttons = get_tree().get_nodes_in_group("upgradebutton")
 		

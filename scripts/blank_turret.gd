@@ -23,6 +23,8 @@ func _process(delta):
 		aoe.icon = load("res://assets/sprites/burning_aoe_turret.png")
 	if GameData.advanced_turrets["sniper"]:
 		sniper.icon = load("res://assets/sprites/plasma_turret.png")
+	
+	super._process(delta)
 		
 func _on_dps_pressed():
 	

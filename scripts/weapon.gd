@@ -2,7 +2,8 @@ extends Node2D
 
 class_name Weapon
 
-@onready var timer = get_child(0)
+@onready var timer = get_node("PrimaryCooldown")
+@onready var sprite_timer = $SpriteTimer
 
 var weapon_type = {
 	"AR": 0,
@@ -16,18 +17,18 @@ var type = weapon_type.AR
 var atk = 4
 
 
-const ar_cursor = ""
+const cursor = preload("res://assets/HUD/cursor_big.png")
+const shoting_cursor = preload("res://assets/HUD/cursor_big_shoting.png")
 
 func _ready():
 	timer.wait_time = atk_speed
+	sprite_timer.wait_time = atk_speed / 3
 
-func _process(delta):
+func _process(delta):	
 	shoot()
 
 func shoot():
 	if Input.is_action_pressed("left_click") and is_ready:
-		is_ready = false
-		timer.start()
 		var game = get_parent()
 		var enemies = game.get_all_enemies()
 		var tanks = game.get_tank_enemies()
@@ -39,31 +40,38 @@ func shoot():
 		for barrier in barriers:
 			var barrier_col = barrier.get_node("CollisionShape2D")
 			var colliderSize = barrier_col.get_shape().get_rect().size
-			if collidesWithPoint(mouse_position, barrier.global_position, colliderSize):
+			if GlobalFunctions.collidesWithPoint(mouse_position, barrier.global_position, colliderSize):
 				barrier.on_hit(self.atk)
+				is_ready = false
+				timer.start()
+				sprite_timer.start()
+				Input.set_custom_mouse_cursor(shoting_cursor,Input.CURSOR_ARROW,Vector2(26.5, 26.5))
 				return
 		
 		for shield in shields:
 			var colliderSize = shield.get_shape().get_rect().size
-			if collidesWithPoint(mouse_position, shield.global_position, colliderSize):
+			if GlobalFunctions.collidesWithPoint(mouse_position, shield.global_position, colliderSize):
 				shield.on_hit(atk)
+				is_ready = false
+				timer.start()
+				sprite_timer.start()
+				Input.set_custom_mouse_cursor(shoting_cursor,Input.CURSOR_ARROW,Vector2(26.5, 26.5))
 				return
 		
 		for enemy in enemies:
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
-			if collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
+			if GlobalFunctions.collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
 				enemy.on_hit(self.atk, 0)
+				is_ready = false
+				timer.start()
+				sprite_timer.start()
+				Input.set_custom_mouse_cursor(shoting_cursor,Input.CURSOR_ARROW,Vector2(26.5, 26.5))
 				break
-			
-
-func collidesWithPoint(point, pos, size):
-	
-	if point.x >= pos.x - size[0]/2 and point.x <= pos.x + size[0]/2: # la posición del personaje está centrica al objeto, no en la esquina superior izquierda
-		if point.y >= pos.y - size[1]/2 and point.y <= pos.y + size[1]/2:
-			return true
-	
-	return false
 
 func _on_primary_cooldown_timeout():
 	is_ready = true
+
+
+func _on_sprite_timer_timeout():
+	Input.set_custom_mouse_cursor(cursor,Input.CURSOR_ARROW,Vector2(24.5, 24.5))

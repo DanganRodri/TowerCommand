@@ -9,4 +9,8 @@ script = ExtResource("1_3yq32")
 [node name="PrimaryCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="SpriteTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="PrimaryCooldown" to="." method="_on_primary_cooldown_timeout"]
+[connection signal="timeout" from="SpriteTimer" to="." method="_on_sprite_timer_timeout"]

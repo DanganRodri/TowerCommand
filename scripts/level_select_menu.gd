@@ -3,7 +3,6 @@ extends Control
 @onready var level_selector = $LevelSelector
 @onready var level_settings = $LevelSettings
 
-
 func _on_play_button_pressed():
 	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
 	var sliders = get_tree().get_nodes_in_group("challenge_slider")
@@ -13,6 +12,7 @@ func _on_play_button_pressed():
 	
 	var game_scene = load("res://scenes/game.tscn").instantiate()
 	AudioHandler.play_song("res://music/MainTheme.mp3")
+	CursorManager.on_menu_exit()
 	get_parent().add_child(game_scene)
 	queue_free()
 
