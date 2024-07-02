@@ -21,6 +21,7 @@ GameData="*res://Singletons/GameData.gd"
 GlobalFunctions="*res://Singletons/global_functions.gd"
 AudioHandler="*res://scenes/audio_handler.tscn"
 CursorManager="*res://Singletons/CursorManager.gd"
+WaveData="*res://Singletons/WaveData.gd"
 
 [display]
 
