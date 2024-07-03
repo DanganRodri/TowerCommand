@@ -49,18 +49,22 @@ func spawn_enemy():
 	var height = shape.extents.y
 	enemy.position = spawnPoint.position
 	enemy.position[1] -= height / 2
-	spawnPoint.get_parent().get_parent().add_child(enemy) #ajustarlo
+	spawnPoint.get_parent().get_parent().add_child(enemy)
 	
 	if enemyList.size() > 1:
 		var next_enemy = instantiateEnemy(enemyList[1])
-		var next_collision = next_enemy.get_node("CollisionShape2D")
-		var next_shape = next_collision.shape
-		var long = next_shape.extents.x
-		var interval_size_multiplier = abs((long - basic_size) / basic_size)
-		basic_size = long
-		next_enemy.queue_free()
-		spawnDelay.wait_time = GameData.SPAWN_INTERVAL_BASE * (1.1 + interval_size_multiplier)
-		spawnDelay.start()
+		if not next_enemy is Jammer:
+			var next_collision = next_enemy.get_node("CollisionShape2D")
+			var next_shape = next_collision.shape
+			var long = next_shape.extents.x
+			var interval_size_multiplier = abs((long - basic_size) / basic_size)
+			basic_size = long
+			next_enemy.queue_free()
+			spawnDelay.wait_time = GameData.SPAWN_INTERVAL_BASE * (1.1 + interval_size_multiplier)
+			spawnDelay.start()
+		else:
+			spawnDelay.wait_time = GameData.SPAWN_INTERVAL_BASE
+			spawnDelay.start()
 	else:
 		spawnDelay.wait_time = GameData.SPAWN_INTERVAL_BASE
 		spawnDelay.start()

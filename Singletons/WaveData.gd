@@ -18,3 +18,12 @@ const LEVEL1 = {
 		"SpawnPoint": 1
 	},
 }
+
+
+var enemy_probabilities = {
+	"basic": 100,
+	"tank": 0,
+	"jammer": 0,
+	"speedy": 0,
+	"stealth": 0,
+}

@@ -1,5 +1,7 @@
 extends Node
 
+var level : String
+
 const MAX_GOLD = 99999
 const FASTFORWARD_STAGES = [1.0, 1.5, 2.0]
 var fastforward_actual_stage = 0
@@ -35,7 +37,7 @@ const COLOR_DATA = {
 	"RANGE": {
 		"TURRET_RANGE_BORDER_COLOR": Color(0.00001665323907, 0.81538951396942, 0.20047631859779, 0.76862746477127),
 		"TURRET_RANGE_COLOR": Color(1, 1, 1, 0.10000000149012),
-		"BARRIER_RANGE_BORDER_COLOR": Color(0, 0.5686274766922, 1, 0.76862746477127),
+		"BARRIER_RANGE_BORDER_COLOR": Color(0, 0.5686274766922, 1, 0.3),
 		"BARRIER_RANGE_COLOR": Color(0, 0, 0, 0.1)
 	},
 	"STATUS": {
@@ -54,7 +56,8 @@ var gold : int = MAX_GOLD
 var Challenges = { 
 	"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[0],
 	"EnemyDamageTaken": ENEMY_DAMAGE_TAKEN_LEVELS[0],
-	"TimeBetweenWaves": TIME_BETWEEN_WAVES_LEVELS[0]
+	"TimeBetweenWaves": TIME_BETWEEN_WAVES_LEVELS[0],
+	"Endless": false
 }
 
 var stat_bonus = {
@@ -172,7 +175,8 @@ func reset_challenges():
 	Challenges = { 
 		"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[0],
 		"EnemyDamageTaken": ENEMY_DAMAGE_TAKEN_LEVELS[0],
-		"TimeBetweenWaves": TIME_BETWEEN_WAVES_LEVELS[0]
+		"TimeBetweenWaves": TIME_BETWEEN_WAVES_LEVELS[0],
+		"Endless": false
 	}
 
 func full_reset():
