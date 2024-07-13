@@ -26,4 +26,29 @@ var enemy_probabilities = {
 	"jammer": 0,
 	"speedy": 0,
 	"stealth": 0,
+	"basicL": 0,
+	"speedyL": 0,
+	"stealthL": 0,
+}
+
+var increase_enemy_probabilities = {
+	"basic": 0,
+	"tank": 0,
+	"jammer": 2,
+	"speedy": 40,
+	"stealth": 20,
+	"basicL": 15,
+	"speedyL": 10,
+	"stealthL": 4,
+}
+
+var increase_enemy_probabilities_advanced = {
+	"basic": 0,
+	"tank": 10,
+	"jammer": 5,
+	"speedy": 0,
+	"stealth": 0,
+	"basicL": 40,
+	"speedyL": 25,
+	"stealthL": 20,
 }

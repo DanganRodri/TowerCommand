@@ -1,23 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://8j8cbbred0na"]
+[gd_scene load_steps=12 format=3 uid="uid://covlxrethcro2"]
 
-[ext_resource type="Script" path="res://scripts/enemy_stealth.gd" id="1_7yrgf"]
-[ext_resource type="Texture2D" uid="uid://ceaqfe862tbku" path="res://assets/sprites/stealth_enemy_sheet.png" id="2_itwxt"]
-[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="3_h0c4h"]
+[ext_resource type="Script" path="res://scripts/enemy_stealth_lord.gd" id="1_xjsj8"]
+[ext_resource type="Texture2D" uid="uid://ceaqfe862tbku" path="res://assets/sprites/stealth_enemy_sheet.png" id="2_jtxsi"]
+[ext_resource type="Script" path="res://scripts/HealthBar.gd" id="3_x300r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_weo2m"]
-atlas = ExtResource("2_itwxt")
+atlas = ExtResource("2_jtxsi")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onb6g"]
-atlas = ExtResource("2_itwxt")
+atlas = ExtResource("2_jtxsi")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_br3m1"]
-atlas = ExtResource("2_itwxt")
+atlas = ExtResource("2_jtxsi")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ch5b7"]
-atlas = ExtResource("2_itwxt")
+atlas = ExtResource("2_jtxsi")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0qcpc"]
@@ -41,7 +41,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feq2d"]
-size = Vector2(43, 42)
+size = Vector2(53.75, 52.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w4l2k"]
 bg_color = Color(0.168627, 0.0431373, 0, 1)
@@ -49,19 +49,18 @@ bg_color = Color(0.168627, 0.0431373, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqoct"]
 bg_color = Color(0.72549, 1, 0.784314, 1)
 
-[node name="Enemy Stealth" type="CharacterBody2D" groups=["enemy"]]
-script = ExtResource("1_7yrgf")
+[node name="Enemy Stealth Lord" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_xjsj8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 4)
-scale = Vector2(1.3125, 1.3125)
+scale = Vector2(1.641, 1.641)
 sprite_frames = SubResource("SpriteFrames_0qcpc")
 animation = &"run"
 autoplay = "run"
 frame_progress = 0.618902
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_feq2d")
 
@@ -74,4 +73,4 @@ theme_override_styles/background = SubResource("StyleBoxFlat_w4l2k")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fqoct")
 value = 50.0
 show_percentage = false
-script = ExtResource("3_h0c4h")
+script = ExtResource("3_x300r")

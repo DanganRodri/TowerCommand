@@ -44,6 +44,9 @@ func area_hit():
 	for enemy in result:
 		if enemy.collider and enemy.collider.is_in_group("enemy"):
 			if status_effect != "poison":
-				enemy.collider.on_hit(atk, self.def_pen)
+				if not enemy.collider.stealth:
+					enemy.collider.on_hit(atk, self.def_pen)
+				else:
+					enemy.collider.on_hit(atk / 2, self.def_pen / 2)
 			if not enemy.collider.stealth:
 				enemy.collider.status_effect(status_effect,status_duration,status_value)

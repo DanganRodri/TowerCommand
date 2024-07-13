@@ -30,8 +30,7 @@ func _ready():
 		set_level(WaveData.LEVEL1)
 	
 	var totalWaves = waveList.size()
-	
-	
+
 	if GameData.Challenges["Endless"] == true:
 		waveIndicator.text = "Wave:   " + str(wave+1)
 	else:
@@ -50,7 +49,6 @@ func generate_wave():
 	
 
 func generate_enemy_list() -> Array[String]:
-	
 	var probabilities = []
 	
 	for enemy_type in WaveData.enemy_probabilities.keys():
@@ -59,27 +57,59 @@ func generate_enemy_list() -> Array[String]:
 			probabilities.append(enemy_type)
 	
 	var enemyList : Array[String] = []
-	
 	for i in wave_size:
-		enemyList.append(probabilities.pick_random())
+		if i == wave_size-1 and ((wave+1) % 5) == 0:
+			enemyList.append("boss")
+		else:
+			enemyList.append(probabilities.pick_random())
 	
 	update_probabilities()
+	
+	if (wave+1) % 5 == 0:
+		wave_size += 1
 	
 	return enemyList
 
 func update_probabilities():
-	if WaveData.enemy_probabilities["basic"] != 10:
-		var dec_amount
-		if wave == 0:
+	var dec_amount = 0
+	var enemies = []
+	var stealth_prob = WaveData.enemy_probabilities["stealth"]
+	var speedy_prob = WaveData.enemy_probabilities["speedy"]
+	
+	if WaveData.enemy_probabilities["basic"] != 20:
+		if wave == 0 or ((wave+1) % 5) == 0 and not wave == 10:
 			dec_amount = 25
 		else:
 			dec_amount = 5
+			
+		WaveData.enemy_probabilities["basic"] = max(20, WaveData.enemy_probabilities["basic"]-dec_amount)
+		enemies = set_prob_array( WaveData.increase_enemy_probabilities )
 		
-		WaveData.enemy_probabilities["basic"] -= dec_amount
-		const enemies = ["tank","jammer","stealth","speedy"]
-		for i in dec_amount:
-			var increase_prob = enemies.pick_random()
-			WaveData.enemy_probabilities[increase_prob] += 1
+	elif stealth_prob > 10 and speedy_prob > 10:
+		if stealth_prob > speedy_prob:
+			dec_amount = 2
+			WaveData.enemy_probabilities["stealth"] = max(10, WaveData.enemy_probabilities["stealth"]-dec_amount)
+		if speedy_prob >= stealth_prob:
+			dec_amount = 2
+			WaveData.enemy_probabilities["speedy"] = max(10, WaveData.enemy_probabilities["speedy"]-dec_amount)
+		
+		enemies = set_prob_array( WaveData.increase_enemy_probabilities_advanced )
+		
+	if dec_amount == 0:
+		return
+	
+	for i in dec_amount:
+		var increase_prob = enemies.pick_random()
+		WaveData.enemy_probabilities[increase_prob] += 1
+
+func set_prob_array(dictionary) -> Array:
+	var enemies = []
+	for enemy_type in dictionary.keys():
+		var prob = dictionary[enemy_type]
+		for i in prob:
+			enemies.append(enemy_type)
+	
+	return enemies
 
 func set_level(level):
 	var levelList = level
@@ -103,9 +133,14 @@ func _process(delta):
 	
 func spawnWave():
 	
-	
 	if GameData.Challenges["Endless"]:
+		waveList[wave].start()
+		waveTimer.wait_time = (GameData.WAVE_INTERVAL + waveList[wave].enemyList.size()) * GameData.Challenges["TimeBetweenWaves"]
+		wave = wave + 1
 		generate_wave()
+		wave_ended = false
+		waveTimer.start()
+		return
 	
 	else:
 		if waveList.size() == wave + 1:
@@ -117,12 +152,15 @@ func spawnWave():
 		return
 	
 	waveList[wave].start()
+	waveTimer.wait_time = (GameData.WAVE_INTERVAL + waveList[wave].enemyList.size()) * GameData.Challenges["TimeBetweenWaves"]
+	wave = wave + 1
+	waveTimer.start()
 	wave_ended = false
+	
 
 
 func _on_wave_timer_timeout():
 	wave_ended = true
-	wave = wave + 1
 	if GameData.Challenges["Endless"] == true:
 		waveIndicator.text = "Wave:   " + str(wave+1)
 	else:

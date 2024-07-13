@@ -8,6 +8,9 @@ var enemy_jammer = preload("res://entities/enemy_jammer.tscn")
 var enemy_speedy = preload("res://entities/enemy_speedy.tscn")
 var enemy_stealth = preload("res://entities/enemy_stealth.tscn")
 var enemy_boss = preload("res://entities/enemy_boss.tscn")
+var enemy_basic_lord = preload("res://entities/enemy_basic_lord.tscn")
+var enemy_speedy_lord = preload("res://entities/enemy_speedy_lord.tscn")
+var enemy_stealth_lord = preload("res://entities/enemy_stealth_lord.tscn")
 
 var spawnPoint : Marker2D
 var enemyList = []
@@ -94,6 +97,12 @@ func instantiateEnemy(type) -> Enemy:
 			enemy = enemy_stealth.instantiate()
 		"boss":
 			enemy = enemy_boss.instantiate()
+		"basicL":
+			enemy = enemy_basic_lord.instantiate()
+		"speedyL":
+			enemy = enemy_speedy_lord.instantiate()
+		"stealthL":
+			enemy = enemy_stealth_lord.instantiate()
 	
 	return enemy
 

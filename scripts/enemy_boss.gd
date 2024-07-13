@@ -10,7 +10,6 @@ func _init():
 
 
 func _on_inmune_timer_timeout():
-	print("entro")
 	inmune = false
 	self.sprite.modulate = color
 	inmune_cd.start()
