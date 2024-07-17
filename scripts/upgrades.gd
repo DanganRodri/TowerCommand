@@ -85,14 +85,19 @@ func set_effect(upgrade : UpgradeNode):
 			upgrade.description = "Slightly increases the attack of the turret."
 		UpgradeNode.Effect.PlasmaSniper:
 			upgrade.effect = plasma_sniper
-			upgrade.description = "Transforms all sniper turrets into plsama sniper turrets that shots plasma bullets, dealing damage to nearby enemies when impact ." + "\n\n" + "Base stats increased." + "\n\n" + "(All the sniper turrets builded for the rest of the game will be advanced sniper turrets)"
+			upgrade.description = "Transforms all sniper turrets into plasma sniper turrets that shots plasma bullets, dealing damage to nearby enemies when impact ." + "\n\n" + "Base stats increased." + "\n\n" + "(All the sniper turrets builded for the rest of the game will be plama sniper turrets)"
 		UpgradeNode.Effect.ChargedSniper:
 			upgrade.effect = charged_sniper
 			upgrade.description = "Every third attack will be a charged attack that deals double true damage"
 		UpgradeNode.Effect.AtkSpeedSniper:
 			upgrade.effect = atk_speed_sniper
 			upgrade.description = "Slightly increases the attack speed of the turret."
-
+		UpgradeNode.Effect.GlobalSniper:
+			upgrade.effect = global_sniper
+			upgrade.description = "Transforms all sniper turrets into global sniper turrets that has infinite range, its bullets pierces through enemies dealing damage each enemy on impact ." + "\n\n" + "Base stats increased." + "\n\n" + "(All the sniper turrets builded for the rest of the game will be global sniper turrets)"
+		UpgradeNode.Effect.BulletSize:
+			upgrade.effect = bullet_size
+			upgrade.description = "Increses the size of the bullets and slightly their damage."
 ###	DPS UPGRADES /---------------------------------------------------------------------------------------------/
 
 func atk_dps(_upgrade):
@@ -295,6 +300,17 @@ func charged_sniper(_upgrade):
 
 func atk_speed_sniper(_upgrade):
 	GameData.stat_bonus["atk_speed_sniper"] += 0.2
+	GameData.stat_bonus["atk_sniper"] += 0.05
+
+
+func global_sniper(_upgrade):
+	var sniper_turrets = get_tree().get_nodes_in_group("sniper")
+	for sniper_turret in sniper_turrets:
+		create_advanced_turret("res://entities/global_sniper_turret.tscn", sniper_turret)
+	GameData.advanced_turrets["global_sniper"] = true
+
+func bullet_size(_upgrade):
+	GameData.stat_bonus["bullet_size"] += 0.5
 
 ###	OTHER STUFF /---------------------------------------------------------------------------------------------/
 func wip(_upgrade):

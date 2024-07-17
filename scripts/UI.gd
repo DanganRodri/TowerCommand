@@ -26,19 +26,20 @@ func _input(event):
 		return
 
 func _on_fastforward_button_pressed():
-	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
-	if Engine.get_time_scale() == GameData.SLOWMOTION:
-		return
-	
-	if GameData.FASTFORWARD_STAGES.size() - 1 == GameData.fastforward_actual_stage:
-		GameData.fastforward_actual_stage = 0
-		Engine.set_time_scale(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
-	else:
-		GameData.fastforward_actual_stage += 1
-		Engine.set_time_scale(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
-	
-	var label = fastforward_button.get_node("Speed")
-	label.text = "x" + str(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
+	if not GameData.game_ended:
+		AudioHandler.play_SFX("res://SFX/button_pressed.wav")
+		if Engine.get_time_scale() == GameData.SLOWMOTION:
+			return
+		
+		if GameData.FASTFORWARD_STAGES.size() - 1 == GameData.fastforward_actual_stage:
+			GameData.fastforward_actual_stage = 0
+			Engine.set_time_scale(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
+		else:
+			GameData.fastforward_actual_stage += 1
+			Engine.set_time_scale(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
+		
+		var label = fastforward_button.get_node("Speed")
+		label.text = "x" + str(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
 
 func unpause_countdown():
 	on_unpause = true
@@ -48,14 +49,16 @@ func unpause_countdown():
 	countdown.show()
 
 func _on_pause_button_pressed():
-	CursorManager.on_menu_enter()
-	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
-	if get_tree().is_paused():
-		if not on_unpause:
-			unpause_countdown()
-	else:
-		pause_panel.show()
-		get_tree().paused = true
+	
+	if not GameData.game_ended:
+		CursorManager.on_menu_enter()
+		AudioHandler.play_SFX("res://SFX/button_pressed.wav")
+		if get_tree().is_paused():
+			if not on_unpause:
+				unpause_countdown()
+		else:
+			pause_panel.show()
+			get_tree().paused = true
 
 
 func _on_exit_button_pressed():

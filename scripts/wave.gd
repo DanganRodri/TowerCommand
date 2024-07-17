@@ -41,7 +41,7 @@ func _process(delta):
 func spawn_enemy():
 	
 	if enemyList.is_empty():
-		started = false
+		self.queue_free()
 		return
 	
 	spawn_ready = false

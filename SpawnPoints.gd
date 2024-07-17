@@ -11,6 +11,12 @@ var enemy_boss = preload("res://entities/enemy_boss.tscn")
 @onready var waveIndicator = $WaveIndicatorBackGround/WaveIndicator
 @onready var spawn_interval = $SpawnInterval
 
+@onready var pause_panel = $"../UI/PausePanel"
+@onready var back_ground = $"../UI/PausePanel/BackGround"
+@onready var end_screen = $"../UI/PausePanel/EndScreen"
+@onready var wincon = $"../UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/Wincon"
+
+
 var wave : int = 0
 var waveList = []
 var spawn_ready : bool = true
@@ -124,11 +130,35 @@ func set_level(level):
 		add_child(new_wave)
 	
 
-func _process(delta):
-	if last_wave:
-		return
+func check_win():
+	var children = get_children()
 	
-	if not last_wave and wave_ended:
+	for child in children:
+		if child is Wave:
+			return false
+	
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	
+	for enemy in enemies:
+		if not enemy is Jammer:
+			return false
+	
+	return true
+
+func victory():
+	GameData.game_ended = true
+	pause_panel.show()
+	back_ground.hide()
+	end_screen.show()
+	get_tree().paused = true
+	wincon.text = "VICTORY"
+
+func _process(delta):
+	
+	if last_wave:
+		if check_win():
+			victory()
+	elif wave_ended:
 		spawnWave()
 	
 func spawnWave():
@@ -144,12 +174,8 @@ func spawnWave():
 	
 	else:
 		if waveList.size() == wave + 1:
-			if waveList[wave].enemyList.is_empty():
-				last_wave = true
+			last_wave = true
 			waveTimer.stop()
-	
-	if waveList[wave].enemyList.is_empty():
-		return
 	
 	waveList[wave].start()
 	waveTimer.wait_time = (GameData.WAVE_INTERVAL + waveList[wave].enemyList.size()) * GameData.Challenges["TimeBetweenWaves"]

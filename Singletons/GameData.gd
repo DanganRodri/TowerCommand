@@ -1,8 +1,10 @@
 extends Node
 
 var level : String
+var game_ended : bool = false
 
 const MAX_GOLD = 99999
+const MAX_SCORE = 99999999
 const FASTFORWARD_STAGES = [1.0, 1.5, 2.0]
 var fastforward_actual_stage = 0
 const SLOWMOTION = 0.15
@@ -55,6 +57,9 @@ const COLOR_DATA = {
 }
 
 var gold : int = MAX_GOLD
+var score : int = 0
+var score_increase = 0
+var health : int = 30
 
 var Challenges = { 
 	"GoldGainPercentage": GOLD_GAIN_PERCENTAGE_LEVELS[0],
@@ -89,6 +94,7 @@ var stat_bonus = {
 	"range_sniper": 1,
 	"atk_sniper": 1,
 	"def_pen_sniper": 1,
+	"bullet_size": 1,
 	"gold_gain": 1
 }
 
@@ -108,7 +114,7 @@ var pasive_skills =  {
 	"burn": false,
 	"charged_sniper": false,
 	"explosion_radius_upgrade": false,
-	"stun_upgrade": false
+	"stun_upgrade": false,
 }
 
 var active_skills = {

@@ -33,7 +33,10 @@ enum Effect {
 	AtkSniper,
 	PlasmaSniper,
 	ChargedSniper,
-	AtkSpeedSniper
+	AtkSpeedSniper,
+	GlobalSniper,
+	SniperSkill,
+	BulletSize,
 }
 
 @onready var panel = $Panel

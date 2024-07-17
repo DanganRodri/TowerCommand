@@ -23,6 +23,8 @@ func _process(delta):
 		aoe.icon = load("res://assets/sprites/burning_aoe_turret.png")
 	if GameData.advanced_turrets["sniper"]:
 		sniper.icon = load("res://assets/sprites/plasma_turret.png")
+	if GameData.advanced_turrets["global_sniper"]:
+		sniper.icon = load("res://assets/sprites/global_sniper_turret.png")
 	
 	super._process(delta)
 		
@@ -56,6 +58,8 @@ func _on_ice_pressed():
 func _on_sniper_pressed():
 	if GameData.advanced_turrets["sniper"]:
 		create_turret("res://entities/plasma_sniper_turret.tscn")
+	elif GameData.advanced_turrets["global_sniper"]:
+		create_turret("res://entities/global_sniper_turret.tscn")
 	else:
 		create_turret("res://entities/sniper_turret.tscn")
 

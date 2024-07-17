@@ -187,6 +187,7 @@ func status_effect(effect,duration,value):
 func on_destroy():
 	AudioHandler.play_SFX("res://SFX/478328__joao_janz__8-bit-gun-2_4.wav")
 	GameData.gold = min(GameData.MAX_GOLD, GameData.gold + (self.gold * GameData.Challenges["GoldGainPercentage"]) )
+	GameData.score = min(GameData.MAX_SCORE, roundi( GameData.score + self.gold ))
 	self.queue_free()
 	
 func apply_color_filter():

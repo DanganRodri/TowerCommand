@@ -21,13 +21,14 @@ func hide_upgrade_buttons():
 		ub.hide()
 
 func _on_open_upgrade_menu_pressed():
-	CursorManager.on_menu_enter()
-	AudioHandler.play_SFX("res://SFX/button_pressed.wav")
-	ui.on_upgrade_menu = true
-	get_tree().paused = true
-	turrets = game.get_node("Turrets")
-	self.show()
-	select_tree.show()
+	if not GameData.game_ended:
+		CursorManager.on_menu_enter()
+		AudioHandler.play_SFX("res://SFX/button_pressed.wav")
+		ui.on_upgrade_menu = true
+		get_tree().paused = true
+		turrets = game.get_node("Turrets")
+		self.show()
+		select_tree.show()
 
 func show_tree(tree_group: String):
 	match tree_group:

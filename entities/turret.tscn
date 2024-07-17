@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://hvvnfjpmdhwo"]
+[gd_scene load_steps=17 format=3 uid="uid://hvvnfjpmdhwo"]
 
 [ext_resource type="Script" path="res://scripts/blank_turret.gd" id="1_4o1ll"]
 [ext_resource type="Texture2D" uid="uid://b2m3qisdv1vq5" path="res://assets/sprites/blank_turret.png" id="2_i3j4t"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b7rc1jn6wt64u" path="res://assets/sprites/aoe_turret.png" id="5_dgm2x"]
 [ext_resource type="Texture2D" uid="uid://ctbjlleqwbpc2" path="res://assets/sprites/ice_turret.png" id="6_b4vcu"]
 [ext_resource type="Texture2D" uid="uid://c5qjfpdv5tvcn" path="res://assets/sprites/sniper_turret.png" id="7_ntk34"]
+[ext_resource type="Script" path="res://scripts/cost.gd" id="8_d5nsd"]
+[ext_resource type="Texture2D" uid="uid://dw55pvs0h0cyj" path="res://assets/HUD/gold.png" id="9_ai65r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cclg"]
 atlas = ExtResource("2_i3j4t")
@@ -104,10 +106,10 @@ anchor_left = -0.076
 anchor_top = 0.086
 anchor_right = 0.124
 anchor_bottom = 0.225
-offset_left = -0.447998
+offset_left = -0.448006
 offset_top = 0.271999
-offset_right = 0.151993
-offset_bottom = 0.199997
+offset_right = 0.152008
+offset_bottom = 37.2
 script = ExtResource("3_v67vt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
@@ -194,6 +196,23 @@ offset_right = 50.0
 offset_bottom = 75.0
 text = "Sniper"
 horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="Upgrade/UpgradeList"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 96.0
+offset_right = 152.0
+offset_bottom = 122.0
+text = "250"
+script = ExtResource("8_d5nsd")
+
+[node name="TextureRect" type="TextureRect" parent="Upgrade/UpgradeList"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 96.0
+offset_right = 106.0
+offset_bottom = 121.0
+texture = ExtResource("9_ai65r")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="pressed" from="Upgrade/UpgradeList/HBoxContainer/Dps" to="." method="_on_dps_pressed"]

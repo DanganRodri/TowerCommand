@@ -1,20 +1,25 @@
-[gd_scene load_steps=26 format=3 uid="uid://kli56l5wifew"]
+[gd_scene load_steps=31 format=3 uid="uid://kli56l5wifew"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_4a55a"]
 [ext_resource type="Script" path="res://scripts/UI.gd" id="2_cin3x"]
-[ext_resource type="Texture2D" uid="uid://onc7pa8et78a" path="res://assets/HUD/Pause_button.png" id="3_7yfum"]
 [ext_resource type="Texture2D" uid="uid://bpkvaho57xiic" path="res://assets/HUD/play_button.png" id="4_4b1b1"]
 [ext_resource type="Texture2D" uid="uid://d3fe511ov118s" path="res://assets/HUD/Fastfoward_button.png" id="5_1h2si"]
-[ext_resource type="Texture2D" uid="uid://x0e716blyoao" path="res://assets/HUD/Blank_button.png" id="6_tshg0"]
+[ext_resource type="Texture2D" uid="uid://db12rouaqwrfo" path="res://assets/HUD/upgrade_menu_button.png" id="5_ya2qw"]
+[ext_resource type="Texture2D" uid="uid://cm1u0x7amgh5u" path="res://assets/HUD/box_background_cornerless.png" id="6_fxiq7"]
 [ext_resource type="Script" path="res://scripts/Gold.gd" id="7_km8i6"]
 [ext_resource type="PackedScene" uid="uid://b11qa1ok58ptg" path="res://skilltrees/skill_tree.tscn" id="8_05gsf"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="8_n2gjq"]
 [ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="9_ddqlf"]
 [ext_resource type="Texture2D" uid="uid://bucje24pdr4dv" path="res://tileprueba.png" id="9_yjq7b"]
+[ext_resource type="Texture2D" uid="uid://dw55pvs0h0cyj" path="res://assets/HUD/gold.png" id="10_2skgw"]
 [ext_resource type="Texture2D" uid="uid://b7c303pkbpm07" path="res://TileMap.png" id="10_ffdxk"]
 [ext_resource type="Script" path="res://scripts/unpause_countdown.gd" id="10_i4ccp"]
+[ext_resource type="Texture2D" uid="uid://cyyk1hcudxx0a" path="res://assets/HUD/score.png" id="11_iy5y8"]
 [ext_resource type="Script" path="res://scripts/TileMap.gd" id="11_x7rl8"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="12_4hfl7"]
 [ext_resource type="PackedScene" uid="uid://com1u85x7sy52" path="res://entities/primary_weapon.tscn" id="12_238j0"]
 [ext_resource type="Script" path="res://scripts/tower_manager.gd" id="13_0trdu"]
+[ext_resource type="Texture2D" uid="uid://cxanfpbegv5bx" path="res://assets/HUD/health.png" id="13_hg6e6"]
 [ext_resource type="PackedScene" uid="uid://6qw84vv1brxl" path="res://entities/tower.tscn" id="14_whx4x"]
 [ext_resource type="PackedScene" uid="uid://hvvnfjpmdhwo" path="res://entities/turret.tscn" id="15_8q4kn"]
 [ext_resource type="Script" path="res://SpawnPoints.gd" id="16_bbnkd"]
@@ -27,9 +32,6 @@ font_size = 8
 
 [sub_resource type="LabelSettings" id="LabelSettings_t0lon"]
 font_size = 8
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c02cq"]
-texture = ExtResource("6_tshg0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5epq"]
 texture = ExtResource("9_yjq7b")
@@ -86,6 +88,9 @@ custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_n5epq")
 sources/1 = SubResource("TileSetAtlasSource_kkfqi")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mt6q3"]
+texture = ExtResource("6_fxiq7")
+
 [node name="Game" type="Node"]
 script = ExtResource("1_4a55a")
 
@@ -112,7 +117,7 @@ custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
-texture_normal = ExtResource("3_7yfum")
+texture_normal = ExtResource("4_4b1b1")
 texture_pressed = ExtResource("4_4b1b1")
 stretch_mode = 0
 
@@ -161,23 +166,6 @@ label_settings = SubResource("LabelSettings_t0lon")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gold" type="Label" parent="UI/HUD"]
-unique_name_in_owner = true
-modulate = Color(0.196078, 0.196078, 0.196078, 1)
-z_index = 10
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -128.0
-offset_bottom = 65.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 29
-theme_override_styles/normal = SubResource("StyleBoxTexture_c02cq")
-text = "99999"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("7_km8i6")
-
 [node name="Open_upgrade_menu" type="TextureButton" parent="UI/HUD"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -189,7 +177,7 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("6_tshg0")
+texture_normal = ExtResource("5_ya2qw")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="UI/HUD/Open_upgrade_menu"]
@@ -202,9 +190,104 @@ label_settings = SubResource("LabelSettings_t0lon")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GoldContainer" type="TextureRect" parent="UI/HUD"]
+z_index = 10
+offset_left = 1024.0
+offset_right = 1152.0
+offset_bottom = 65.0
+texture = ExtResource("6_fxiq7")
+
+[node name="Gold" type="Label" parent="UI/HUD/GoldContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -77.0
+offset_right = -7.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.85098, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_km8i6")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/GoldContainer"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 48.0
+offset_bottom = 52.0
+texture = ExtResource("10_2skgw")
+
+[node name="ScoreContainer" type="TextureRect" parent="UI/HUD"]
+z_index = 5
+offset_left = 1024.0
+offset_top = 69.0
+offset_right = 1152.0
+offset_bottom = 134.0
+texture = ExtResource("6_fxiq7")
+
+[node name="Score" type="Label" parent="UI/HUD/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_right = -7.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_n2gjq")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/ScoreContainer"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 48.0
+offset_bottom = 52.0
+texture = ExtResource("11_iy5y8")
+
+[node name="HealthContainer" type="TextureRect" parent="UI/HUD"]
+z_index = 5
+offset_left = 85.0
+offset_right = 184.0
+offset_bottom = 40.0
+texture = ExtResource("6_fxiq7")
+
+[node name="Health" type="Label" parent="UI/HUD/HealthContainer"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_right = -7.0
+offset_bottom = 37.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("12_4hfl7")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/HealthContainer"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 42.0
+offset_bottom = 37.0
+texture = ExtResource("13_hg6e6")
+
 [node name="UpgradeTree" parent="UI" instance=ExtResource("8_05gsf")]
 unique_name_in_owner = true
 visible = false
+z_index = 7
 offset_right = 2.0
 
 [node name="PausePanel" type="Panel" parent="UI"]
@@ -231,7 +314,7 @@ offset_right = 7.67999
 offset_bottom = 19.984
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_ddqlf")
+texture = ExtResource("6_fxiq7")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/PausePanel/BackGround"]
 process_mode = 3
@@ -275,7 +358,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Continue"
+text = "Resume"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -308,6 +391,114 @@ texture_normal = ExtResource("9_ddqlf")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ExitButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndScreen" type="TextureRect" parent="UI/PausePanel"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.309
+anchor_right = 0.66
+anchor_bottom = 0.642
+offset_left = -9.98401
+offset_top = 7.76799
+offset_right = 7.67999
+offset_bottom = 19.984
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fxiq7")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PausePanel/EndScreen"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PausePanel/EndScreen/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Wincon" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Total Score:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreWincon" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_n2gjq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+alignment = 1
+
+[node name="RestartButton" type="TextureButton" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("9_ddqlf")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/RestartButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("9_ddqlf")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/ExitButton"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -418,15 +609,25 @@ autostart = true
 one_shot = true
 
 [node name="WaveIndicatorBackGround" type="Panel" parent="SpawnPoints"]
+z_index = 5
 offset_left = 2.0
 offset_right = 84.0
-offset_bottom = 23.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_mt6q3")
 
 [node name="WaveIndicator" type="Label" parent="SpawnPoints/WaveIndicatorBackGround"]
-layout_mode = 0
-offset_left = 4.0
-offset_right = 44.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -11.0
+offset_right = 36.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="UI/HUD/HBoxContainer/Pause_button" to="UI" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="UI/HUD/HBoxContainer/Fastforward_button" to="UI" method="_on_fastforward_button_pressed"]
@@ -434,6 +635,8 @@ offset_bottom = 23.0
 [connection signal="pressed" from="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ContinueButton" to="UI" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ExitButton" to="UI" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/ExitButton" to="UI" method="_on_exit_button_pressed"]
 [connection signal="timeout" from="UI/PausePanel/UnpauseTimer" to="UI" method="_on_unpause_timer_timeout"]
 [connection signal="timeout" from="SpawnPoints/WaveTimer" to="SpawnPoints" method="_on_wave_timer_timeout"]
 [connection signal="timeout" from="SpawnPoints/SpawnInterval" to="SpawnPoints" method="_on_spawn_interval_timeout"]

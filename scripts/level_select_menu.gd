@@ -9,6 +9,7 @@ func _on_play_button_pressed():
 	GameData.Challenges["GoldGainPercentage"] =  GameData.GOLD_GAIN_PERCENTAGE_LEVELS[sliders[0].value]
 	GameData.Challenges["EnemyDamageReduction"] = GameData.ENEMY_DAMAGE_TAKEN_LEVELS[sliders[1].value]
 	GameData.Challenges["TimeBetweenWaves"] = GameData.TIME_BETWEEN_WAVES_LEVELS[sliders[2].value]
+	GameData.score_increase =  sliders[0].value + sliders[1].value + sliders[2].value
 	var check_button = get_tree().get_first_node_in_group("challenge_endless")
 	
 	if check_button.button_pressed:
