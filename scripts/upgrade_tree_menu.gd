@@ -4,6 +4,8 @@ var turrets = null
 @onready var select_tree = $"Select Tree"
 @onready var game = $"../.."
 @onready var ui = $".."
+@onready var gold_container = $GoldContainer
+@onready var upgrade_desc = %UpgradeDesc
 
 
 func _on_exit_pressed():
@@ -19,6 +21,10 @@ func hide_upgrade_buttons():
 	var upgrade_buttons = get_tree().get_nodes_in_group("upgradebutton")
 	for ub in upgrade_buttons:
 		ub.hide()
+		ub.selected = false
+		ub.self_modulate = ub.base_color
+	gold_container.hide()
+	upgrade_desc.text = ""
 
 func _on_open_upgrade_menu_pressed():
 	if not GameData.game_ended:

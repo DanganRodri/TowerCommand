@@ -1,9 +1,13 @@
 extends Node
 
-var level : String
+var level : int
+const LEVEL_PATH : String = "res://scenes/level"
 var game_ended : bool = false
 
+
 const MAX_GOLD = 99999
+const INITIAL_GOLD_ENDLESS = 5000
+const INITIAL_GOLD_CAMPAING = 300
 const MAX_SCORE = 99999999
 const FASTFORWARD_STAGES = [1.0, 1.5, 2.0]
 var fastforward_actual_stage = 0
@@ -56,7 +60,8 @@ const COLOR_DATA = {
 	}
 }
 
-var gold : int = MAX_GOLD
+var gold : int = 5000
+var initial_gold = gold
 var score : int = 0
 var score_increase = 0
 var health : int = 30
@@ -126,33 +131,40 @@ var active_skills = {
 
 
 func reset_bonuses():
-	stat_bonus = {
-		"atk": 1,
-		"atk_speed": 1,
-		"dmg": 1,
-		"range": 1,
-		"atk_dps": 1,
-		"atk_speed_dps": 1,
-		"poison_dot": 1,
-		"poison_splash": 1,
-		"weakened_value" : 1,
-		"def_pen_dps": 1,
-		"slow": 1,
-		"slow_duration": 1,
-		"freeze_cd": 1,
-		"atk_ice": 1,
-		"range_ice": 1,
-		"atk_speed_ice": 1,
-		"atk_aoe": 1,
-		"atk_speed_aoe": 1,
-		"range_aoe": 1,
-		"burn_cd": 1,
-		"burn_damage": 1,
-		"atk_speed_sniper": 1,
-		"range_sniper": 1,
-		"atk_sniper": 1,
-		"def_pen_sniper": 1
-	}
+	
+	gold = initial_gold
+	score = 0
+	health = 30
+	
+	var stat_bonus = {
+	"atk": 1,
+	"atk_speed": 1,
+	"dmg": 1,
+	"range": 1,
+	"atk_dps": 1,
+	"atk_speed_dps": 1,
+	"poison_dot": 1,
+	"poison_splash": 1,
+	"weakened_value" : 1,
+	"def_pen_dps": 1,
+	"slow": 1,
+	"slow_duration": 1,
+	"freeze_cd": 1,
+	"atk_ice": 1,
+	"range_ice": 1,
+	"atk_speed_ice": 1,
+	"atk_aoe": 1,
+	"atk_speed_aoe": 1,
+	"range_aoe": 1,
+	"burn_cd": 1,
+	"burn_damage": 1,
+	"atk_speed_sniper": 1,
+	"range_sniper": 1,
+	"atk_sniper": 1,
+	"def_pen_sniper": 1,
+	"bullet_size": 1,
+	"gold_gain": 1
+}
 
 	advanced_turrets = {
 		"dps": false,
@@ -179,6 +191,8 @@ func reset_bonuses():
 		"ice": false,
 		"sniper": false
 	}
+	
+	WaveData.reset_probabilities()
 
 func reset_challenges():
 	Challenges = { 
@@ -191,3 +205,4 @@ func reset_challenges():
 func full_reset():
 	reset_bonuses()
 	reset_challenges()
+	WaveData.reset_probabilities()

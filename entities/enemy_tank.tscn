@@ -57,7 +57,7 @@ radius = 105.7
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3p3pe"]
 bg_color = Color(0.988235, 1, 0.784314, 1)
 
-[node name="Enemy Tank" type="CharacterBody2D" groups=["enemy"]]
+[node name="Enemy Tank" type="CharacterBody2D" groups=["enemy", "tank"]]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_2b0qn")
 

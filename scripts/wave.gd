@@ -32,6 +32,8 @@ func _ready():
 	var shape = collision.shape
 	basic_size = shape.extents.x
 	basic_enemy.queue_free()
+	
+	self.add_to_group("wave")
 
 func _process(delta):
 	if started and spawn_ready:
@@ -74,12 +76,12 @@ func spawn_enemy():
 	
 	enemyList.remove_at(0)
 
-func set_wave(waveList, spawPosition : Marker2D):
+func set_wave(waveList, spawnPosition : Marker2D):
 	
 	for enemy in waveList:
 		enemyList.append(enemy)
 	
-	spawnPoint = spawPosition
+	spawnPoint = spawnPosition
 
 func instantiateEnemy(type) -> Enemy:
 	var enemy

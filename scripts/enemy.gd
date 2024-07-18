@@ -220,7 +220,6 @@ func get_target():
 	var towers = self.get_parent().get_node("Towers").get_children()
 	var tower = GlobalFunctions.check_closest(self, towers)
 	target = tower.position
-	pass
 
 func _process(delta):
 	
@@ -228,6 +227,8 @@ func _process(delta):
 		color = sprite.modulate
 	
 	apply_color_filter()
+	
+	
 	
 	if not current_path.is_empty():
 		var target_position = tilemap.map_to_local(current_path.front())

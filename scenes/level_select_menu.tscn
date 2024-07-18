@@ -1,35 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://hi7i0jns1fxu"]
+[gd_scene load_steps=6 format=3 uid="uid://hi7i0jns1fxu"]
 
 [ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="1_3wq56"]
 [ext_resource type="Script" path="res://scripts/level_select_menu.gd" id="1_bkh4o"]
 [ext_resource type="Texture2D" uid="uid://x0e716blyoao" path="res://assets/HUD/Blank_button.png" id="2_c2bbc"]
 [ext_resource type="Script" path="res://scripts/challenge_value.gd" id="4_tgkr2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ffnt"]
-bg_color = Color(0.858824, 0.501961, 0.0117647, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.976471, 0.760784, 0.403922, 1)
-border_blend = true
-corner_radius_top_left = 9
-corner_radius_top_right = 9
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 9
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykee5"]
-bg_color = Color(0.87451, 0.658824, 0.364706, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0.909804, 0.776471, 0.611765, 1)
-border_blend = true
-corner_radius_top_left = 9
-corner_radius_top_right = 9
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 9
+[ext_resource type="Texture2D" uid="uid://b18vtglngo1ad" path="res://assets/HUD/return_button.png" id="5_g1g6v"]
 
 [node name="LevelMenu" type="Control"]
 layout_mode = 3
@@ -56,13 +31,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 65
-theme_override_constants/margin_top = 65
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 65
-theme_override_constants/margin_bottom = 65
+
+[node name="ReturnTotal" type="TextureButton" parent="LevelSelector"]
+process_mode = 3
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+texture_normal = ExtResource("5_g1g6v")
+stretch_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelSelector"]
-custom_minimum_size = Vector2(800, 0)
+custom_minimum_size = Vector2(800, 620)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -158,13 +142,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 65
-theme_override_constants/margin_top = 65
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 65
-theme_override_constants/margin_bottom = 65
+theme_override_constants/margin_bottom = 0
+
+[node name="Return" type="TextureButton" parent="LevelSettings"]
+process_mode = 3
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+texture_normal = ExtResource("5_g1g6v")
+stretch_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelSettings"]
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="LevelSettings/VBoxContainer"]
 layout_mode = 2
@@ -375,20 +372,10 @@ text = "Reset"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Return" type="Button" parent="."]
-process_mode = 3
-layout_mode = 0
-offset_left = 34.0
-offset_top = 15.0
-offset_right = 114.0
-offset_bottom = 97.0
-mouse_filter = 1
-theme_override_font_sizes/font_size = 52
-theme_override_styles/normal = SubResource("StyleBoxFlat_5ffnt")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ykee5")
-text = "<"
-
+[connection signal="pressed" from="LevelSelector/ReturnTotal" to="." method="_on_return_total_pressed"]
 [connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level1Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level2Button" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level3Button" to="." method="_on_level_3_button_pressed"]
+[connection signal="pressed" from="LevelSettings/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="LevelSettings/VBoxContainer/HBoxContainer5/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="LevelSettings/VBoxContainer/HBoxContainer5/ResetButton" to="." method="_on_reset_button_pressed"]
-[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

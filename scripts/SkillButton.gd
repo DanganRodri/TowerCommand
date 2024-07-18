@@ -44,6 +44,8 @@ enum Effect {
 @onready var line_2d = $Line2D
 @onready var upgrade_effects = %UpgradeEffects
 @onready var desc = %UpgradeDesc
+@onready var gold_container = %GoldContainer
+
 
 
 @export var max_level : int = 3
@@ -92,6 +94,9 @@ func _on_pressed():
 		self.self_modulate = Color(1, 1, 0.53333336114883)
 		
 		desc.text = description
+		var upgrade_cost = gold_container.get_node("Upgrade_cost")
+		upgrade_cost.cost = self.cost
+		gold_container.show()
 		
 		return
 	

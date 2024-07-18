@@ -88,10 +88,17 @@ func _on_restart_button_pressed():
 	
 	GameData.reset_bonuses()
 	
-	var game_scene = load("res://scenes/game.tscn").instantiate()
-	game.queue_free()
+	var waves = get_tree().get_nodes_in_group("wave")
+	
+	for wave in waves:
+		wave.spawn_ready = false
+		wave.queue_free()
+	
+	var game_scene = load(rootNode.level_path).instantiate()
+	
+	
+	game.free()
 	rootNode.add_child(game_scene)
-
 
 func _on_unpause_timer_timeout():
 	CursorManager.on_menu_exit()

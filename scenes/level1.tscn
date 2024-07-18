@@ -1,0 +1,630 @@
+[gd_scene load_steps=30 format=3 uid="uid://6up7upfxfyuv"]
+
+[ext_resource type="Script" path="res://scripts/UI.gd" id="2_8r7v8"]
+[ext_resource type="Texture2D" uid="uid://bpkvaho57xiic" path="res://assets/HUD/play_button.png" id="3_ebhph"]
+[ext_resource type="Texture2D" uid="uid://d3fe511ov118s" path="res://assets/HUD/Fastfoward_button.png" id="4_uu1nn"]
+[ext_resource type="Texture2D" uid="uid://db12rouaqwrfo" path="res://assets/HUD/upgrade_menu_button.png" id="5_3qb5a"]
+[ext_resource type="Texture2D" uid="uid://cm1u0x7amgh5u" path="res://assets/HUD/box_background_cornerless.png" id="6_cja6d"]
+[ext_resource type="Script" path="res://scripts/Gold.gd" id="7_gymp0"]
+[ext_resource type="Texture2D" uid="uid://dw55pvs0h0cyj" path="res://assets/HUD/gold.png" id="8_c342e"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="9_7gvbd"]
+[ext_resource type="Texture2D" uid="uid://cyyk1hcudxx0a" path="res://assets/HUD/score.png" id="10_536fq"]
+[ext_resource type="Script" path="res://scripts/health.gd" id="11_k1rqa"]
+[ext_resource type="Texture2D" uid="uid://cxanfpbegv5bx" path="res://assets/HUD/health.png" id="12_p71tg"]
+[ext_resource type="PackedScene" uid="uid://b11qa1ok58ptg" path="res://skilltrees/skill_tree.tscn" id="13_xxetj"]
+[ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="14_lrq2g"]
+[ext_resource type="Script" path="res://scripts/unpause_countdown.gd" id="15_v0ytm"]
+[ext_resource type="Texture2D" uid="uid://bucje24pdr4dv" path="res://tileprueba.png" id="16_ddnbi"]
+[ext_resource type="Texture2D" uid="uid://b7c303pkbpm07" path="res://TileMap.png" id="17_kghnx"]
+[ext_resource type="Script" path="res://scripts/TileMap.gd" id="18_7ll5d"]
+[ext_resource type="PackedScene" uid="uid://com1u85x7sy52" path="res://entities/primary_weapon.tscn" id="19_uhptx"]
+[ext_resource type="Script" path="res://scripts/tower_manager.gd" id="20_fc52s"]
+[ext_resource type="PackedScene" uid="uid://6qw84vv1brxl" path="res://entities/tower.tscn" id="21_8suda"]
+[ext_resource type="PackedScene" uid="uid://hvvnfjpmdhwo" path="res://entities/turret.tscn" id="22_ndbl8"]
+[ext_resource type="Script" path="res://SpawnPoints.gd" id="23_p78qa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxxcm"]
+bg_color = Color(0.2, 0.2, 0.219608, 0.678431)
+
+[sub_resource type="LabelSettings" id="LabelSettings_webyr"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_t0lon"]
+font_size = 8
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5epq"]
+texture = ExtResource("16_ddnbi")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "wall"
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kkfqi"]
+texture = ExtResource("17_kghnx")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "wall"
+1:0/0 = 0
+1:0/0/custom_data_0 = "wall"
+3:0/0 = 0
+3:0/0/custom_data_0 = "wall"
+4:0/0 = 0
+4:0/0/custom_data_0 = "wall"
+5:0/0 = 0
+5:0/0/custom_data_0 = "wall"
+0:1/0 = 0
+0:1/0/custom_data_0 = "wall"
+1:1/0 = 0
+1:1/0/custom_data_0 = "wall"
+3:1/0 = 0
+3:1/0/custom_data_0 = "wall"
+4:1/0 = 0
+5:1/0 = 0
+5:1/0/custom_data_0 = "wall"
+0:2/0 = 0
+0:2/0/custom_data_0 = "wall"
+1:2/0 = 0
+1:2/0/custom_data_0 = "wall"
+3:2/0 = 0
+3:2/0/custom_data_0 = "wall"
+4:2/0 = 0
+4:2/0/custom_data_0 = "wall"
+5:2/0 = 0
+5:2/0/custom_data_0 = "wall"
+3:4/0 = 0
+3:4/0/custom_data_0 = "wall"
+4:4/0 = 0
+4:4/0/custom_data_0 = "wall"
+3:5/0 = 0
+3:5/0/custom_data_0 = "wall"
+4:5/0 = 0
+4:5/0/custom_data_0 = "wall"
+
+[sub_resource type="TileSet" id="TileSet_ip0x2"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "type"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_n5epq")
+sources/1 = SubResource("TileSetAtlasSource_kkfqi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mt6q3"]
+texture = ExtResource("6_cja6d")
+
+[node name="Level1" type="Node"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 11
+script = ExtResource("2_8r7v8")
+
+[node name="HUD" type="Node" parent="UI"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_right = 100.0
+grow_vertical = 0
+alignment = 1
+
+[node name="Pause_button" type="TextureButton" parent="UI/HUD/HBoxContainer"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource("3_ebhph")
+texture_pressed = ExtResource("3_ebhph")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/HUD/HBoxContainer/Pause_button"]
+layout_mode = 1
+offset_right = 17.0
+offset_bottom = 15.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gxxcm")
+text = "Esc"
+label_settings = SubResource("LabelSettings_webyr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fastforward_button" type="TextureButton" parent="UI/HUD/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_uu1nn")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/HUD/HBoxContainer/Fastforward_button"]
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 15.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gxxcm")
+text = "Tab"
+label_settings = SubResource("LabelSettings_t0lon")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="Label" parent="UI/HUD/HBoxContainer/Fastforward_button"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -15.0
+offset_top = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gxxcm")
+text = "x1"
+label_settings = SubResource("LabelSettings_t0lon")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Open_upgrade_menu" type="TextureButton" parent="UI/HUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_3qb5a")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/HUD/Open_upgrade_menu"]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 15.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_gxxcm")
+text = "Q"
+label_settings = SubResource("LabelSettings_t0lon")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldContainer" type="TextureRect" parent="UI/HUD"]
+z_index = 10
+offset_left = 1024.0
+offset_right = 1152.0
+offset_bottom = 65.0
+texture = ExtResource("6_cja6d")
+
+[node name="Gold" type="Label" parent="UI/HUD/GoldContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -77.0
+offset_right = -7.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.85098, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_gymp0")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/GoldContainer"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 48.0
+offset_bottom = 52.0
+texture = ExtResource("8_c342e")
+
+[node name="ScoreContainer" type="TextureRect" parent="UI/HUD"]
+z_index = 5
+offset_left = 1024.0
+offset_top = 69.0
+offset_right = 1152.0
+offset_bottom = 134.0
+texture = ExtResource("6_cja6d")
+
+[node name="Score" type="Label" parent="UI/HUD/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_right = -7.0
+offset_bottom = 65.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_7gvbd")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/ScoreContainer"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 48.0
+offset_bottom = 52.0
+texture = ExtResource("10_536fq")
+
+[node name="HealthContainer" type="TextureRect" parent="UI/HUD"]
+z_index = 5
+offset_left = 85.0
+offset_right = 184.0
+offset_bottom = 40.0
+texture = ExtResource("6_cja6d")
+
+[node name="Health" type="Label" parent="UI/HUD/HealthContainer"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -52.0
+offset_right = -7.0
+offset_bottom = 37.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_k1rqa")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/HealthContainer"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 42.0
+offset_bottom = 37.0
+texture = ExtResource("12_p71tg")
+
+[node name="UpgradeTree" parent="UI" instance=ExtResource("13_xxetj")]
+unique_name_in_owner = true
+visible = false
+z_index = 7
+offset_right = 2.0
+
+[node name="PausePanel" type="Panel" parent="UI"]
+process_mode = 3
+visible = false
+z_index = 13
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackGround" type="TextureRect" parent="UI/PausePanel"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.309
+anchor_right = 0.66
+anchor_bottom = 0.642
+offset_left = -9.98401
+offset_top = 7.76799
+offset_right = 7.67999
+offset_bottom = 19.984
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_cja6d")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PausePanel/BackGround"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PausePanel/BackGround/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="TextureButton" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("14_lrq2g")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ContinueButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="TextureButton" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("14_lrq2g")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/RestartButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("14_lrq2g")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ExitButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndScreen" type="TextureRect" parent="UI/PausePanel"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.342
+anchor_top = 0.309
+anchor_right = 0.66
+anchor_bottom = 0.642
+offset_left = -9.98401
+offset_top = 7.76799
+offset_right = 7.67999
+offset_bottom = 19.984
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_cja6d")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PausePanel/EndScreen"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PausePanel/EndScreen/MarginContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_constants/separation = 11
+
+[node name="Wincon" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Total Score:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreWincon" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer2"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_7gvbd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+alignment = 1
+
+[node name="RestartButton" type="TextureButton" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("14_lrq2g")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/RestartButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer"]
+process_mode = 3
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("14_lrq2g")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/ExitButton"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UnpauseTimer" type="Timer" parent="UI/PausePanel"]
+process_mode = 3
+wait_time = 3.0
+one_shot = true
+
+[node name="Countdown" type="Label" parent="UI/PausePanel"]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 150
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("15_v0ytm")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(2, 0)
+tile_set = SubResource("TileSet_ip0x2")
+cell_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 196609, 0, 131083, 262145, 0, 131084, 262145, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 1, 0, 524295, 1, 0, 524296, 1, 0, 524297, 1, 0, 524298, 196609, 1, 524299, 262145, 1, 524300, 327681, 1, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0, 524304, 196609, 1, 524305, 262145, 1, 196620, 262145, 1, 262156, 196609, 4, 327692, 327681, 1, 393228, 327681, 1, 458764, 327681, 1, 524306, 327681, 1, 524307, 1, 0, 524308, 1, 0, 458772, 1, 0, 393236, 1, 0, 327700, 1, 0, 262164, 1, 0, 196628, 1, 0, 131092, 1, 0, 131093, 1, 0, 131094, 196609, 0, 131095, 262145, 0, 131096, 262145, 0, 131097, 262145, 0, 589844, 1, 0, 655380, 1, 0, 720916, 1, 0, 786452, 1, 0, 851988, 1, 0, 917524, 1, 0, 917525, 1, 0, 917526, 196609, 1, 917527, 262145, 1, 917528, 327681, 1, 917529, 1, 0, 917504, 1, 0, 917505, 1, 0, 917506, 1, 0, 917507, 1, 0, 917508, 196609, 1, 917509, 262145, 1, 917510, 327681, 1, 917511, 1, 0, 917512, 1, 0, 917513, 1, 0, 917514, 196609, 1, 917515, 262145, 1, 917516, 327681, 1, 917517, 1, 0, 917518, 1, 0, 917519, 1, 0, 917520, 196609, 1, 917521, 262145, 1, 917522, 327681, 1, 917523, 1, 0, 851968, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 196609, 1, 851973, 262145, 1, 851974, 327681, 1, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 196609, 1, 851979, 262145, 1, 851980, 327681, 1, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 851984, 196609, 1, 851985, 262145, 1, 851986, 327681, 1, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 196609, 1, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65556, 1, 0, 65557, 1, 0, 65558, 1, 0, 65559, 1, 0, 65560, 1, 0, 65561, 1, 0, 851990, 196609, 1, 851991, 262145, 1, 851992, 327681, 1, 851993, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 196609, 1, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 196609, 1, 589835, 262145, 1, 589836, 327681, 1, 589837, 1, 0, 589838, 1, 0, 589839, 1, 0, 589840, 196609, 1, 589841, 262145, 1, 589842, 327681, 1, 589843, 1, 0, 983040, 1, 0, 983041, 1, 0, 983042, 1, 0, 983043, 1, 0, 983044, 196609, 1, 983045, 262145, 1, 983046, 327681, 1, 983047, 1, 0, 983048, 1, 0, 983049, 1, 0, 983050, 196609, 1, 983051, 262145, 1, 983052, 327681, 1, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 196609, 1, 983057, 262145, 1, 983058, 327681, 1, 983059, 1, 0, 983060, 1, 0, 983061, 1, 0, 983062, 196609, 1, 983063, 262145, 1, 983064, 327681, 1, 983065, 1, 0, 393229, 1, 0, 327693, 1, 0, 262157, 262145, 2, 196621, 262145, 1, 131085, 262145, 0, 786453, 1, 0, 720917, 1, 0, 655381, 1, 0, 589845, 1, 0, 524309, 1, 0, 458773, 1, 0, 393237, 1, 0, 327701, 1, 0, 262165, 1, 0, 131098, 262145, 0, 917530, 1, 0, 393235, 1, 0, 327699, 1, 0, 262163, 1, 0, 196627, 1, 0, 131091, 1, 0, 393227, 262145, 1, 327691, 262145, 1, 262155, 262145, 1, 65548, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 196609, 1, 458769, 262145, 1, 458770, 327681, 1, 851987, 1, 0, 458763, 262145, 1, 458771, 1, 0, 786451, 1, 0, 720915, 1, 0, 655379, 1, 0, 851989, 1, 0, 196629, 1, 0, 196630, 196609, 1, 196631, 262145, 1, 196632, 262145, 1, 196633, 262145, 1, 196634, 262145, 1, 65555, 1, 0, 983066, 1, 0, 851994, 1, 0, 196619, 262145, 1, 65549, 1, 0, 458765, 1, 0, 1048576, 1, 2, 1048581, 262145, 1, 1048588, 327681, 1, 1048592, 196609, 1, 1048599, 262145, 1, 786458, 65537, 0, 19, 1, 1, 18, 1, 0, 17, 1, 0, 16, 1, 0, 15, 1, 0, 14, 1, 0, 13, 1, 2, 12, 1, 0, 11, 1, 0, 10, 1, 0, 9, 1, 0, 8, 1, 0, 7, 1, 0, 6, 1, 0, 5, 1, 0, 4, 1, 0, 2, 1, 0, 1, 65537, 1, 0, 1, 0, 3, 1, 0, 393216, 1, 0, 327680, 1, 0, 262144, 1, 0, 786432, 262145, 2, 720896, 262145, 1, 655360, 262145, 0, 786439, 1, 0, 720903, 1, 0, 655367, 1, 0, 655366, 327681, 0, 655365, 262145, 0, 655364, 262145, 0, 655363, 262145, 0, 655362, 262145, 0, 655361, 262145, 0, 720897, 262145, 1, 786433, 262145, 2, 786434, 262145, 2, 720898, 262145, 1, 720899, 262145, 1, 786435, 262145, 2, 786436, 262145, 4, 720900, 262145, 1, 720901, 262145, 1, 786437, 262145, 1, 786438, 327681, 1, 720902, 327681, 1, 655368, 1, 0, 720904, 65537, 1, 786440, 1, 0, 786441, 1, 0, 720905, 1, 0, 655369, 1, 0, 655370, 196609, 1, 720906, 196609, 1, 786442, 196609, 1, 786443, 262145, 1, 720907, 262145, 1, 655371, 262145, 1, 655372, 327681, 1, 720908, 327681, 1, 786444, 327681, 1, 786445, 1, 0, 720909, 1, 0, 655373, 1, 0, 655374, 1, 0, 720910, 65537, 0, 786446, 1, 0, 786447, 1, 0, 720911, 1, 0, 655375, 1, 0, 655376, 196609, 1, 720912, 196609, 1, 786448, 196609, 1, 786449, 262145, 1, 720913, 262145, 1, 655377, 262145, 1, 655378, 327681, 1, 720914, 327681, 1, 786450, 327681, 1, 327687, 1, 0, 262151, 65537, 0, 262150, 1, 0, 262149, 1, 0, 262148, 1, 0, 262147, 1, 0, 262146, 1, 0, 262145, 65537, 2, 327681, 1, 0, 393217, 1, 0, 393218, 1, 0, 327682, 1, 0, 327683, 1, 0, 393219, 1, 0, 393220, 1, 1, 327684, 1, 0, 327685, 1, 0, 393221, 1, 0, 393222, 1, 0, 327686, 1, 0, 393223, 1, 0, 393224, 1, 0, 327688, 1, 0, 262152, 1, 0, 262153, 1, 0, 327689, 1, 0, 393225, 1, 2, 393226, 196609, 1, 327690, 196609, 1, 262154, 196609, 1, 262158, 262145, 2, 196622, 262145, 1, 131086, 262145, 0, 65550, 1, 0, 65551, 1, 0, 131087, 262145, 0, 196623, 262145, 1, 262159, 262145, 2, 327695, 1, 0, 327694, 1, 0, 393230, 65537, 1, 393231, 1, 0, 393232, 196609, 1, 327696, 196609, 1, 262160, 262145, 4, 196624, 262145, 1, 131088, 262145, 0, 65552, 1, 0, 65553, 1, 0, 131089, 262145, 0, 196625, 262145, 1, 262161, 262145, 1, 327697, 262145, 1, 393233, 262145, 1, 393234, 327681, 1, 327698, 327681, 1, 262162, 327681, 1, 196626, 327681, 1, 131090, 327681, 0, 65554, 1, 0, 262166, 196609, 1, 393239, 262145, 1, 786454, 196609, 1, 524313, 65537, 0, 655384, 327681, 1, 65571, 1, 0, 35, 1, 0, 34, 1, 0, 33, 1, 0, 32, 1, 0, 31, 1, 0, 30, 1, 0, 29, 1, 0, 28, 1, 0, 27, 1, 0, 26, 1, 0, 25, 1, 0, 24, 1, 0, 23, 1, 0, 22, 1, 0, 21, 1, 0, 20, 1, 0, 65562, 1, 0, 65563, 1, 0, 131099, 262145, 0, 196635, 262145, 1, 262171, 262145, 2, 262170, 262145, 2, 262169, 262145, 2, 262168, 196609, 4, 262167, 262145, 1, 327703, 262145, 1, 327702, 196609, 1, 393238, 196609, 1, 458774, 196609, 1, 524310, 196609, 1, 589846, 196609, 1, 655382, 196609, 1, 720918, 196609, 1, 720919, 262145, 1, 655383, 262145, 1, 589847, 262145, 1, 524311, 262145, 1, 458775, 262145, 1, 458776, 327681, 1, 393240, 327681, 1, 327704, 327681, 1, 327705, 1, 0, 393241, 1, 0, 458777, 1, 0, 458778, 1, 0, 393242, 1, 0, 327706, 1, 0, 327707, 1, 0, 393243, 1, 0, 458779, 1, 0, 524315, 1, 0, 524314, 1, 0, 589850, 1, 0, 589849, 1, 0, 589848, 327681, 1, 524312, 327681, 1, 655385, 1, 0, 720921, 1, 0, 720920, 327681, 1, 786456, 327681, 1, 786455, 262145, 1, 786457, 1, 0, 720922, 1, 0, 655386, 1, 0, 655387, 1, 0, 589851, 1, 0, 589852, 196609, 1, 524316, 196609, 1, 458780, 196609, 1, 393244, 196609, 1, 327708, 196609, 1, 262172, 262145, 4, 196636, 262145, 1, 131100, 262145, 0, 65564, 1, 0, 65565, 1, 0, 131101, 262145, 0, 196637, 262145, 1, 262173, 262145, 1, 327709, 262145, 1, 393245, 262145, 1, 458781, 262145, 1, 524317, 262145, 1, 589853, 262145, 1, 655389, 262145, 1, 655388, 196609, 1, 720924, 196609, 1, 720923, 1, 0, 786459, 1, 0, 851995, 1, 0, 917531, 1, 0, 983067, 1, 0, 1048603, 1, 0, 1048602, 1, 0, 1048601, 1, 0, 1048600, 327681, 1, 1114136, 327681, 1, 1114135, 262145, 1, 1114134, 262145, 5, 1048598, 196609, 1, 1048597, 1, 0, 1048596, 1, 0, 1048595, 1, 0, 1048594, 327681, 1, 1048593, 262145, 1, 1114129, 262145, 1, 1114128, 196609, 1, 1114127, 1, 0, 1048591, 1, 0, 1048590, 1, 0, 1048589, 1, 0, 1114125, 1, 0, 1114124, 327681, 1, 1114123, 262145, 1, 1048587, 262145, 1, 1048586, 196609, 1, 1048585, 1, 0, 1048584, 1, 0, 1048583, 1, 0, 1048582, 327681, 1, 1114118, 196609, 5, 1114117, 262145, 1, 1114116, 196609, 1, 1048580, 196609, 1, 1048579, 1, 0, 1048578, 1, 0, 1048577, 1, 0, 1114113, 1, 0, 1114112, 1, 0, 1179648, 1, 0, 1245184, 1, 0, 1310720, 1, 0, 1310721, 1, 0, 1245185, 1, 0, 1179649, 1, 0, 1179650, 1, 0, 1114114, 1, 0, 1114115, 1, 0, 1179651, 1, 0, 1245187, 1, 0, 1245186, 1, 0, 1310722, 1, 0, 1310723, 1, 0, 1310724, 1, 0, 1245188, 196609, 2, 1179652, 196609, 1, 1179653, 262145, 1, 1245189, 262145, 2, 1310725, 1, 0, 1310726, 1, 0, 1245190, 262145, 2, 1179654, 262145, 1, 1179655, 262145, 1, 1114119, 262145, 0, 1114120, 262145, 0, 1179656, 262145, 1, 1245192, 262145, 2, 1245191, 262145, 2, 1310727, 1, 0, 1310728, 1, 0, 1310729, 1, 0, 1245193, 262145, 2, 1179657, 262145, 1, 1114121, 262145, 0, 1114122, 262145, 5, 1179658, 262145, 1, 1245194, 262145, 2, 1310730, 1, 0, 1310731, 1, 0, 1245195, 262145, 2, 1179659, 262145, 1, 1179660, 327681, 1, 1245196, 327681, 2, 1310732, 1, 0, 1310733, 1, 0, 1245197, 65537, 1, 1179661, 1, 0, 1179662, 1, 0, 1114126, 1, 0, 1245198, 1, 0, 1310734, 1, 0, 1310735, 1, 0, 1245199, 1, 0, 1179663, 1, 0, 1179664, 196609, 1, 1245200, 196609, 2, 1310736, 1, 0, 1310737, 1, 0, 1245201, 262145, 2, 1179665, 262145, 1, 1179666, 262145, 1, 1114130, 196609, 5, 1114131, 262145, 0, 1179667, 262145, 1, 1245203, 262145, 2, 1245202, 262145, 2, 1310738, 1, 0, 1310739, 1, 0, 1310740, 1, 0, 1245204, 262145, 2, 1179668, 262145, 1, 1114132, 262145, 0, 1114133, 262145, 0, 1179669, 262145, 1, 1245205, 262145, 2, 1310741, 1, 0, 1310742, 1, 0, 1245206, 262145, 2, 1179670, 262145, 1, 1179671, 262145, 1, 1245207, 262145, 2, 1310743, 1, 0, 1310744, 1, 0, 1245208, 327681, 2, 1179672, 327681, 1, 1179673, 1, 0, 1114137, 1, 0, 1114138, 1, 0, 1179674, 1, 0, 1245210, 1, 0, 1245209, 1, 0, 1310745, 1, 0, 1310746, 1, 0, 1310747, 1, 0, 1245211, 1, 0, 1179675, 1, 0, 1114139, 1, 0, 1114140, 1, 0, 1048604, 1, 0, 983068, 1, 2, 917532, 1, 0, 851996, 1, 0, 786460, 196609, 2, 786461, 262145, 2, 720925, 262145, 1, 720926, 262145, 1, 655390, 196609, 5, 589854, 327681, 1, 524318, 327681, 1, 458782, 327681, 1, 393246, 327681, 1, 327710, 327681, 1, 262174, 327681, 1, 196638, 327681, 1, 131102, 327681, 0, 65566, 1, 1, 65567, 1, 0, 131103, 1, 0, 196639, 1, 0, 262175, 1, 0, 327711, 1, 0, 393247, 1, 0, 458783, 1, 0, 524319, 1, 0, 589855, 1, 0, 655391, 262145, 0, 720927, 262145, 1, 786463, 262145, 2, 786462, 262145, 2, 851998, 1, 0, 851997, 65537, 0, 917533, 1, 0, 983069, 1, 0, 1048605, 1, 0, 1114141, 1, 0, 1179677, 1, 0, 1179676, 1, 0, 1245212, 1, 0, 1310748, 1, 0, 1310749, 1, 0, 1245213, 1, 0, 1245214, 1, 0, 1179678, 1, 0, 1114142, 1, 0, 1048606, 1, 0, 983070, 1, 0, 917534, 1, 0, 917535, 1, 0, 851999, 1, 0, 852000, 1, 0, 786464, 262145, 2, 720928, 262145, 1, 655392, 262145, 0, 589856, 1, 0, 524320, 1, 0, 458784, 1, 0, 393248, 1, 0, 327712, 1, 0, 262176, 1, 0, 196640, 65537, 2, 131104, 1, 0, 65568, 1, 0, 65569, 1, 0, 131105, 1, 0, 196641, 1, 0, 262177, 1, 0, 327713, 1, 0, 393249, 1, 0, 458785, 1, 0, 524321, 1, 0, 589857, 1, 0, 655393, 262145, 0, 720929, 262145, 1, 786465, 262145, 2, 852001, 1, 0, 917537, 1, 0, 917536, 1, 0, 983072, 1, 0, 983071, 1, 0, 1048607, 1, 0, 1114143, 1, 0, 1179679, 1, 0, 1245215, 1, 0, 1310751, 1, 0, 1310750, 1, 0, 1310752, 1, 0, 1245216, 1, 0, 1179680, 1, 0, 1114144, 1, 0, 1048608, 1, 0, 1048609, 1, 0, 983073, 1, 0, 983074, 1, 0, 917538, 1, 0, 852002, 1, 0, 786466, 327681, 2, 720930, 327681, 1, 655394, 327681, 0, 589858, 1, 0, 524322, 1, 0, 458786, 1, 0, 393250, 1, 0, 327714, 1, 0, 262178, 1, 0, 196642, 1, 0, 131106, 1, 0, 65570, 1, 0, 131107, 1, 0, 196643, 1, 0, 262179, 1, 0, 327715, 1, 0, 393251, 1, 0, 458787, 65537, 1, 524323, 1, 0, 589859, 1, 0, 655395, 1, 0, 720931, 1, 0, 786467, 1, 0, 852003, 1, 0, 917539, 1, 0, 983075, 1, 0, 1048611, 1, 0, 1048610, 65537, 2, 1114146, 1, 0, 1114145, 1, 0, 1179681, 1, 0, 1245217, 1, 0, 1310753, 1, 0, 1310754, 1, 0, 1245218, 65537, 0, 1179682, 1, 0, 1179683, 1, 0, 1114147, 1, 0, 1245219, 1, 0, 1310755, 1, 0)
+script = ExtResource("18_7ll5d")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(2, 0)
+anchor_mode = 0
+
+[node name="PrimaryWeapon" parent="." instance=ExtResource("19_uhptx")]
+
+[node name="Towers" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("20_fc52s")
+
+[node name="Tower1" parent="Towers" groups=["Tower"] instance=ExtResource("21_8suda")]
+position = Vector2(1065, 355)
+scale = Vector2(10, 10)
+
+[node name="Turrets" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="Turret" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(273, 480)
+
+[node name="Turret2" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(467, 198)
+
+[node name="Turret3" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(659, 483)
+
+[node name="Turret4" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(851, 198)
+
+[node name="Turret5" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(176, 255)
+
+[node name="Turret7" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(908, 494)
+
+[node name="Turret6" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(659, 112)
+
+[node name="Turret8" parent="Turrets" instance=ExtResource("22_ndbl8")]
+position = Vector2(467, 482)
+
+[node name="SpawnPoints" type="Node" parent="."]
+script = ExtResource("23_p78qa")
+
+[node name="Spawner1" type="Marker2D" parent="SpawnPoints" groups=["spawn_point"]]
+position = Vector2(2, 368)
+
+[node name="WaveTimer" type="Timer" parent="SpawnPoints"]
+autostart = true
+
+[node name="SpawnInterval" type="Timer" parent="SpawnPoints"]
+one_shot = true
+
+[node name="WaveIndicatorBackGround" type="Panel" parent="SpawnPoints"]
+z_index = 5
+offset_left = 2.0
+offset_right = 84.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_mt6q3")
+
+[node name="WaveIndicator" type="Label" parent="SpawnPoints/WaveIndicatorBackGround"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -11.0
+offset_right = 36.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="UI/HUD/HBoxContainer/Pause_button" to="UI" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="UI/HUD/HBoxContainer/Fastforward_button" to="UI" method="_on_fastforward_button_pressed"]
+[connection signal="pressed" from="UI/HUD/Open_upgrade_menu" to="UI/UpgradeTree" method="_on_open_upgrade_menu_pressed"]
+[connection signal="pressed" from="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ContinueButton" to="UI" method="_on_continue_button_pressed"]
+[connection signal="pressed" from="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed" flags=3]
+[connection signal="pressed" from="UI/PausePanel/BackGround/MarginContainer/VBoxContainer/ExitButton" to="UI" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/RestartButton" to="UI" method="_on_restart_button_pressed" flags=3]
+[connection signal="pressed" from="UI/PausePanel/EndScreen/MarginContainer/VBoxContainer/HBoxContainer/ExitButton" to="UI" method="_on_exit_button_pressed"]
+[connection signal="timeout" from="UI/PausePanel/UnpauseTimer" to="UI" method="_on_unpause_timer_timeout"]
+[connection signal="timeout" from="SpawnPoints/WaveTimer" to="SpawnPoints" method="_on_wave_timer_timeout"]
+[connection signal="timeout" from="SpawnPoints/SpawnInterval" to="SpawnPoints" method="_on_spawn_interval_timeout"]

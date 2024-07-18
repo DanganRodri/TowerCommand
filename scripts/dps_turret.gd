@@ -22,6 +22,5 @@ func apply_attack():
 	new_bullet.target_pos = self.target.global_position
 	new_bullet.atk = atk * GameData.stat_bonus["atk_dps"]
 	new_bullet.def_pen = def_pen
-	#target.on_hit(atk * GameData.stat_bonus["atk_dps"] , self.def_pen)
 	reload_timer.start()
 

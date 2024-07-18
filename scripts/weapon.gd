@@ -30,8 +30,8 @@ func _process(delta):
 func shoot():
 	if Input.is_action_pressed("left_click") and is_ready:
 		var game = get_parent()
-		var enemies = game.get_all_enemies()
-		var tanks = game.get_tank_enemies()
+		var enemies = get_tree().get_nodes_in_group("enemy")
+		var tanks = get_tree().get_nodes_in_group("tank")
 		var shields = get_tree().get_nodes_in_group("shield")
 		var mouse_position = get_global_mouse_position()
 		

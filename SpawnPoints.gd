@@ -123,7 +123,20 @@ func set_level(level):
 	
 	var waveKey = levelList.keys()
 	for wave in waveKey:
-		wave = WaveData.LEVEL1[wave]
+		
+		match GameData.level:
+			1:
+				wave = WaveData.LEVEL1[wave]
+			2:
+				wave = WaveData.LEVEL1[wave]
+			3:
+				wave = WaveData.LEVEL3[wave]
+			4:
+				wave = WaveData.LEVEL1[wave]
+			_:
+				wave = WaveData.LEVEL1[wave]
+		
+		
 		var new_wave = Wave.new()
 		new_wave.set_wave(wave["EnemyList"],spawn_points[wave["SpawnPoint"]])
 		waveList.append(new_wave)

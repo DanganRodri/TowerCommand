@@ -136,6 +136,7 @@ vertical_alignment = 1
 script = ExtResource("6_tmmmc")
 
 [node name="TextureRect" type="TextureRect" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
+layout_mode = 0
 offset_left = -7.99999
 offset_top = 52.0
 offset_right = 18.0
@@ -158,6 +159,7 @@ vertical_alignment = 1
 script = ExtResource("9_xftpu")
 
 [node name="TextureRect" type="TextureRect" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
+layout_mode = 0
 offset_left = -7.99999
 offset_top = 52.0
 offset_right = 18.0
