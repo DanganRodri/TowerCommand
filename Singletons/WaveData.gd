@@ -7,7 +7,7 @@ const LEVEL1 = {
 		"SpawnPoint": 0
 	},
 	"WAVE2": {
-		"EnemyList": ["basic","tank","basic","basic","basic","tank","basic"],
+		"EnemyList": ["basic","basic","basic","basic","basic","basicL","speedy"],
 		"SpawnPoint": 0
 	},
 	"WAVE3": {
@@ -15,6 +15,10 @@ const LEVEL1 = {
 		"SpawnPoint": 0
 	},
 	"WAVE4": {
+		"EnemyList": ["basic","basic","basicL","stealth","stealth","speedyL","basic"],
+		"SpawnPoint": 0
+	},
+	"WAVE5": {
 		"EnemyList": ["basic","basic","tank","stealth","stealth","speedy","boss"],
 		"SpawnPoint": 0
 	},
@@ -27,7 +31,7 @@ const LEVEL3 = {
 		"SpawnPoint": 0
 	},
 	"WAVE2": {
-		"EnemyList": ["basic","tank","basic","basic","basic","tank","basic"],
+		"EnemyList": ["basic","speedy","basic","basic","basic","speedy","basic"],
 		"SpawnPoint": 2
 	},
 	"WAVE3": {
@@ -35,8 +39,21 @@ const LEVEL3 = {
 		"SpawnPoint": 1
 	},
 	"WAVE4": {
-		"EnemyList": ["basic","basic","tank","stealth","stealth","speedy","boss"],
+		"EnemyList": ["basic","basic","tank","stealth","stealth","speedy","speedy"],
 		"SpawnPoint": 1
+	},
+	
+	"WAVE5": {
+		"EnemyList": ["basic","speedy","basic","basic","basic","speedy","basic"],
+		"SpawnPoint": 2
+	},
+	"WAVE6": {
+		"EnemyList": ["basicL","speedyL","jammer","speedy","basic","basic","stealthL"],
+		"SpawnPoint": 1
+	},
+	"WAVE7": {
+		"EnemyList": ["basic","basic","tank","basic","stealth","speedyL","boss"],
+		"SpawnPoint": 0
 	},
 }
 

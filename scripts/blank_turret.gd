@@ -105,3 +105,11 @@ func check_active_skills(turret):
 		var skill = turret.get_node("Skill/Skill")
 		skill.global_position = turret.position + GameData.SKILL_OFFSET
 		skill.show()
+	if turret.is_in_group("aoe") and GameData.active_skills["aoe"]:
+		var skill = turret.get_node("Skill/Skill")
+		skill.global_position = turret.position + GameData.SKILL_OFFSET
+		skill.show()
+	if turret.is_in_group("sniper") and GameData.active_skills["sniper"]:
+		var skill = turret.get_node("Skill/Skill")
+		skill.global_position = turret.position + GameData.SKILL_OFFSET
+		skill.show()

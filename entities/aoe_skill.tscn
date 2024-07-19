@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxvjnca3giwiq"]
+
+[ext_resource type="Script" path="res://scripts/aoe_skill.gd" id="1_7ssj3"]
+[ext_resource type="Script" path="res://scripts/CollisionRadius.gd" id="2_gjuxs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3hswo"]
+
+[node name="Aoe skill" type="Area2D"]
+script = ExtResource("1_7ssj3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3hswo")
+script = ExtResource("2_gjuxs")
+
+[node name="Skill_timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Skill_timer" to="." method="_on_skill_timer_timeout"]

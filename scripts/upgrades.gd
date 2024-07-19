@@ -74,6 +74,9 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.BurningAoe:
 			upgrade.effect = burning_aoe
 			upgrade.description = "Transforms all aoe turrets into burning aoe turrets that burns enemies on hit, causing damage to them over time." + "\n\n" + "Base stats increased." + "\n\n" + "(All the aoe turrets builded for the rest of the game will be burning aoe turrets)"
+		UpgradeNode.Effect.AoeSkill:
+			upgrade.effect = aoe_skill
+			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Deals damage and burns enemies in a big area."
 		UpgradeNode.Effect.BurnUpgrade:
 			upgrade.effect = burn_upgrade
 			upgrade.description = "Increases burn damage."
@@ -95,9 +98,25 @@ func set_effect(upgrade : UpgradeNode):
 		UpgradeNode.Effect.GlobalSniper:
 			upgrade.effect = global_sniper
 			upgrade.description = "Transforms all sniper turrets into global sniper turrets that has infinite range, its bullets pierces through enemies dealing damage each enemy on impact ." + "\n\n" + "Base stats increased." + "\n\n" + "(All the sniper turrets builded for the rest of the game will be global sniper turrets)"
+		UpgradeNode.Effect.SniperSkill:
+			upgrade.effect = sniper_skill
+			upgrade.description = "Unlocks the tower skill." + "\n\n" + "Deals A LOT of damage in a small area."
 		UpgradeNode.Effect.BulletSize:
 			upgrade.effect = bullet_size
 			upgrade.description = "Increses the size of the bullets and slightly their damage."
+		UpgradeNode.Effect.PlayerGold:
+			upgrade.effect = player_gold
+			upgrade.description = "Increses the gold obtained by a small amount."
+		UpgradeNode.Effect.PlayerTurretDiscount:
+			upgrade.effect = player_turret_discount
+			upgrade.description = "Reduces the cost of leveling turrets."
+		UpgradeNode.Effect.PlayerUpgradeDiscount:
+			upgrade.effect = player_upgrade_discount
+			upgrade.description = "Reduces the cost of turret upgrades in the upgrade tree."
+		UpgradeNode.Effect.PlayerLvlUp:
+			upgrade.effect = player_lvl_up
+			upgrade.description = "Increases players damage and defense penetration."
+		
 ###	DPS UPGRADES /---------------------------------------------------------------------------------------------/
 
 func atk_dps(_upgrade):
@@ -268,6 +287,21 @@ func burning_aoe(_upgrade):
 		create_advanced_turret("res://entities/burning_aoe_turret.tscn", aoe_turret)
 	GameData.advanced_turrets["burning_aoe"] = true
 
+func aoe_skill(_upgrade):
+	var aoe_turrets = get_tree().get_nodes_in_group("aoe")
+	
+	if _upgrade.level == 1:
+		for aoe_turret in aoe_turrets:
+			var aoe_skill = aoe_turret.get_node("Skill/Skill")
+			aoe_skill.show()
+			aoe_skill.global_position = aoe_turret.position + GameData.SKILL_OFFSET
+		GameData.active_skills["aoe"] = true
+		_upgrade.description = "Reduces the skill cooldown."
+		_upgrade.desc.text = _upgrade.description
+	else:
+		for aoe_turret in aoe_turrets:
+			aoe_turret.skill.cd -= 5
+
 func burn_upgrade(_upgrade):
 	GameData.stat_bonus["burn_damage"] += 1.5
 
@@ -309,8 +343,37 @@ func global_sniper(_upgrade):
 		create_advanced_turret("res://entities/global_sniper_turret.tscn", sniper_turret)
 	GameData.advanced_turrets["global_sniper"] = true
 
+func sniper_skill(_upgrade):
+	var sniper_turrets = get_tree().get_nodes_in_group("sniper")
+	
+	if _upgrade.level == 1:
+		for sniper_turret in sniper_turrets:
+			var sniper_skill = sniper_turret.get_node("Skill/Skill")
+			sniper_skill.show()
+			sniper_skill.global_position = sniper_turret.position + GameData.SKILL_OFFSET
+		GameData.active_skills["sniper"] = true
+		_upgrade.description = "Reduces the skill cooldown."
+		_upgrade.desc.text = _upgrade.description
+	else:
+		for sniper_turret in sniper_turrets:
+			sniper_turret.skill.cd -= 5
+
 func bullet_size(_upgrade):
 	GameData.stat_bonus["bullet_size"] += 0.5
+
+###	Player UPGRADES /---------------------------------------------------------------------------------------------/
+
+func player_gold(_upgrade):
+	GameData.stat_bonus["gold_gain"] += 0.075
+
+func player_turret_discount(_upgrade):
+	GameData.stat_bonus["turret_discount"] -= 0.15
+
+func player_upgrade_discount(_upgrade):
+	GameData.stat_bonus["upgrade_discount"] -= 0.15
+
+func player_lvl_up(_upgrade):
+	GameData.stat_bonus["player_bonuses"] += 0.025
 
 ###	OTHER STUFF /---------------------------------------------------------------------------------------------/
 func wip(_upgrade):

@@ -137,11 +137,11 @@ func _on_range_body_exited(body):
 	enemy_in_sight.erase(body)
 
 func _on_upgrade_pressed():
-	if GameData.gold >= self.cost:
-		GameData.gold -= self.cost
+	if GameData.gold >= self.cost * GameData.stat_bonus["turret_discount"]:
+		GameData.gold -= self.cost * GameData.stat_bonus["turret_discount"]
 		self.level = self.level + 1
-		self.total_cost = self.total_cost + self.cost
-		self.cost = self.cost + (self.cost * 0.6)
+		self.total_cost = self.total_cost + (self.cost * GameData.stat_bonus["turret_discount"])
+		self.cost = self.cost + (self.cost * 0.35)
 		self.atk = self.atk + (self.atk * 0.2)
 		self.atk_speed = self.atk_speed - (self.atk_speed * 0.05)
 		self.def_pen = min(self.def_pen + (self.def_pen * 0.2), 100.0)

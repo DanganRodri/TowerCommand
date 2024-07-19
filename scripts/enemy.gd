@@ -51,6 +51,9 @@ func _ready():
 	get_target()
 	get_route()
 	
+	self.hp *= GameData.stat_bonus["endless_bonus"]
+	self.def *= GameData.stat_bonus["endless_bonus"]
+	
 	damage_timer = Timer.new()
 	damage_timer.wait_time = 0.035
 	damage_timer.one_shot = true
@@ -185,8 +188,11 @@ func status_effect(effect,duration,value):
 			self.burned = true
 
 func on_destroy():
-	AudioHandler.play_SFX("res://SFX/478328__joao_janz__8-bit-gun-2_4.wav")
-	GameData.gold = min(GameData.MAX_GOLD, GameData.gold + (self.gold * GameData.Challenges["GoldGainPercentage"]) )
+	if not self is Boss:
+		AudioHandler.play_SFX("res://SFX/478328__joao_janz__8-bit-gun-2_4.wav")
+	else:
+		AudioHandler.play_SFX("res://SFX/boss_defeated.wav")
+	GameData.gold = min(GameData.MAX_GOLD, GameData.gold + ( (self.gold * GameData.stat_bonus["gold_gain"]) * GameData.Challenges["GoldGainPercentage"]) )
 	GameData.score = min(GameData.MAX_SCORE, roundi( GameData.score + self.gold ))
 	self.queue_free()
 	

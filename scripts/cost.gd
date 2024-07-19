@@ -13,9 +13,9 @@ func _process(delta):
 			self.modulate = Color(1, 1, 1)
 		self.text = str( blank_turret.cost )
 	else:
-		if turret.cost > GameData.gold:
+		if turret.cost * GameData.stat_bonus["turret_discount"] > GameData.gold :
 			self.modulate = Color(1, 0, 0)
 		else:
 			self.modulate = Color(1, 1, 1)
-		self.text = str( turret.cost )
+		self.text = str(  roundi( turret.cost * GameData.stat_bonus["turret_discount"] ) )
 

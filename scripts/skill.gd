@@ -9,7 +9,6 @@ var damage = 1
 @onready var collision_shape_2d = $CollisionShape2D
 
 func _ready():
-	skill_timer.start()
 	collision_shape_2d.shape.radius = 100
 	
 func _process(delta):
@@ -25,6 +24,7 @@ func _input(event):
 		Engine.set_time_scale(GameData.FASTFORWARD_STAGES[GameData.fastforward_actual_stage])
 		get_parent().disabled = true
 		get_parent().go_on_cd = true
+		skill_timer.start()
 	
 	if event.is_action_pressed("right_click") and skill_mode:
 		skill_mode = false

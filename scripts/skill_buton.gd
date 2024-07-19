@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 @onready var timer_progress = $TextureProgressBar
 @onready var skill_cd = $Skill_CD

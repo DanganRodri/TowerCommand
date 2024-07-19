@@ -1,9 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://g3qp2um41wts"]
+[gd_scene load_steps=21 format=3 uid="uid://g3qp2um41wts"]
 
 [ext_resource type="Script" path="res://scripts/ice_turret.gd" id="1_r7ys7"]
 [ext_resource type="Texture2D" uid="uid://heb6vqk1smu1" path="res://assets/sprites/ice_turret-sheet.png" id="2_1e418"]
 [ext_resource type="Script" path="res://scripts/UpgradeList.gd" id="3_2p0uc"]
 [ext_resource type="Script" path="res://scripts/shoot_animation.gd" id="3_o4s2u"]
+[ext_resource type="Texture2D" uid="uid://chc3bxftqx2gb" path="res://assets/HUD/lvl_up_button.png" id="5_gk4b5"]
+[ext_resource type="Script" path="res://scripts/cost.gd" id="6_7dkxy"]
+[ext_resource type="Texture2D" uid="uid://dw55pvs0h0cyj" path="res://assets/HUD/gold.png" id="7_dqqh4"]
+[ext_resource type="Texture2D" uid="uid://datyne1f50dlu" path="res://assets/HUD/discard_buton.png" id="8_1u830"]
+[ext_resource type="Script" path="res://scripts/discard.gd" id="9_nhyxs"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="10_uxvgd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w5c3m"]
 atlas = ExtResource("2_1e418")
@@ -73,32 +79,6 @@ size = Vector2(60.5, 61)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dntdq"]
 radius = 175.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ktumx"]
-bg_color = Color(0.176471, 0.701961, 0.501961, 1)
-border_width_left = 7
-border_width_top = 7
-border_width_right = 7
-border_width_bottom = 7
-border_color = Color(0.376471, 0.933333, 0.47451, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqe0l"]
-bg_color = Color(0.901961, 0, 0, 1)
-border_width_left = 7
-border_width_top = 7
-border_width_right = 7
-border_width_bottom = 7
-border_color = Color(1, 0.509804, 0.435294, 1)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [node name="Ice Turret" type="StaticBody2D" groups=["builded_turret", "ice"]]
 z_index = 1
 input_pickable = true
@@ -136,49 +116,73 @@ anchor_right = 0.124
 anchor_bottom = 0.225
 offset_left = 1.55199
 offset_top = 3.272
-offset_right = 2.15198
-offset_bottom = 3.2
+offset_right = 2.15201
+offset_bottom = 47.2
 script = ExtResource("3_2p0uc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
 layout_mode = 0
 offset_top = 12.0
 offset_right = 231.0
-offset_bottom = 61.0
+offset_bottom = 64.0
 theme_override_constants/separation = 42
 alignment = 1
 
-[node name="Upgrade" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+[node name="Upgrade" type="TextureButton" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_ktumx")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ktumx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ktumx")
+texture_normal = ExtResource("5_gk4b5")
+stretch_mode = 0
 
 [node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
 layout_mode = 0
-offset_left = -8.99999
+offset_left = 18.0
 offset_top = 52.0
-offset_right = 58.0
+offset_right = 61.0
 offset_bottom = 78.0
-text = "Upgrade"
-horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_7dkxy")
 
-[node name="Discard" type="Button" parent="Upgrade/UpgradeList/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Upgrade/UpgradeList/HBoxContainer/Upgrade"]
+layout_mode = 0
+offset_left = -7.99999
+offset_top = 52.0
+offset_right = 18.0
+offset_bottom = 77.0
+texture = ExtResource("7_dqqh4")
+
+[node name="Discard" type="TextureButton" parent="Upgrade/UpgradeList/HBoxContainer"]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_rqe0l")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rqe0l")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_rqe0l")
+texture_normal = ExtResource("8_1u830")
+stretch_mode = 0
 
-[node name="Discard" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
+[node name="Label" type="Label" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
 layout_mode = 0
-offset_left = -4.0
+offset_left = 18.0
 offset_top = 52.0
-offset_right = 55.0
+offset_right = 61.0
 offset_bottom = 78.0
-text = "Discard"
-horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_nhyxs")
+
+[node name="TextureRect" type="TextureRect" parent="Upgrade/UpgradeList/HBoxContainer/Discard"]
+layout_mode = 0
+offset_left = -7.99999
+offset_top = 52.0
+offset_right = 18.0
+offset_bottom = 77.0
+texture = ExtResource("7_dqqh4")
+
+[node name="Level" type="Label" parent="Upgrade/UpgradeList"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 99.0
+offset_right = 126.0
+offset_bottom = 125.0
+text = "Level: "
+vertical_alignment = 1
+script = ExtResource("10_uxvgd")
 
 [node name="Bullets" type="Node" parent="."]
 

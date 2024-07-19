@@ -28,6 +28,9 @@ func _ready():
 	self.position = Vector2(100000,50)
 	find_turret()
 	
+	for shield in shields.get_children():
+		shield.hp *= GameData.stat_bonus["endless_bonus"]
+	
 	damage_timer = Timer.new()
 	damage_timer.wait_time = 0.035
 	damage_timer.one_shot = true
@@ -55,7 +58,7 @@ func _process(delta):
 	if shields.get_children().size() != 0:
 		self.inmune = true
 	else:
-		self.inmune = false
+		on_destroy()
 	
 	if color == Color():
 		color = sprite.modulate

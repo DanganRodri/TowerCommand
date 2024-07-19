@@ -1,6 +1,7 @@
 extends Turret
 
 class_name GlobalSniperTurret
+@onready var skill = $Skill/Skill
 
 var bullet = preload("res://entities/global_sniper_bullet.tscn")
 
@@ -28,3 +29,10 @@ func apply_attack():
 	new_bullet.scale *= GameData.stat_bonus["bullet_size"]
 	#target.on_hit(atk, def_pen)
 	reload_timer.start()
+
+
+func _on_skill_pressed():
+	var sniper_skill = load("res://entities/sniper_skill.tscn").instantiate()
+	sniper_skill.damage = self.atk * 3
+	skill.add_child(sniper_skill)
+	sniper_skill.global_position = self.position

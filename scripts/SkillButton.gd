@@ -37,6 +37,10 @@ enum Effect {
 	GlobalSniper,
 	SniperSkill,
 	BulletSize,
+	PlayerGold,
+	PlayerTurretDiscount,
+	PlayerUpgradeDiscount,
+	PlayerLvlUp
 }
 
 @onready var panel = $Panel
@@ -95,7 +99,7 @@ func _on_pressed():
 		
 		desc.text = description
 		var upgrade_cost = gold_container.get_node("Upgrade_cost")
-		upgrade_cost.cost = self.cost
+		upgrade_cost.cost = self.cost * GameData.stat_bonus["upgrade_discount"]
 		gold_container.show()
 		
 		return
@@ -105,10 +109,14 @@ func _on_pressed():
 		if level == max_level:
 			return
 		
-		if cost > GameData.gold:
+		if cost * GameData.stat_bonus["upgrade_discount"] > GameData.gold:
 			return
 		
-		GameData.gold -= cost
+		GameData.gold -= cost * GameData.stat_bonus["upgrade_discount"]
+		cost += 50
+		var upgrade_cost = gold_container.get_node("Upgrade_cost")
+		upgrade_cost.cost = self.cost * GameData.stat_bonus["upgrade_discount"]
+		gold_container.show()
 		
 		level = min(level + 1, max_level)
 		apply_effect()

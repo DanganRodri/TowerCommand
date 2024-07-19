@@ -15,6 +15,7 @@ var atk_speed = 0.1
 var is_ready : bool = true
 var type = weapon_type.AR
 var atk = 4
+var def_pen = 0.2
 
 
 const cursor = preload("res://assets/HUD/cursor_big.png")
@@ -41,7 +42,8 @@ func shoot():
 			var barrier_col = barrier.get_node("CollisionShape2D")
 			var colliderSize = barrier_col.get_shape().get_rect().size
 			if GlobalFunctions.collidesWithPoint(mouse_position, barrier.global_position, colliderSize):
-				barrier.on_hit(self.atk)
+				AudioHandler.play_player_SFX("res://SFX/player_shot2.wav")
+				barrier.on_hit(self.atk * GameData.stat_bonus["player_bonuses"])
 				is_ready = false
 				timer.start()
 				sprite_timer.start()
@@ -51,7 +53,8 @@ func shoot():
 		for shield in shields:
 			var colliderSize = shield.get_shape().get_rect().size
 			if GlobalFunctions.collidesWithPoint(mouse_position, shield.global_position, colliderSize):
-				shield.on_hit(atk)
+				AudioHandler.play_player_SFX("res://SFX/player_shot2.wav")
+				shield.on_hit(atk * GameData.stat_bonus["player_bonuses"])
 				is_ready = false
 				timer.start()
 				sprite_timer.start()
@@ -62,7 +65,8 @@ func shoot():
 			var colliderSize = enemy.get_child(1).get_shape().get_rect().size
 		
 			if GlobalFunctions.collidesWithPoint(mouse_position, enemy.position, colliderSize) and enemy.inmune == false:
-				enemy.on_hit(self.atk, 0)
+				AudioHandler.play_player_SFX("res://SFX/player_shot2.wav")
+				enemy.on_hit(self.atk * GameData.stat_bonus["player_bonuses"] , def_pen * GameData.stat_bonus["player_bonuses"])
 				is_ready = false
 				timer.start()
 				sprite_timer.start()

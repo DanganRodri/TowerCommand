@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bft1br0dn1qqa"]
+[gd_scene load_steps=20 format=3 uid="uid://bft1br0dn1qqa"]
 
 [ext_resource type="Script" path="res://scripts/dps_turret.gd" id="1_xgn6f"]
 [ext_resource type="Texture2D" uid="uid://di3ts2e6gnu25" path="res://assets/sprites/Dps_turret-sheet.png" id="2_okx31"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/cost.gd" id="6_tmmmc"]
 [ext_resource type="Texture2D" uid="uid://dw55pvs0h0cyj" path="res://assets/HUD/gold.png" id="7_oe3s7"]
 [ext_resource type="Script" path="res://scripts/discard.gd" id="9_xftpu"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="10_seyct"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pipkb"]
 atlas = ExtResource("2_okx31")
@@ -108,8 +109,8 @@ anchor_right = 0.124
 anchor_bottom = 0.225
 offset_left = 1.55199
 offset_top = 3.272
-offset_right = 2.15198
-offset_bottom = 3.2
+offset_right = 2.15201
+offset_bottom = 47.2
 script = ExtResource("3_4of2i")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/UpgradeList"]
@@ -165,6 +166,16 @@ offset_top = 52.0
 offset_right = 18.0
 offset_bottom = 77.0
 texture = ExtResource("7_oe3s7")
+
+[node name="Level" type="Label" parent="Upgrade/UpgradeList"]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 99.0
+offset_right = 126.0
+offset_bottom = 125.0
+text = "Level: "
+vertical_alignment = 1
+script = ExtResource("10_seyct")
 
 [node name="Bullets" type="Node" parent="."]
 

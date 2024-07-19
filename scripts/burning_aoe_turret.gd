@@ -1,6 +1,7 @@
 extends Turret
 
 class_name BurningAoeTurret
+@onready var skill = $Skill/Skill
 
 var explosion_radius : float = 75.0
 var bullet = preload("res://entities/bullet.tscn")
@@ -15,6 +16,7 @@ func _ready():
 
 
 func apply_attack():
+	AudioHandler.play_SFX("res://SFX/shot.wav")
 	reloading = true
 	var new_bullet : Bullet = bullet.instantiate()
 	get_node("Bullets").add_child(new_bullet)
@@ -51,4 +53,9 @@ func area_hit():
 			enemy.collider.status_effect("burn", GameData.BASE_BURN_DURATION , 0)
 	
 	
-	
+
+func _on_skill_pressed():
+	var aoe_skill = load("res://entities/aoe_skill.tscn").instantiate()
+	aoe_skill.damage = self.atk * 2.15
+	skill.add_child(aoe_skill)
+	aoe_skill.global_position = self.position

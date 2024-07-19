@@ -13,9 +13,10 @@ shape = SubResource("CircleShape2D_3hswo")
 script = ExtResource("1_fb6nf")
 
 [node name="Skill_timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 8.0
 
 [node name="DoT_timer" type="Timer" parent="."]
+wait_time = 1.6
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

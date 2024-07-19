@@ -33,7 +33,17 @@ func _ready():
 	if GameData.Challenges["Endless"]:
 		generate_wave()
 	else:
-		set_level(WaveData.LEVEL1)
+		match GameData.level:
+			1:
+				set_level(WaveData.LEVEL1)
+			2:
+				set_level(WaveData.LEVEL1)
+			3:
+				set_level(WaveData.LEVEL3)
+			4:
+				set_level(WaveData.LEVEL1)
+			_:
+				set_level(WaveData.LEVEL1)
 	
 	var totalWaves = waveList.size()
 
@@ -73,6 +83,9 @@ func generate_enemy_list() -> Array[String]:
 	
 	if (wave+1) % 5 == 0:
 		wave_size += 1
+	
+	if (wave+1) % 3 == 0:
+		GameData.stat_bonus["endless_bonus"] += 0.05
 	
 	return enemyList
 
@@ -123,18 +136,7 @@ func set_level(level):
 	
 	var waveKey = levelList.keys()
 	for wave in waveKey:
-		
-		match GameData.level:
-			1:
-				wave = WaveData.LEVEL1[wave]
-			2:
-				wave = WaveData.LEVEL1[wave]
-			3:
-				wave = WaveData.LEVEL3[wave]
-			4:
-				wave = WaveData.LEVEL1[wave]
-			_:
-				wave = WaveData.LEVEL1[wave]
+		wave = level[wave]
 		
 		
 		var new_wave = Wave.new()

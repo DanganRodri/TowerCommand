@@ -50,6 +50,7 @@ func select_second_enemy():
 func apply_attack():
 	reloading = true
 	if target != null:
+		AudioHandler.play_SFX("res://SFX/shot.wav")
 		var new_bullet : Bullet = bullet.instantiate()
 		get_node("Bullets").add_child(new_bullet)
 		new_bullet.global_position = self.global_position
@@ -60,6 +61,7 @@ func apply_attack():
 		#target.on_hit(atk * GameData.stat_bonus["atk_dps"], def_pen * GameData.stat_bonus["def_pen_dps"])
 		
 	if second_target != null:
+		AudioHandler.play_SFX("res://SFX/shot.wav")
 		var new_bullet : Bullet = bullet.instantiate()
 		get_node("Bullets").add_child(new_bullet)
 		new_bullet.global_position = self.global_position
@@ -71,9 +73,10 @@ func apply_attack():
 	reload_timer.start()
 
 func _on_skill_pressed():
-	var ice_skill = load("res://entities/dps_skill.tscn").instantiate()
-	skill.add_child(ice_skill)
-	ice_skill.global_position = self.position
+	var dps_skill = load("res://entities/dps_skill.tscn").instantiate()
+	dps_skill.damage = self.atk * 0.4
+	skill.add_child(dps_skill)
+	dps_skill.global_position = self.position
 
 func _on_range_body_exited(body):
 	if body == target:

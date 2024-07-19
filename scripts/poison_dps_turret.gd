@@ -20,6 +20,7 @@ func _ready():
 
 
 func apply_attack():
+	AudioHandler.play_SFX("res://SFX/shot.wav")
 	reloading = true
 	var new_bullet : Bullet = bullet.instantiate()
 	get_node("Bullets").add_child(new_bullet)

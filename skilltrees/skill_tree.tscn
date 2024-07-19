@@ -78,6 +78,7 @@ offset_right = -1025.0
 offset_bottom = -281.0
 texture_normal = ExtResource("5_1gjmb")
 effect_id = 12
+cost = 200
 
 [node name="UpgradeButton" parent="IceSkills" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -87,6 +88,7 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("6_up8x5")
 effect_id = 11
+cost = 300
 
 [node name="UpgradeButton" parent="IceSkills/UpgradeButton" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -98,6 +100,7 @@ disabled = true
 texture_normal = ExtResource("5_vyn5r")
 max_level = 1
 effect_id = 13
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="IceSkills/UpgradeButton/UpgradeButton" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -109,6 +112,7 @@ offset_bottom = 56.0
 disabled = true
 texture_normal = ExtResource("8_d16s3")
 max_level = 2
+cost = 300
 
 [node name="UpgradeButton2" parent="IceSkills/UpgradeButton/UpgradeButton" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -119,6 +123,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("9_acsv1")
 effect_id = 14
+cost = 550
 
 [node name="UpgradeButton3" parent="IceSkills/UpgradeButton" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -130,6 +135,7 @@ disabled = true
 texture_normal = ExtResource("6_64083")
 max_level = 1
 effect_id = 15
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="IceSkills/UpgradeButton/UpgradeButton3" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -141,6 +147,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("11_mjke5")
 effect_id = 16
+cost = 550
 
 [node name="UpgradeButton2" parent="IceSkills/UpgradeButton/UpgradeButton3" groups=["ice_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -152,6 +159,7 @@ disabled = true
 texture_normal = ExtResource("12_vhcv1")
 max_level = 2
 effect_id = 1
+cost = 300
 
 [node name="DpsSkills" parent="." groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -163,6 +171,7 @@ offset_right = -1025.0
 offset_bottom = -281.0
 texture_normal = ExtResource("13_va2y6")
 effect_id = 3
+cost = 200
 
 [node name="UpgradeButton" parent="DpsSkills" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -173,6 +182,7 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("14_xbe4j")
 effect_id = 4
+cost = 300
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -185,6 +195,7 @@ disabled = true
 texture_normal = ExtResource("7_t08go")
 max_level = 1
 effect_id = 5
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -198,6 +209,7 @@ disabled = true
 texture_normal = ExtResource("16_u4r87")
 max_level = 2
 effect_id = 7
+cost = 300
 
 [node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -209,6 +221,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("17_d3dct")
 effect_id = 6
+cost = 550
 
 [node name="UpgradeButton3" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -221,6 +234,7 @@ disabled = true
 texture_normal = ExtResource("8_issny")
 max_level = 1
 effect_id = 8
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton/UpgradeButton3" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -233,6 +247,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("19_fng1c")
 effect_id = 9
+cost = 550
 
 [node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton3" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -245,6 +260,7 @@ disabled = true
 texture_normal = ExtResource("20_npqhk")
 max_level = 2
 effect_id = 10
+cost = 300
 
 [node name="AoeSkills" parent="." groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -256,6 +272,7 @@ offset_right = -1025.0
 offset_bottom = -281.0
 texture_normal = ExtResource("13_va2y6")
 effect_id = 18
+cost = 200
 
 [node name="UpgradeButton" parent="AoeSkills" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -265,6 +282,7 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("14_xbe4j")
 effect_id = 19
+cost = 300
 
 [node name="UpgradeButton" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -276,6 +294,7 @@ disabled = true
 texture_normal = ExtResource("9_7hkam")
 max_level = 1
 effect_id = 20
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="AoeSkills/UpgradeButton/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -298,6 +317,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("22_fleem")
 effect_id = 21
+cost = 550
 
 [node name="UpgradeButton3" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -309,6 +329,7 @@ disabled = true
 texture_normal = ExtResource("10_e2x2a")
 max_level = 1
 effect_id = 23
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -320,6 +341,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("23_nn83s")
 effect_id = 24
+cost = 550
 
 [node name="UpgradeButton2" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -331,6 +353,7 @@ disabled = true
 texture_normal = ExtResource("24_q187o")
 max_level = 2
 effect_id = 25
+cost = 300
 
 [node name="SniperSkills" parent="." groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -342,6 +365,7 @@ offset_right = -1025.0
 offset_bottom = -281.0
 texture_normal = ExtResource("20_npqhk")
 effect_id = 26
+cost = 200
 
 [node name="UpgradeButton" parent="SniperSkills" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -351,6 +375,7 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("14_xbe4j")
 effect_id = 27
+cost = 300
 
 [node name="UpgradeButton" parent="SniperSkills/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -362,6 +387,7 @@ disabled = true
 texture_normal = ExtResource("11_n4gpu")
 max_level = 1
 effect_id = 28
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="SniperSkills/UpgradeButton/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -374,6 +400,7 @@ disabled = true
 texture_normal = ExtResource("13_va2y6")
 max_level = 2
 effect_id = 30
+cost = 300
 
 [node name="UpgradeButton2" parent="SniperSkills/UpgradeButton/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -384,6 +411,7 @@ offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("12_yl8ab")
 effect_id = 29
+cost = 550
 
 [node name="UpgradeButton3" parent="SniperSkills/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -395,6 +423,7 @@ disabled = true
 texture_normal = ExtResource("13_ldtua")
 max_level = 1
 effect_id = 31
+cost = 500
 exclusive = true
 
 [node name="UpgradeButton" parent="SniperSkills/UpgradeButton/UpgradeButton3" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -405,7 +434,8 @@ offset_right = 160.0
 offset_bottom = -56.0
 disabled = true
 texture_normal = ExtResource("20_ulvpr")
-effect_id = 24
+effect_id = 32
+cost = 550
 
 [node name="UpgradeButton2" parent="SniperSkills/UpgradeButton/UpgradeButton3" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -417,6 +447,7 @@ disabled = true
 texture_normal = ExtResource("29_pa5a0")
 max_level = 2
 effect_id = 33
+cost = 300
 
 [node name="PlayerSkills" parent="." groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -428,7 +459,8 @@ offset_right = -1002.0
 offset_bottom = -393.0
 texture_normal = ExtResource("21_lkks6")
 max_level = 1
-effect_id = 26
+effect_id = 34
+cost = 200
 
 [node name="UpgradeButton" parent="PlayerSkills" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -438,7 +470,8 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("21_lkks6")
 max_level = 1
-effect_id = 27
+effect_id = 35
+cost = 300
 
 [node name="UpgradeButton3" parent="PlayerSkills/UpgradeButton" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -448,7 +481,8 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("21_lkks6")
 max_level = 1
-effect_id = 27
+effect_id = 34
+cost = 400
 
 [node name="UpgradeButton2" parent="PlayerSkills/UpgradeButton/UpgradeButton3" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -458,7 +492,8 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("21_lkks6")
 max_level = 1
-effect_id = 27
+effect_id = 36
+cost = 500
 
 [node name="UpgradeButton3" parent="PlayerSkills/UpgradeButton/UpgradeButton3/UpgradeButton2" groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
 layout_mode = 1
@@ -468,7 +503,8 @@ offset_bottom = 0.0
 disabled = true
 texture_normal = ExtResource("21_lkks6")
 max_level = 1
-effect_id = 27
+effect_id = 34
+cost = 750
 
 [node name="PlayerSkills2" parent="." groups=["player_upgrade_button"] instance=ExtResource("1_r7i35")]
 process_mode = 3
@@ -480,7 +516,8 @@ offset_right = -778.0
 offset_bottom = -194.0
 texture_normal = ExtResource("22_0qcke")
 max_level = 15436
-effect_id = 26
+effect_id = 37
+cost = 100
 
 [node name="UpgradeDesc" type="TextEdit" parent="."]
 unique_name_in_owner = true

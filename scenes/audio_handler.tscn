@@ -8,9 +8,17 @@ script = ExtResource("1_o4e2c")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
+volume_db = -5.622
+bus = &"Music"
+
+[node name="player_SFX" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+max_polyphony = 30
+bus = &"Player_SFX"
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 max_polyphony = 30
+bus = &"SFX"
 
 [connection signal="finished" from="Music" to="." method="_on_music_finished"]

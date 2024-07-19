@@ -6,7 +6,7 @@ var game_ended : bool = false
 
 
 const MAX_GOLD = 99999
-const INITIAL_GOLD_ENDLESS = 5000
+const INITIAL_GOLD_ENDLESS = 3000
 const INITIAL_GOLD_CAMPAING = 300
 const MAX_SCORE = 99999999
 const FASTFORWARD_STAGES = [1.0, 1.5, 2.0]
@@ -31,7 +31,7 @@ const BASE_POISON_DURATION = 3
 const BASE_POISON_DOT = 1
 const MAX_BOSS_POISON_STAKS = 3
 
-const SKILL_OFFSET = Vector2(40,-6)
+const SKILL_OFFSET = Vector2(40,-15)
 
 const SPAWN_INTERVAL_BASE = 1.0
 const WAVE_INTERVAL = 11.5
@@ -60,7 +60,7 @@ const COLOR_DATA = {
 	}
 }
 
-var gold : int = 5000
+var gold : int = 3000
 var initial_gold = gold
 var score : int = 0
 var score_increase = 0
@@ -100,7 +100,11 @@ var stat_bonus = {
 	"atk_sniper": 1,
 	"def_pen_sniper": 1,
 	"bullet_size": 1,
-	"gold_gain": 1
+	"gold_gain": 1,
+	"turret_discount": 1,
+	"upgrade_discount": 1,
+	"player_bonuses": 1,
+	"endless_bonus":1
 }
 
 var advanced_turrets = {
@@ -132,6 +136,7 @@ var active_skills = {
 
 func reset_bonuses():
 	
+	game_ended = false
 	gold = initial_gold
 	score = 0
 	health = 30
@@ -163,7 +168,11 @@ func reset_bonuses():
 	"atk_sniper": 1,
 	"def_pen_sniper": 1,
 	"bullet_size": 1,
-	"gold_gain": 1
+	"gold_gain": 1,
+	"turret_discount": 1,
+	"upgrade_discount": 1,
+	"player_bonuses": 1,
+	"endless_bonus":1
 }
 
 	advanced_turrets = {
