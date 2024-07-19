@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://b11qa1ok58ptg"]
+[gd_scene load_steps=46 format=3 uid="uid://b11qa1ok58ptg"]
 
 [ext_resource type="Script" path="res://scripts/upgrade_tree_menu.gd" id="1_71stc"]
 [ext_resource type="Texture2D" uid="uid://b1a6ulnhl4opq" path="res://assets/HUD/box_background.png" id="1_r3b73"]
@@ -24,14 +24,24 @@
 [ext_resource type="Texture2D" uid="uid://dgtyxft2a526x" path="res://assets/HUD/dps_up_button.png" id="12_vhcv1"]
 [ext_resource type="Texture2D" uid="uid://mk1guuydirq2" path="res://assets/HUD/charged_plasma_button.png" id="12_yl8ab"]
 [ext_resource type="Texture2D" uid="uid://ddqtk24hylgxv" path="res://assets/HUD/doble_sniper_button.png" id="13_ldtua"]
+[ext_resource type="Texture2D" uid="uid://44pnagxon0xf" path="res://assets/HUD/atk_speed_button.png" id="13_va2y6"]
+[ext_resource type="Texture2D" uid="uid://bstmpgar1mgv7" path="res://assets/HUD/atk_up_button.png" id="14_xbe4j"]
+[ext_resource type="Texture2D" uid="uid://bh0d86m3tv1in" path="res://assets/HUD/weaken_button.png" id="16_u4r87"]
+[ext_resource type="Texture2D" uid="uid://df3urue0sm1pk" path="res://assets/HUD/poison_up_button.png" id="17_d3dct"]
+[ext_resource type="Texture2D" uid="uid://dyf7ft01iiypk" path="res://assets/HUD/dps_skill_button.png" id="19_fng1c"]
+[ext_resource type="Texture2D" uid="uid://cland8q2gflhq" path="res://assets/HUD/def_pen_up_button.png" id="20_npqhk"]
 [ext_resource type="Texture2D" uid="uid://c7rn3gm3txgcd" path="res://assets/HUD/sniper_skill_button.png" id="20_ulvpr"]
 [ext_resource type="Texture2D" uid="uid://dcxv5ho84u8hv" path="res://assets/HUD/gold_increase_button.png" id="21_lkks6"]
 [ext_resource type="Texture2D" uid="uid://dhoe0os7g84ks" path="res://assets/HUD/cursor_button.png" id="21_sglto"]
 [ext_resource type="Texture2D" uid="uid://c3c5k0w3legl6" path="res://assets/HUD/arrow_up_button.png" id="22_0qcke"]
+[ext_resource type="Texture2D" uid="uid://dcvfl65s7shuc" path="res://assets/HUD/burn_wave_button.png" id="22_fleem"]
 [ext_resource type="Texture2D" uid="uid://bkrjajomfvf1s" path="res://assets/HUD/exit_button.png" id="23_5tra0"]
+[ext_resource type="Texture2D" uid="uid://cr3egl7oijd21" path="res://assets/HUD/aoe_skill_button.png" id="23_nn83s"]
 [ext_resource type="Texture2D" uid="uid://b18vtglngo1ad" path="res://assets/HUD/return_button.png" id="24_o62d0"]
+[ext_resource type="Texture2D" uid="uid://c584pwdbcripf" path="res://assets/HUD/burn_up_button.png" id="24_q187o"]
 [ext_resource type="Texture2D" uid="uid://cm1u0x7amgh5u" path="res://assets/HUD/box_background_cornerless.png" id="27_6m16o"]
 [ext_resource type="Script" path="res://scripts/upgrade_cost.gd" id="28_s4xo1"]
+[ext_resource type="Texture2D" uid="uid://byui7ux71fwlt" path="res://assets/HUD/bullet_up_button.png" id="29_pa5a0"]
 [ext_resource type="Texture2D" uid="uid://dw55pvs0h0cyj" path="res://assets/HUD/gold.png" id="29_v2fdg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vdlhl"]
@@ -151,6 +161,7 @@ offset_left = 41.0
 offset_top = 280.0
 offset_right = -1025.0
 offset_bottom = -281.0
+texture_normal = ExtResource("13_va2y6")
 effect_id = 3
 
 [node name="UpgradeButton" parent="DpsSkills" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -160,6 +171,7 @@ offset_left = 143.0
 offset_right = 143.0
 offset_bottom = 0.0
 disabled = true
+texture_normal = ExtResource("14_xbe4j")
 effect_id = 4
 
 [node name="UpgradeButton" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -183,6 +195,7 @@ offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 disabled = true
+texture_normal = ExtResource("16_u4r87")
 max_level = 2
 effect_id = 7
 
@@ -194,6 +207,7 @@ offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
 disabled = true
+texture_normal = ExtResource("17_d3dct")
 effect_id = 6
 
 [node name="UpgradeButton3" parent="DpsSkills/UpgradeButton" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -217,6 +231,7 @@ offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
 disabled = true
+texture_normal = ExtResource("19_fng1c")
 effect_id = 9
 
 [node name="UpgradeButton2" parent="DpsSkills/UpgradeButton/UpgradeButton3" groups=["dps_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -227,6 +242,7 @@ offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 disabled = true
+texture_normal = ExtResource("20_npqhk")
 max_level = 2
 effect_id = 10
 
@@ -238,6 +254,7 @@ offset_left = 41.0
 offset_top = 280.0
 offset_right = -1025.0
 offset_bottom = -281.0
+texture_normal = ExtResource("13_va2y6")
 effect_id = 18
 
 [node name="UpgradeButton" parent="AoeSkills" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -246,6 +263,7 @@ offset_left = 143.0
 offset_right = 143.0
 offset_bottom = 0.0
 disabled = true
+texture_normal = ExtResource("14_xbe4j")
 effect_id = 19
 
 [node name="UpgradeButton" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -267,6 +285,7 @@ offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 disabled = true
+texture_normal = ExtResource("8_d16s3")
 max_level = 2
 effect_id = 22
 
@@ -277,6 +296,7 @@ offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
 disabled = true
+texture_normal = ExtResource("22_fleem")
 effect_id = 21
 
 [node name="UpgradeButton3" parent="AoeSkills/UpgradeButton" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -298,6 +318,7 @@ offset_top = -56.0
 offset_right = 160.0
 offset_bottom = -56.0
 disabled = true
+texture_normal = ExtResource("23_nn83s")
 effect_id = 24
 
 [node name="UpgradeButton2" parent="AoeSkills/UpgradeButton/UpgradeButton3" groups=["aoe_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -307,6 +328,7 @@ offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 disabled = true
+texture_normal = ExtResource("24_q187o")
 max_level = 2
 effect_id = 25
 
@@ -318,6 +340,7 @@ offset_left = 41.0
 offset_top = 280.0
 offset_right = -1025.0
 offset_bottom = -281.0
+texture_normal = ExtResource("20_npqhk")
 effect_id = 26
 
 [node name="UpgradeButton" parent="SniperSkills" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -326,6 +349,7 @@ offset_left = 143.0
 offset_right = 143.0
 offset_bottom = 0.0
 disabled = true
+texture_normal = ExtResource("14_xbe4j")
 effect_id = 27
 
 [node name="UpgradeButton" parent="SniperSkills/UpgradeButton" groups=["sniper_upgrade_button"] instance=ExtResource("1_r7i35")]
@@ -347,6 +371,7 @@ offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 disabled = true
+texture_normal = ExtResource("13_va2y6")
 max_level = 2
 effect_id = 30
 
@@ -389,6 +414,7 @@ offset_top = 56.0
 offset_right = 160.0
 offset_bottom = 56.0
 disabled = true
+texture_normal = ExtResource("29_pa5a0")
 max_level = 2
 effect_id = 33
 
