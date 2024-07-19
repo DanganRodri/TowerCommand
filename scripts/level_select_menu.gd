@@ -17,7 +17,7 @@ func _on_play_button_pressed():
 		GameData.Challenges["Endless"] = true
 		GameData.initial_gold = GameData.INITIAL_GOLD_ENDLESS
 	else:
-		GameData.initial_gold = GameData.INITIAL_GOLD_CAMPAING + ( (GameData.level - 1) * 75)
+		GameData.initial_gold = GameData.INITIAL_GOLD_CAMPAING + ( (GameData.level - 1) * 200)
 		GameData.Challenges["Endless"] = false
 	
 	GameData.gold = GameData.initial_gold
@@ -64,6 +64,5 @@ func _on_level_2_button_pressed():
 func _on_level_3_button_pressed():
 	set_level(3)
 
-
-
-	
+func _on_level_4_button_pressed():
+	set_level(4)

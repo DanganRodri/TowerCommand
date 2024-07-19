@@ -376,6 +376,7 @@ vertical_alignment = 1
 [connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level1Button" to="." method="_on_level_1_button_pressed"]
 [connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level2Button" to="." method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level3Button" to="." method="_on_level_3_button_pressed"]
+[connection signal="pressed" from="LevelSelector/VBoxContainer/HBoxContainer/Level4Button" to="." method="_on_level_4_button_pressed"]
 [connection signal="pressed" from="LevelSettings/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="LevelSettings/VBoxContainer/HBoxContainer5/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="LevelSettings/VBoxContainer/HBoxContainer5/ResetButton" to="." method="_on_reset_button_pressed"]

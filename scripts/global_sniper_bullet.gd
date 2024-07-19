@@ -15,7 +15,7 @@ func _physics_process(delta):
 		var distance = speed * delta
 		global_position += direction * distance
 		
-	if self.global_position[0] > 1000 or self.global_position[1] > 1000:
+	if self.global_position[0] > 9999 or self.global_position[1] > 9999:
 		self.queue_free()
 
 

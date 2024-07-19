@@ -37,15 +37,15 @@ func _ready():
 			1:
 				set_level(WaveData.LEVEL1)
 			2:
-				set_level(WaveData.LEVEL1)
+				set_level(WaveData.LEVEL2)
 			3:
 				set_level(WaveData.LEVEL3)
 			4:
-				set_level(WaveData.LEVEL1)
+				set_level(WaveData.LEVEL4)
 			_:
 				set_level(WaveData.LEVEL1)
 	
-	var totalWaves = waveList.size()
+	totalWaves = waveList.size()
 
 	if GameData.Challenges["Endless"] == true:
 		waveIndicator.text = "Wave:   " + str(wave+1)
@@ -162,6 +162,7 @@ func check_win():
 
 func victory():
 	GameData.game_ended = true
+	AudioHandler.play_SFX("res://SFX/suc.wav")
 	pause_panel.show()
 	back_ground.hide()
 	end_screen.show()

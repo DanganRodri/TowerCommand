@@ -14,6 +14,7 @@ func _on_area_2d_body_entered(enemy):
 		enemy.queue_free()
 		if GameData.health <= 0:
 			GameData.game_ended = true
+			AudioHandler.play_SFX("res://SFX/game_over.wav")
 			pause_panel.show()
 			back_ground.hide()
 			end_screen.show()
